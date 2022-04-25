@@ -4,6 +4,7 @@ import { Button,
     Typography,
     IconButton,
     Box,
+    Avatar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState } from "react";
@@ -17,7 +18,10 @@ function Menubar(){
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
-  
+
+    const profile = () => {
+      navigate('/profile')
+    }
     const fetchUserName = async () => {
       try {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -48,10 +52,12 @@ function Menubar(){
                 onClick={logout}>
                 Logout
             </Button>
+            <Avatar onClick={profile}>
+              {name.charAt(0).toUpperCase()}
+            </Avatar>
           </Toolbar>
         </AppBar>
-      </Box>
-            
+      </Box>        
     )
 }
 

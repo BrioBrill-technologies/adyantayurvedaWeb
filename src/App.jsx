@@ -2,6 +2,7 @@ import Home from './Components/Home';
 import Login from './Components/Pages/Login';
 import Reset from './Components/Pages/Reset';
 import Register from './Components/Pages/Register';
+import Profile from './Components/Pages/profile';
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, logout } from "./firebase";
@@ -14,6 +15,7 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 import Menubar from "./Components/Navbar/MenuBar";
 import Navbar from "./Components/Navbar/Navbar";
+import Booking from './Components/Pages/Booking';
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -52,6 +54,9 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/reset" element={<Reset />} />
           <Route exact path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/booking" element={<Booking />} />  
+          <Route path="*" element={<div>Not found</div>} />
         </Routes>
     </div>
   );
