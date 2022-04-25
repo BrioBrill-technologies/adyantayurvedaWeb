@@ -17,6 +17,7 @@ import {
   collection,
   where,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -53,6 +54,7 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
+        phone: '',
       });
     }
   } catch (err) {
@@ -78,6 +80,7 @@ const registerWithEmailAndPassword = async ( email, password) => {
       uid: user.uid,
       authProvider: "local",
       email,
+      phone: '',
     });
   } catch (err) {
     console.error(err);
@@ -89,6 +92,55 @@ const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent!");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const updateUser = async (user, email, name, phone) => {
+  console.log(user, email, name, phone);
+  try {
+    await updateDoc(collection(db, "users"), user.uid, {
+      email,
+      name,
+      phone,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const addBooking = async (user, date, time, status) => {
+  try {
+    await addDoc(collection(db, "bookings"), {
+      date,
+      time,
+      status,
+      patientId: user.uid,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const getBookings = async (user) => {
+  try {
+    const booking = []
+    const q = query(collection(db, "bookings"), where("patientId", "==", user.uid));
+    const docs = await getDocs(q);
+    for (let i = 0; i < docs.docs.length; i++) {
+      const book = {
+        id: docs.docs[i].id,
+        date: docs.docs[i].data().date,
+        time: docs.docs[i].data().time,
+        status: docs.docs[i].data().status,
+      };
+      booking.push(book);
+    }
+    return booking;
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -107,4 +159,7 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  updateUser,
+  addBooking,
+  getBookings,
 };
