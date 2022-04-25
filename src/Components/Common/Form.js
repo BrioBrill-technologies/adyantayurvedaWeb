@@ -17,23 +17,23 @@ const theme = createTheme();
 
 export default function BasicTextFields({ title, setPassword, setEmail, handleAction }) {
     return (
-<ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {title}
-          </Typography>
+      <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                {title}
+              </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -68,8 +68,7 @@ export default function BasicTextFields({ title, setPassword, setEmail, handleAc
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
-            </Button>
+            >{title}</Button>
             </Box>
         </Container>
     </ThemeProvider>
