@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import {useNavigate} from 'react-router-dom';
-import { Box, Table } from "@mui/material";
+import { Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  Table
+  } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getBookings, auth, db, } from '../firebase';
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { getBookings, auth, getDoctors } from '../firebase';
+import { makeStyles } from '@material-ui/core'
+const useStyles = makeStyles({
+})
 function Home() {
+  const classes = useStyles();
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
   const [data, setData] = useState([]);
+  const [doctors, setDoctors] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -27,6 +31,10 @@ function Home() {
       const data = doc
       setData(data);
       console.log(data);
+      const doc2 = await getDoctors();
+      const data2 = doc2
+      setDoctors(data2);
+      console.log(data2);
     } catch (err) {
       console.error(err);
       alert("An error occurred while fetching user data");
@@ -40,51 +48,51 @@ function Home() {
   return (
     <Box>
       {user && (
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+        <div>
+        <Typography style={{textAlign:'center'}}>My Appointments</Typography>
+        <TableContainer component={Paper} sx={{maxWidth: 500}} style={{margin: '0 auto'}}>
+          <Table aria-label="simple table" style={{border: '20px'}}>
             <TableHead>
               <TableRow>
-                <TableCell align="right">Date</TableCell>
-                <TableCell align="right">Time</TableCell>
-                <TableCell align="right">Status</TableCell>
+                <TableCell align="center">Doctor</TableCell>
+                <TableCell align="center">Date</TableCell>
+                <TableCell align="center">Time</TableCell>
+                <TableCell align="center">Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell align="right">{row.booking}</TableCell>
-                  <TableCell align="right">{row.time}</TableCell>
-                  <TableCell align="right">{row.status}</TableCell>
+                  <TableCell align="center" component="th" scope="row"> {row.doctor}</TableCell>
+                  <TableCell align="center">{row.date}</TableCell>
+                  <TableCell align="center">{row.time}</TableCell>
+                  <TableCell align="center">{row.status}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-      )}
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/logo.jpeg"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Dr Harish
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Dr Harish is a renowned medical practitioner in the field of
-            dermatology. He is a member of the Indian Association of Dermatologists
-            (IAD) and the Indian Society of Dermatology (ISD).
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small"
-            onClick={() => {
-              navigate("/booking");
-            }}
-          >Book Now</Button>
-        </CardActions>
-      </Card>
+        {doctors.map((row) => (
+        <Card sx={{ maxWidth: 200 }} style={{margin: '20px'}} key={row.uid} onClick={() => {
+          navigate('/booking/', {state: {uid: row.uid}});
+        }}>
+          <CardMedia
+            component="img"
+            height="140"
+            image="/logo.png"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {row.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {row.specialization}
+            </Typography>
+          </CardContent>
+        </Card>
+        ))}
+      </div>
+    )}
     </Box>
   );
 }

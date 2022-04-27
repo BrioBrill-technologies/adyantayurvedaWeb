@@ -14,6 +14,10 @@ export default function Profile() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [zip, setZip] = useState("");
+    const [country, setCountry] = useState("");
     const navigate = useNavigate();
 
     const fetchUserName = async () => {
@@ -25,6 +29,10 @@ export default function Profile() {
             setName(data.name);
             setEmail(data.email);
             setPhone(data.phone);
+            setCity(data.city);
+            setState(data.state);
+            setZip(data.zip);
+            setCountry(data.country);
         } catch (err) {
             console.error(err);
             alert("An error occured while fetching user data");
@@ -41,23 +49,52 @@ export default function Profile() {
                 <CssBaseline />
                 <Box component="form" noValidate sx={{ mt: 1 }}>
                     <TextField
-                        id="outlined-basic"
+                        id="name"
                         label="Name"
                         variant="outlined"
+                        defaultValue={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <TextField
-                        id="outlined-basic"
+                        id="email"
                         label="Email"
                         variant="outlined"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
-                        id="outlined-basic"
+                        id="phone"
                         label="Phone"
                         variant="outlined"
                         onChange={(e) => setPhone(e.target.value)}
                     />
+                    <TextField
+                        id="city"
+                        label="city"
+                        variant="outlined"
+                        onChange={(e) => setCity(e.target.value)}
+                    />
+
+                    <TextField
+                        id="state"
+                        label="state"
+                        variant="outlined"
+                        onChange={(e) => setState(e.target.value)}
+                    />
+
+                    <TextField
+                        id="country"
+                        label="country"
+                        variant="outlined"
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
+
+                    <TextField
+                        id="zip"
+                        label="zip"
+                        variant="outlined"
+                        onChange={(e) => setZip(e.target.value)}
+                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -65,11 +102,7 @@ export default function Profile() {
                         color="primary"
                         onClick={(e) =>{
                             e.preventDefault();
-                            updateUser(user.uid, 
-                                name,
-                                email,
-                                phone
-                            );
+                            updateUser(name, email, phone, city, state, zip, country);
                         }}>
                         Update
                     </Button>
