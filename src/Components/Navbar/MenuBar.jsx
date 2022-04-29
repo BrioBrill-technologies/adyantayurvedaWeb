@@ -57,7 +57,7 @@ function Menubar(){
     }, [user, loading]);
     return (
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{background: 'transparent', marginBottom:'2vw'}}>
+        <AppBar position="static" style={{background: 'aliceblue'}}>
           <Toolbar>
             <Link to='/'>
               <img src='/logo.png' alt='logo' style={{width: '5vw', marginLeft:'10vw'}}/>

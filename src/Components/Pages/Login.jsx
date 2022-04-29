@@ -10,7 +10,8 @@ import { Button,
   Checkbox,
   Box,
   Typography,
-  Container
+  Container,
+  Grid
 } from '@mui/material';
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -34,6 +35,12 @@ function Login() {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <Grid container component="main" className="root">
+          <Grid item xs={false} sm={4} md={8} className="image">
+              <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/doctor.jpeg?alt=media&token=b764f32b-f712-4e78-acf4-4b8ca8d43425"
+               width={'80%'} style={{margin:'2vw'}}  alt="doctor" />
+          </Grid>
+          <Grid item xs={12} sm={8} md={3} component={Container}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
             <Box
@@ -100,6 +107,8 @@ function Login() {
               </div>
           </Box>
         </Container>
+        </Grid>
+        </Grid>
       </ThemeProvider>
     </>
   );
