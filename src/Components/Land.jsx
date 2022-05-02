@@ -116,7 +116,7 @@ function Land() {
       <Typography variant="h4" style={{margin:'2vw', textAlign:'center'}}>
         What Our Users Say about us
       </Typography>
-      <Typography variant="h5" style={{margin:'2vw', textAlign:'center', paddingBottom:'1vw'}}>
+      <Typography variant="h5" style={{margin:'2vw auto', textAlign:'center', paddingBottom:'1vw', fontSize:'1vw', width:'50%'}}>
         "I was suffering from digestion related issues for a long time and I was struggling with allopathic medicines which used to give temporary relief. Later on I started consulting with Dr.Shree Lakshmi and she started the treatment with Ayurvedic medicines. Now my digestion problem is solved and I am very happy. She listens to the patients with patience and she is very supportive."
       </Typography>
       <Divider variant="middle" />

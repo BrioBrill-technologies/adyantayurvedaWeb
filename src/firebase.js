@@ -20,6 +20,7 @@ import {
   addDoc,
   updateDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -117,7 +118,7 @@ const sendPasswordReset = async (email) => {
 const updateUser = async (name, email, phone, city, state, zip, country) => {
   console.log(name, email, phone, city, state, zip, country);
   try {
-    await updateDoc(collection(db, "users"), where("uid", "==", auth.currentUser.uid), {
+    await setDoc(collection(db, "users"), auth.currentUser.uid, {
       name,
       email,
       phone,
@@ -164,6 +165,29 @@ const getBookings = async (user) => {
       booking.push(book);
     }
     return booking;
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const getTherapies = async () => {
+  try {
+    const therapies = []
+    const q = query(collection(db, "Therapies"));
+    const docs = await getDocs(q);
+    for (let i = 0; i < docs.docs.length; i++) {
+      const therapy = {
+        id: docs.docs[i].id,
+        name: docs.docs[i].data().name,
+        amount: docs.docs[i].data().amount,
+        duration: docs.docs[i].data().duration,
+        description: docs.docs[i].data().description,
+        type: docs.docs[i].data().type,
+      };
+      therapies.push(therapy);
+    }
+    return therapies;
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -231,4 +255,5 @@ export {
   getBookings,
   getDoctors,
   getDoctor,
+  getTherapies,
 };

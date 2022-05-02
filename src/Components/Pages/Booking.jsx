@@ -8,17 +8,19 @@ import { Button,
     FormControl,
     Select,
     Container,
-    Typography} from '@mui/material';
+    Typography,
+    Grid} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Box } from '@mui/system';
+import { Box, width } from '@mui/system';
 import * as React from 'react';
 import { addBooking, auth, getDoctor } from '../../firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {useNavigate, useLocation} from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import "flatpickr/dist/themes/dark.css";
-import Flatpickr from "react-flatpickr";
-import { makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 const useStyles = makeStyles({
     marginT: {
         marginTop: '1rem !important'
@@ -27,10 +29,15 @@ const useStyles = makeStyles({
         fontSize: '25px !important'
     },
     sub:{
-        margin: '1rem 0 0 !important',
-        left:'50%',
-        transform: 'translateX(-50%)',
-    }
+        margin: '2vw 4vw 0 !important',
+    },
+    back:{
+        background: 'URL(https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/istockphoto-1157591198-612x612.jpeg?alt=media&token=e1c2d5f5-533e-4c2b-a8c5-0899c25217fa)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: '100vh',
+    },
 })
 
 const theme = createTheme();
@@ -44,7 +51,6 @@ function Booking () {
     const [doctor, setDoctor] = useState(null);
     const [name, setName] = useState(null);
     const [birthday, setBirthday] = useState(null);
-    const [chipId, setChipId] = useState('1');
     const navigate = useNavigate();
 
     const fetchDoctor = async () => {
@@ -66,7 +72,7 @@ function Booking () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addBooking(user, state.uid, date[0].toString(), time, status);
+        addBooking(user, state.uid, date.toString(), time, status);
         navigate("/");
     }
 
@@ -76,77 +82,94 @@ function Booking () {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                }}>
-                <Typography className={classes.font45}>Book an Appointment</Typography>
-                <Box component="form" noValidate sx={{ mt: 1 }}>
-                <FormControl fullWidth className={classes.marginT}>
-                    <Flatpickr
-                        value={date}
-                        options={{
-                            enableTime: false,
-                            dateFormat: "Y-m-d",
-                            minDate: "today",
-                        }}
-                        onChange={(e) => setDate(e)}
-                    />
-                    </FormControl>
-                    <Stack direction="row" spacing={3} className={classes.marginT}>
-                        <Chip label="09:00"   onClick={()=>{setTime('9:00')
-                            console.log('here')}}/>
-                        <Chip label="10:00" variant="outlined" onClick={()=>{setTime('10:00')
-                            console.log('here')}}/>
-                        <Chip label="11:00" variant="outlined" onClick={()=>{setTime('11:00')
-                            console.log('here')}}/>
-                        <Chip label="12:00" variant="outlined" onClick={()=>{setTime('12:00')
-                            console.log('here')}}/>
-                        <Chip label="13:00" variant="outlined" onClick={()=>{setTime('13:00')
-                            console.log('here')}}/>
-                        <Chip label="14:00" variant="outlined" onClick={()=>{setTime('15:00')
-                            console.log('here')}}/>
-                        <Chip label="15:00" variant="outlined" onClick={()=>{setTime('16:00')
-                            console.log('here')}}/>
-                    </Stack>
-                    <FormControl fullWidth className={classes.marginT}>
-                        <InputLabel id="GenderLabel">Gender</InputLabel>
-                        <Select
-                            labelId="GenderLabel"
-                            defaultValue={''}
-                            id="demo-simple-select"
-                            label="Gender"
-                            onChange={handleGender}>
-                            <MenuItem value={'Male'}>Male</MenuItem>
-                            <MenuItem value={'Female'}>Female</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField 
-                        className={classes.marginT}
-                        fullWidth
-                        label="Full Name"
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField className={classes.marginT}
-                    fullWidth
-                        label="Date of Birth"
-                        onChange={(e) => setBirthday(e.target.value)}
-                    />
-                    <Button className={classes.sub}
-                        variant="contained"
-                        color="primary"
-                        onClick={(e) => handleSubmit(e)}>
-                        Submit
-                    </Button>
-                </Box>
-            </Box>
-        </Container>
-      </ThemeProvider>
+            <div className={classes.back}>
+            <Grid container component="main" className="root">
+                <Grid item xs={false} sm={4} md={3.5}></Grid>
+                <Grid item xs={12} sm={8} md={5} component={Container}>
+                    <Container component="main" maxWidth="xs">
+                        <CssBaseline />
+                            <Box
+                                sx={{
+                                marginTop: 15,
+                                background:'#ffffff6e',
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexDirection: 'column',
+                                border: '1px solid grey',
+                                borderRadius: '2vw',
+                                padding: '1rem',
+                                }}>
+                            <Typography className={classes.font45}>Book an Appointment</Typography>
+                            <Box component="form" noValidate sx={{ mt: 1, ml:10}}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns} >
+                                    <DatePicker
+                                        minDate= {new Date()}
+                                        label="Date of Appointment"
+                                        value={date}
+                                        onChange={(e) => {
+                                            setDate(e);
+                                        }}
+                                        renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <Stack direction="column" spacing={3} className={classes.marginT} sx={{ml:-7}}>
+                                    <Stack direction="row" spacing={3}>
+                                    <Chip label="09:00" onClick={()=>{setTime('9:00')}}/>
+                                    <Chip label="10:00" variant="outlined" onClick={()=>{setTime('10:00')}}/>
+                                    <Chip label="11:00" variant="outlined" onClick={()=>{setTime('11:00')}}/>
+                                    <Chip label="12:00" variant="outlined" onClick={()=>{setTime('12:00')}}/>
+                                    </Stack>
+                                    <Stack direction="row" spacing={3}>
+                                    <Chip label="13:00" variant="outlined" onClick={()=>{setTime('13:00')}}/>
+                                    <Chip label="14:00" variant="outlined" onClick={()=>{setTime('14:00')}}/>
+                                    <Chip label="15:00" variant="outlined" onClick={()=>{setTime('15:00')}}/>
+                                    <Chip label="16:00" variant="outlined" onClick={()=>{setTime('16:00')}}/>
+                                    </Stack>
+                                </Stack>
+                                <FormControl style={{width:'70%'}} className={classes.marginT}>
+                                    <InputLabel id="GenderLabel">Gender</InputLabel>
+                                    <Select
+                                        labelId="GenderLabel"
+                                        defaultValue={''}
+                                        id="demo-simple-select"
+                                        label="Gender"
+                                        onChange={handleGender}>
+                                        <MenuItem value={'Male'}>Male</MenuItem>
+                                        <MenuItem value={'Female'}>Female</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <TextField 
+                                    className={classes.marginT}
+                                    style={{marginBottom:'1vw',width:'70%'}}
+                                    label="Full Name"
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                                <LocalizationProvider dateAdapter={AdapterDateFns} >
+                                    <DatePicker
+                                        maxDate= {new Date()}
+                                        label="Date of Birth"
+                                        value={birthday}
+                                        onChange={(e) => {
+                                            setBirthday(e);
+                                        }}
+                                        renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <div></div>
+                                <Button 
+                                    className={classes.sub}
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={(e) => handleSubmit(e)}>
+                                    Submit
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Container>
+                </Grid>
+            </Grid>
+            </div>
+        </ThemeProvider>
     );
 }
 

@@ -57,10 +57,9 @@ function Home() {
           {booking && (
             <>        
               <Typography style={{
-                textAlign:'center', 
-                color: 'white',
+                textAlign:'center',
                 fontWeight: 'bold',
-                fontSize: '3vw',
+                fontSize: '2vw',
                 paddingTop: '3vw'}}>
                   My Appointments
               </Typography>
@@ -89,7 +88,7 @@ function Home() {
             </>
           )}
         {doctors.map((row) => (
-        <Card sx={{ maxWidth: 200 }} style={{margin: '2vw'}} key={row.uid} onClick={() => {
+        <Card sx={{ maxWidth: 200, boxShadow: 3 }} style={{margin: '2vw'}} key={row.uid} onClick={() => {
           navigate('/booking/', {state: {uid: row.uid}});
         }}>
           <CardMedia

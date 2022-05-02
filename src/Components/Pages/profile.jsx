@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, db, updateUser } from "../../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { Button, Container, CssBaseline, TextField } from "@mui/material";
+import { Avatar, Button, Container, CssBaseline, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const theme = createTheme();
 export default function Profile() {
@@ -15,6 +17,7 @@ export default function Profile() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [city, setCity] = useState("");
+    const [birthday, setBirthday] = useState("");
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [country, setCountry] = useState("");
@@ -33,6 +36,7 @@ export default function Profile() {
             setState(data.state);
             setZip(data.zip);
             setCountry(data.country);
+            setBirthday(data.dob);
         } catch (err) {
             console.error(err);
             alert("An error occured while fetching user data");
@@ -47,59 +51,93 @@ export default function Profile() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Box component="form" noValidate sx={{ mt: 1 }}>
-                    <TextField
-                        id="name"
-                        label="Name"
-                        variant="outlined"
-                        defaultValue={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField
-                        id="email"
-                        label="Email"
-                        variant="outlined"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <TextField
-                        id="phone"
-                        label="Phone"
-                        variant="outlined"
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                    <TextField
-                        id="city"
-                        label="city"
-                        variant="outlined"
-                        onChange={(e) => setCity(e.target.value)}
-                    />
+                <Avatar
+                    alt="Remy Sharp"
+                    src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/findDocs.webp?alt=media&token=cefbf081-908b-4918-9ee3-4b97495bf38f"
+                    sx={{ width: 200, height: 200, mt: 5, mb: 3, ml: "auto", mr: "auto" }}
+                />
+                <Box component="form" noValidate sx={{ mt: 1, width: 400, ml:"auto", display:"flex", flexDirection:"column", mr:"auto"}}>
+                    <Box sx={{ display: "flex", flexDirection: "row", mt:1}}>
+                        <TextField
+                            id="name"
+                            label="Name"
+                            sx={{mr:1}}
+                            variant="outlined"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            sx={{ml:1}}
+                            id="email"
+                            label="Email"
+                            value={email}
+                            variant="outlined"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Box>
+                    <Box sx={{ display: "flex", flexDirection: "row", mt:1}}>
+                        <TextField
+                            sx={{mr:1}}
+                            id="phone"
+                            label="Phone"
+                            value={phone}
+                            variant="outlined"
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <TextField
+                            sx={{ml:1}}
+                            id="city"
+                            label="city"
+                            value={city}
+                            variant="outlined"
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                    </Box>
+                    <Box sx={{ display: "flex", flexDirection: "row", mt:1}}>
+                        <TextField
+                            sx={{mr:1}}
+                            id="state"
+                            label="state"
+                            value={state}
+                            variant="outlined"
+                            onChange={(e) => setState(e.target.value)}
+                        />
 
-                    <TextField
-                        id="state"
-                        label="state"
-                        variant="outlined"
-                        onChange={(e) => setState(e.target.value)}
-                    />
-
-                    <TextField
-                        id="country"
-                        label="country"
-                        variant="outlined"
-                        onChange={(e) => setCountry(e.target.value)}
-                    />
-
-                    <TextField
-                        id="zip"
-                        label="zip"
-                        variant="outlined"
-                        onChange={(e) => setZip(e.target.value)}
-                    />
-
+                        <TextField
+                            sx={{ml:1}}
+                            id="country"
+                            label="country"
+                            value={country}
+                            variant="outlined"
+                            onChange={(e) => setCountry(e.target.value)}
+                        />
+                    </Box>
+                    <Box sx={{ display: "flex", flexDirection: "row", mt:1}}>
+                        <TextField
+                            sx={{mr:1}}
+                            id="zip"
+                            label="zip"
+                            value={zip}
+                            variant="outlined"
+                            onChange={(e) => setZip(e.target.value)}
+                        />
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Birthday"
+                                maxDate={new Date()}
+                                onChange={(date) => setBirthday(date)}
+                                value={birthday}
+                                renderInput={(params) => <TextField 
+                                    sx={{ml:1}}
+                                    style={{width:'100%'}} {...params} />}
+                            />
+                        </LocalizationProvider>
+                    </Box>
                     <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
                         color="primary"
+                        sx={{mt:1}}
                         onClick={(e) =>{
                             e.preventDefault();
                             updateUser(name, email, phone, city, state, zip, country);
