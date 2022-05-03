@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../../firebase";
+import { auth } from "../../firebase";
+import {signInWithGoogle,logInWithEmailAndPassword} from '../../Hooks/useAuth'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Button,
+import { 
+  Button,
   Avatar,
   CssBaseline,
   TextField,
@@ -13,10 +15,9 @@ import { Button,
   Container,
   Grid
 } from '@mui/material';
-
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import "./Login.css";
+
 const theme = createTheme();
 function Login() {
   const [email, setEmail] = useState("");

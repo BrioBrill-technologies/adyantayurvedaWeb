@@ -11,7 +11,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { createTheme } from '@mui/material/styles';
-import { auth, db, logout } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { logout } from '../../Hooks/useAuth';
 import { query, collection, getDocs, where } from "firebase/firestore";
 const theme = createTheme();
 

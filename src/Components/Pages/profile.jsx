@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { auth, db, updateUser } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { updateUser } from "../../Hooks/usePost";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import { Avatar, Button, Container, CssBaseline, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import moment from "moment";
 
 const theme = createTheme();
 export default function Profile() {
@@ -28,7 +30,6 @@ export default function Profile() {
             const q = query(collection(db, "users"), where("uid", "==", user?.uid));
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
-            console.log("here we are ",data);
             setName(data.name);
             setEmail(data.email);
             setPhone(data.phone);
@@ -125,11 +126,11 @@ export default function Profile() {
                             <DatePicker
                                 label="Birthday"
                                 maxDate={new Date()}
-                                onChange={(date) => setBirthday(date)}
+                                inputFormat="dd/MM/yyyy"
+                                onChange={(date) => setBirthday(moment(date).format("DD-MM-YYYY"))
+                                }
                                 value={birthday}
-                                renderInput={(params) => <TextField 
-                                    sx={{ml:1}}
-                                    style={{width:'100%'}} {...params} />}
+                                renderInput={(params) => <TextField sx={{ml:1}} style={{width:'100%'}} {...params} />}
                             />
                         </LocalizationProvider>
                     </Box>
@@ -140,7 +141,17 @@ export default function Profile() {
                         sx={{mt:1}}
                         onClick={(e) =>{
                             e.preventDefault();
-                            updateUser(name, email, phone, city, state, zip, country);
+                            updateUser( {
+                                uid: user.uid,
+                                name,
+                                email,
+                                phone,
+                                city,
+                                state,
+                                zip,
+                                country,
+                                dob:birthday
+                            });
                         }}>
                         Update
                     </Button>

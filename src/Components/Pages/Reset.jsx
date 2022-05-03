@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { auth, sendPasswordReset } from "../../firebase";
-import { Button,
+import { auth } from "../../firebase";
+import { sendPasswordReset } from "../../Hooks/useAuth";
+import { 
+  Button,
   Avatar,
   CssBaseline,
   TextField,
