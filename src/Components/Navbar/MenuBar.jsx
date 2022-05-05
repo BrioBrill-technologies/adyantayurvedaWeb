@@ -34,17 +34,44 @@ function Menubar(){
   const classes = useStyles();
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
+    const [type, setType] = useState("");
     const navigate = useNavigate();
 
     const profile = () => {
-      navigate('/profile')
+      if(type === "doctor"){
+        navigate("/doctor/profile");
+      } else if(type === "patient"){
+        navigate('/profile')
+      } else if(type === "admin"){
+        navigate("/admin/profile");
+      } else {
+        navigate("/therapist/profile");
+      }
     }
+
     const fetchUserName = async () => {
       try {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const data = doc.docs[0].data();
-        setName(data.name);
+        let l
+        if(data.type === 'admin'){
+          setType('admin')
+          l = query(collection(db, "admins"), where("uid", "==", user?.uid));
+        } else if (data.type === 'doctor'){
+          setType('doctor')
+          l = query(collection(db, "doctors"), where("uid", "==", user?.uid));
+        } else if (data.type === 'therapists'){
+          setType('therapists')
+          l = query(collection(db, "therapists"), where("uid", "==", user?.uid));
+        } else {
+          setType('patient')
+          l = query(collection(db, "patients"), where("uid", "==", user?.uid));
+        }
+        const doc1 = await getDocs(l);
+        const data1 = doc1.docs[0].data();
+        if(data.name)setName(data1.name);
+        else setName(data.email);
       } catch (err) {
         console.error(err);
         alert("An error occured while fetching user data");
@@ -61,7 +88,10 @@ function Menubar(){
         <AppBar position="static" style={{background: 'aliceblue'}}>
           <Toolbar>
             <Link to='/'>
-              <img src='/logo.png' alt='logo' style={{width: '5vw', marginLeft:'10vw'}}/>
+              <img src='/logo.png' alt='logo' style={{
+                width: '5vw', 
+                marginLeft:'10vw'
+              }}/>
             </Link>
             <Typography className={classes.firstTypo}> Find Doctors</Typography>
             <Typography className={classes.typo}> Video Consult </Typography>
@@ -69,7 +99,7 @@ function Menubar(){
             <Typography className={classes.typo}> Lab Tests </Typography>
             <Typography className={classes.lastTypo}>Therapies</Typography>
             <Avatar onClick={profile}>
-              {name.charAt(0).toUpperCase()}
+              {name ? name.charAt(0).toUpperCase() : "UU"}
             </Avatar>
             <Button style={{left: '5vw'}}
                 variant="contained"

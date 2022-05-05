@@ -9,13 +9,17 @@ import {
 } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
-import Login from './Components/Pages/Login';
-import Reset from './Components/Pages/Reset';
-import Register from './Components/Pages/Register';
-import Profile from './Components/Pages/profile';
-import Therapies from './Components/Pages/Therapies';
+import Login from './Components/Pages/Patients/Auth/Login';
+import Reset from './Components/Pages/Patients/Auth/Reset';
+import Register from './Components/Pages/Patients/Auth/Register';
+import Profile from './Components/Pages/Patients/profile';
+import Therapies from './Components/Pages/Patients/Therapies';
 import Menubar from "./Components/Navbar/MenuBar";
 import Navbar from "./Components/Navbar/Navbar";
+import AdminRoutes from "./Components/Pages/Admin/Adminroutes";
+import Doctors from "./Components/Pages/Patients/Doctors";
+import Booking from "./Components/Pages/Patients/Booking";
+import Land from "./Components/Land";
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -49,14 +53,18 @@ function App() {
       {!user && (
         <Navbar />
       )}
-        <Routes>
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/reset" element={<Reset />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={<Therapies />} />
-          <Route path="*" element={<div>Not found</div>} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Land />} />
+        <Route path="login" element={<Login />} />
+        <Route path="reset" element={<Reset />} />
+        <Route path="register" element={<Register />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="therapies" element={<Therapies />} />
+        <Route path="admin/*" element={<AdminRoutes />} />
+        <Route path="doctors" element={<Doctors />} />
+        <Route path="booking" element={<Booking />} />
+        <Route path="*" element={<Land />} />
+      </Routes>
     </div>
   );
 }

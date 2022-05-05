@@ -6,6 +6,22 @@ import {
     where,
 } from "firebase/firestore";
 
+// Get Patients
+const getPatients = async () => {
+    try {
+        const Patients = [];
+        const q = query(collection(db, "patients"));
+        const docs = await getDocs(q);
+        docs.docs.forEach((doc) => {
+            Patients.push(doc.data());
+        });
+        return Patients;
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
 // Get Therapies Details
 const getTherapies = async () => {
     try {
@@ -70,7 +86,9 @@ const getNotApproved = async (type) => {
         const docs = await getDocs(q);
         for (let i = 0; i < docs.docs.length; i++) {
             if( docs.docs[i].data().approved === false){
-                doctors.push(docs.docs[i].data());
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                doctors.push(document);
             } 
         }
         return doctors;
@@ -88,7 +106,9 @@ const getApproved = async (type) => {
         const docs = await getDocs(q);
         for (let i = 0; i < docs.docs.length; i++) {
             if( docs.docs[i].data().approved === true){
-                doctors.push(docs.docs[i].data());
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                doctors.push(document);
             }
         }
         return doctors;
@@ -101,9 +121,14 @@ const getApproved = async (type) => {
 // Get Single Doctor & Therapist Details
 const getSingleApproved = async (id, type) => {
     try {
-        const q = query(collection(db, type), where("id", "==", id));
+        const q = query(collection(db, type));
         const docs = await getDocs(q);
-        return docs.docs[0].data();
+        for(let i = 0; i < docs.docs.length; i++){
+            if(docs.docs[i].id === id){
+                return docs.docs[i].data();
+            }
+        }
+        // return docs.docs[0].data();
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -136,24 +161,22 @@ const getSinglePrescriptionOrInvoice = async (id, type) => {
     }
 };
 
-const getSinglePrescriptionOrInvoiceById = async (id, type, person) => {
-    try {
-        const prescriptions = []
-        const q = query(collection(db, type), where(person, "==", id));
+const getTotalInvoiceAmount = async () => {
+    try{
+        const q = query(collection(db, "invoice"));
         const docs = await getDocs(q);
+        let total = 0;
         for (let i = 0; i < docs.docs.length; i++) {
-            prescriptions.push(docs.docs[i].data());
+            total += docs.docs[i].data().amount;
         }
-        return prescriptions;
+        return total; 
     } catch (err) {
         console.error(err);
         alert(err.message);
     }
-};
-
-
-
+}
 export {
+    getPatients,
     getTherapies,
     getTherapyType,
     getSpecializations,
@@ -162,6 +185,6 @@ export {
     getSingleApproved,
     getPrescriptionOrInvoice,
     getSinglePrescriptionOrInvoice,
-    getSinglePrescriptionOrInvoiceById,
+    getTotalInvoiceAmount
 };
 

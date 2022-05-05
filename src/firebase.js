@@ -1,25 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getStorage } from  "firebase/storage"
 import {
-  GoogleAuthProvider,
   getAuth,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  updateProfile,
-  signOut,
 } from "firebase/auth";
 import {
   getFirestore,
-  query,
-  getDocs,
   collection,
-  where,
-  addDoc,
-  updateDoc,
-  doc,
   setDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -42,7 +30,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
+const storage = getStorage(app);
 // Update User Profile
 const updateUser = async (name, email, phone, city, state, zip, country) => {
   try {
@@ -65,4 +53,5 @@ export {
   auth,
   db,
   updateUser,
+  storage
 };
