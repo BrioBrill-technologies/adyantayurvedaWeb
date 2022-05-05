@@ -28,7 +28,6 @@ function Therapies(){
     }
 
     useEffect(() => {
-        if (loading) return;
         fetchTherapies();
     }, [loading]);
 

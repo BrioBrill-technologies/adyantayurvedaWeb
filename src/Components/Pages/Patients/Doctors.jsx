@@ -10,6 +10,7 @@ function Doctors(){
         try {
             const docs = await getApproved("doctors");
             setDoctors(docs);
+            console.log(docs);
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");
@@ -23,7 +24,7 @@ function Doctors(){
     }, [doctors]);
 
     const handleBooking = (id) => {
-        navigate(`/booking/` , { state: { id , type: 'doctors'} });
+        navigate(`/booking/` , { state: { id , type: 'doctors', amount: 3000} });
     }
     return (
             <Grid container spacing={3}>

@@ -7,6 +7,7 @@ import {
     doc,
     setDoc,
     updateDoc,
+    addDoc,
 } from "firebase/firestore";
 
 const updateUser = async (data) => {
@@ -42,7 +43,8 @@ const updateUser = async (data) => {
 
 const addBooking = async (data) => {
     try {
-        await setDoc(doc(db, "bookings"), data);
+        console.log(data);
+        await addDoc(collection(db, "bookings"), data);
     } catch (err) {
         console.error(err);
         alert(err.message);

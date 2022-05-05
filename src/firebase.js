@@ -31,27 +31,9 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-// Update User Profile
-const updateUser = async (name, email, phone, city, state, zip, country) => {
-  try {
-    await setDoc(collection(db, "users"), auth.currentUser.uid, {
-      name,
-      email,
-      phone,
-      city,
-      state,
-      zip,
-      country,
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
 
 export {
   auth,
   db,
-  updateUser,
   storage
 };

@@ -24,10 +24,12 @@ const useStyles = makeStyles({
   firstTypo: {
     color: 'black',
     padding: '0 2vw 0 10vw',
+    cursor: 'pointer',
   },
   lastTypo: {
     color: 'black',
     padding: '0 10vw 0 2vw',
+    cursor: 'pointer',
   },
 })
 function Menubar(){
@@ -93,11 +95,11 @@ function Menubar(){
                 marginLeft:'10vw'
               }}/>
             </Link>
-            <Typography className={classes.firstTypo}> Find Doctors</Typography>
+            <Typography className={classes.firstTypo} onClick={() => { navigate('/doctors')}}> Find Doctors</Typography>
             <Typography className={classes.typo}> Video Consult </Typography>
             <Typography className={classes.typo}> Medicines </Typography>
             <Typography className={classes.typo}> Lab Tests </Typography>
-            <Typography className={classes.lastTypo}>Therapies</Typography>
+            <Typography className={classes.lastTypo} onClick={() => { navigate('therapies')}}>Therapies</Typography>
             <Avatar onClick={profile}>
               {name ? name.charAt(0).toUpperCase() : "UU"}
             </Avatar>

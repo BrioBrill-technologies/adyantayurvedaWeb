@@ -73,7 +73,19 @@ function Booking () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addBooking(state.id, state.type, date, time, status);
+        addBooking({
+            DocId:state.id,
+            type:state.type,
+            patientId:user.uid,
+            date, 
+            time, 
+            status,
+            amount:state.amount,
+        }).then(() => {
+            navigate('/appointments');
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     const handleGender = (e) => {

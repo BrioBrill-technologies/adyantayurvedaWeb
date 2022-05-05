@@ -34,7 +34,7 @@ function AdminRoutes() {
                 <Route path="/" element={<AdminHome />} />
                 <Route path="profile" element={<Profile />} />
                 </>
-            )}
+            )} 
             <Route path="*" element={<AdminLogin />} />
             <Route path="login" element={<AdminLogin />} />
             <Route path="reset" element={<AdminHome />} />

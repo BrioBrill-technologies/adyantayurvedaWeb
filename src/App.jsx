@@ -20,6 +20,7 @@ import AdminRoutes from "./Components/Pages/Admin/Adminroutes";
 import Doctors from "./Components/Pages/Patients/Doctors";
 import Booking from "./Components/Pages/Patients/Booking";
 import Land from "./Components/Land";
+import Appointments from "./Components/Pages/Patients/appoitments";
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -63,6 +64,7 @@ function App() {
         <Route path="admin/*" element={<AdminRoutes />} />
         <Route path="doctors" element={<Doctors />} />
         <Route path="booking" element={<Booking />} />
+        <Route path="appointments" element={<Appointments />} />
         <Route path="*" element={<Land />} />
       </Routes>
     </div>

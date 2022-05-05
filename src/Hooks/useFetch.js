@@ -125,7 +125,9 @@ const getSingleApproved = async (id, type) => {
         const docs = await getDocs(q);
         for(let i = 0; i < docs.docs.length; i++){
             if(docs.docs[i].id === id){
-                return docs.docs[i].data();
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                return document;
             }
         }
         // return docs.docs[0].data();
