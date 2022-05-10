@@ -8,12 +8,15 @@ import {
 } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { auth } from '../../../firebase';
 import { getTherapies, getTherapyType } from '../../../Hooks/useFetch';
+
 function Therapies(){
+    const [user, loading, error] = useAuthState(auth);
     const [Therapy, setTherapy] = useState([]);
-    const [loading] = useAuthState(auth);
     const [therapyType, setTherapyType] = useState([]);
+    const navigate = useNavigate();
     
     const fetchTherapies = async () => {
         try {
@@ -47,6 +50,12 @@ function Therapies(){
         }
     }
 
+    const handleBooking = (id, amount) => {
+        console.log(id, amount);
+        if(user) navigate(`/booking/` , { state: { id , type: 'Therapies', amount} });
+        else navigate("/login");
+    }
+
     return (
         <>
         {therapyType.map(item => (
@@ -67,9 +76,12 @@ function Therapies(){
                             </Typography>
 
                             <CardActionArea>
-                                <Typography>
+                                <Button onClick={() => {
+                                    console.log(therapy.id, therapy.amount);
+                                    handleBooking(therapy.id, therapy.amount)
+                                }}>
                                     Book Now 
-                                </Typography>
+                                </Button>
                             </CardActionArea>
                         </CardContent>
                     </Card>

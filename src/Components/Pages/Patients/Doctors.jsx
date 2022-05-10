@@ -1,16 +1,18 @@
 import { Button, Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase";
 import { getApproved } from "../../../Hooks/useFetch";
 
 function Doctors(){
+    const [user, loading, error] = useAuthState(auth);
     const [doctors, setDoctors] = useState([]);
     const navigate = useNavigate();
     const fetchDoctors = async () => {
         try {
             const docs = await getApproved("doctors");
             setDoctors(docs);
-            console.log(docs);
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");
@@ -24,7 +26,8 @@ function Doctors(){
     }, [doctors]);
 
     const handleBooking = (id) => {
-        navigate(`/booking/` , { state: { id , type: 'doctors', amount: 3000} });
+        if(user) navigate(`/booking/` , { state: { id , type: 'doctors', amount: 3000} });
+        else navigate("/login");
     }
     return (
             <Grid container spacing={3}>

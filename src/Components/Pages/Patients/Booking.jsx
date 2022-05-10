@@ -67,7 +67,7 @@ function Booking () {
     };
     useEffect(() => {
         if (loading) return;
-        // if (!user) return navigate("/");
+        if (!user) return navigate("/");
         fetchDoctor();
     }, [loading]);
 

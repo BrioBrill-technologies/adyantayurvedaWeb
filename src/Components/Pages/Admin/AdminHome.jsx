@@ -6,7 +6,7 @@ import {
     getSingleApproved,
     getNotApproved,
 } from '../../../Hooks/useFetch'
-import { auth } from '../../../firebase';
+import { auth, db } from '../../../firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 import { addApproval } from '../../../Hooks/usePost';
 import StaffDetails from './StaffDetails';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 function AdminHome() {
     const [user, loading, error] = useAuthState(auth);
@@ -35,9 +36,18 @@ function AdminHome() {
     const [visible, setVisible] = useState(false);
     const [editId, setEditId] = useState('');
     const [colType, setColType] = useState('');
+    const [type, setType] = useState('');
     const navigate = useNavigate();
     const fetchTotalAmount = async () => {
         try {
+            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+            const doc = await getDocs(q);
+            const data = doc.docs[0].data();
+            if(data.type !== 'admin') {
+                navigate('/');
+            } else {
+                setType(data.type);
+            }
             const totalAmount = await getTotalInvoiceAmount();
             setTotalAmount(totalAmount);
             const docs = await getApproved("doctors");
@@ -57,7 +67,7 @@ function AdminHome() {
     };
     useEffect(() => {
         if (loading) return;
-        // if (!user) return navigate("/");
+        if (!user) return navigate("/");
         fetchTotalAmount();
     }, [loading]);
 
@@ -85,6 +95,8 @@ function AdminHome() {
     }
   return (
     <div>
+        { type === 'admin' && (
+            <>
         <h2>Total Amount: {totalAmount}</h2>
         <h2>Doctors: {doctors.length} </h2>
         <h2>Not Approved Doctors: {notDoctors.length}</h2>
@@ -254,6 +266,8 @@ function AdminHome() {
         >
             <StaffDetails type={colType} id={editId}/>
         </Modal> */}
+        </>
+        )}
     </div>
   );
 }

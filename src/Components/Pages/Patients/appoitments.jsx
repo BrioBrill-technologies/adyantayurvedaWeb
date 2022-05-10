@@ -18,7 +18,6 @@ function Appointments(){
             for(let i = 0; i < doc.docs.length; i++){
                 const data = doc.docs[i].data();
                 data.date = new Date(data.date.seconds*1000)
-                console.log(data.date.toISOString())
                 const docs = await getDocs(query(collection(db, "doctors")));
                 for(let j = 0; j < docs.docs.length; j++){
                     const doc = docs.docs[j].data();
@@ -27,7 +26,6 @@ function Appointments(){
                         break;
                     }
                 }
-                console.log(data)
                 setBookings(bookings => [...bookings, data]);
             }
             // setBookings(docs);

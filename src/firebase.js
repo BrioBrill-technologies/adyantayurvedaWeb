@@ -7,8 +7,6 @@ import {
 } from "firebase/auth";
 import {
   getFirestore,
-  collection,
-  setDoc,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,5 +33,6 @@ const storage = getStorage(app);
 export {
   auth,
   db,
-  storage
+  storage,
+  analytics,
 };

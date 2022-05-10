@@ -22,6 +22,17 @@ const getPatients = async () => {
     }
 };
 
+const getSinglePatient = async (id) => {
+    try {
+        const q = query(collection(db, "patients"), where("uid", "==", id));
+        const docs = await getDocs(q);
+        return docs.docs[0].data();
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
 // Get Therapies Details
 const getTherapies = async () => {
     try {
@@ -29,7 +40,9 @@ const getTherapies = async () => {
       const q = query(collection(db, "Therapies"));
       const docs = await getDocs(q);
       for (let i = 0; i < docs.docs.length; i++) {
-        therapies.push(docs.docs[i].data());
+        const document = docs.docs[i].data();
+        document.id = docs.docs[i].id;
+        therapies.push(document);
       }
       return therapies;
     } catch (err) {
@@ -107,7 +120,7 @@ const getApproved = async (type) => {
         for (let i = 0; i < docs.docs.length; i++) {
             if( docs.docs[i].data().approved === true){
                 const document = docs.docs[i].data();
-                document.id = docs.docs[i].id;
+                document.id = docs.docs[i].uid;
                 doctors.push(document);
             }
         }
@@ -128,9 +141,14 @@ const getSingleApproved = async (id, type) => {
                 const document = docs.docs[i].data();
                 document.id = docs.docs[i].id;
                 return document;
+            } else if(docs.docs[i].data().uid === id ){
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                return document;
+            } else {
+                return null;
             }
         }
-        // return docs.docs[0].data();
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -177,8 +195,25 @@ const getTotalInvoiceAmount = async () => {
         alert(err.message);
     }
 }
+
+const getBookings = async (type, id) => {
+    try{
+        const bookings = []
+        const q = query(collection(db, "bookings") , where(type, "==", id));
+        const docs = await getDocs(q);
+        for (let i = 0; i < docs.docs.length; i++) {
+            bookings.push(docs.docs[i].data());
+        }
+        return bookings;
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
 export {
     getPatients,
+    getSinglePatient,
     getTherapies,
     getTherapyType,
     getSpecializations,
@@ -187,6 +222,7 @@ export {
     getSingleApproved,
     getPrescriptionOrInvoice,
     getSinglePrescriptionOrInvoice,
-    getTotalInvoiceAmount
+    getTotalInvoiceAmount,
+    getBookings
 };
 

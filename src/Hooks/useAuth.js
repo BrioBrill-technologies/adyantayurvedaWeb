@@ -66,6 +66,7 @@ const signInWithGoogle = async (type) => {
         });
       }
     }
+    return true;
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -106,6 +107,7 @@ const registerWithEmailAndPassword = async (email, password, type) => {
         uid: user.uid,
         email,
         name: '',
+        approved: false,
       });
     } else if(type === 'therapist') {
       await addDoc(collection(db, "users"), {
@@ -116,6 +118,7 @@ const registerWithEmailAndPassword = async (email, password, type) => {
         uid: user.uid,
         email,
         name: '',
+        approved: false,
       });
     } else if(type === 'admin') {
       await addDoc(collection(db, "users"), {
@@ -128,6 +131,7 @@ const registerWithEmailAndPassword = async (email, password, type) => {
         name: '',
       });
     }
+    return 'true';
   } catch (err) {
     console.error(err);
     alert(err.message);

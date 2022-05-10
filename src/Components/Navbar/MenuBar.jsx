@@ -36,15 +36,14 @@ function Menubar(){
   const classes = useStyles();
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
-    const [type, setType] = useState("");
     const navigate = useNavigate();
 
     const profile = () => {
-      if(type === "doctor"){
+      if(user.type === "doctor"){
         navigate("/doctor/profile");
-      } else if(type === "patient"){
+      } else if(user.type === "patient"){
         navigate('/profile')
-      } else if(type === "admin"){
+      } else if(user.type === "admin"){
         navigate("/admin/profile");
       } else {
         navigate("/therapist/profile");
@@ -53,27 +52,20 @@ function Menubar(){
 
     const fetchUserName = async () => {
       try {
-        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-        const doc = await getDocs(q);
-        const data = doc.docs[0].data();
         let l
-        if(data.type === 'admin'){
-          setType('admin')
+        if(user.type === 'admin'){
           l = query(collection(db, "admins"), where("uid", "==", user?.uid));
-        } else if (data.type === 'doctor'){
-          setType('doctor')
+        } else if (user.type === 'doctor'){
           l = query(collection(db, "doctors"), where("uid", "==", user?.uid));
-        } else if (data.type === 'therapists'){
-          setType('therapists')
+        } else if (user.type === 'therapists'){
           l = query(collection(db, "therapists"), where("uid", "==", user?.uid));
         } else {
-          setType('patient')
           l = query(collection(db, "patients"), where("uid", "==", user?.uid));
         }
         const doc1 = await getDocs(l);
         const data1 = doc1.docs[0].data();
-        if(data.name)setName(data1.name);
-        else setName(data.email);
+        if(data1.name) setName(data1.name);
+        else setName(data1.email);
       } catch (err) {
         console.error(err);
         alert("An error occured while fetching user data");
@@ -83,7 +75,9 @@ function Menubar(){
     useEffect(() => {
       if (loading) return;
       if (!user) return navigate("/");
-      fetchUserName();
+      if(user.type){
+        fetchUserName();
+      }
     }, [user, loading]);
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -101,7 +95,7 @@ function Menubar(){
             <Typography className={classes.typo}> Lab Tests </Typography>
             <Typography className={classes.lastTypo} onClick={() => { navigate('therapies')}}>Therapies</Typography>
             <Avatar onClick={profile}>
-              {name ? name.charAt(0).toUpperCase() : "UU"}
+              {name ? name.charAt(0).toUpperCase() : "U"}
             </Avatar>
             <Button style={{left: '5vw'}}
                 variant="contained"

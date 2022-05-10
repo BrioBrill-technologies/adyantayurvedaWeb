@@ -13,7 +13,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import moment from "moment";
 
 const theme = createTheme();
-export default function Profile() {
+export default function AdminProfile() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -42,7 +42,7 @@ export default function Profile() {
             setBirthday(data.dob);
         } catch (err) {
             console.error(err);
-            alert("An error occured while fetching user data");
+            alert("An error occurred while fetching user data");
         }
     };
     useEffect(() => {
@@ -143,7 +143,6 @@ export default function Profile() {
                         sx={{mt:1}}
                         onClick={(e) =>{
                             e.preventDefault();
-                            console.log(user.uid);
                             updateUser( {
                                 uid: user.uid,
                                 name,
