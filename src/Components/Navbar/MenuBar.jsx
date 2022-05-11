@@ -57,7 +57,7 @@ function Menubar(){
           l = query(collection(db, "admins"), where("uid", "==", user?.uid));
         } else if (user.type === 'doctor'){
           l = query(collection(db, "doctors"), where("uid", "==", user?.uid));
-        } else if (user.type === 'therapists'){
+        } else if (user.type === 'therapist'){
           l = query(collection(db, "therapists"), where("uid", "==", user?.uid));
         } else {
           l = query(collection(db, "patients"), where("uid", "==", user?.uid));
@@ -68,7 +68,7 @@ function Menubar(){
         else setName(data1.email);
       } catch (err) {
         console.error(err);
-        alert("An error occured while fetching user data");
+        alert("An error occurred while fetching user data");
       }
     };
   

@@ -26,6 +26,7 @@ const getSinglePatient = async (id) => {
     try {
         const q = query(collection(db, "patients"), where("uid", "==", id));
         const docs = await getDocs(q);
+        console.log(docs.docs[0].data());
         return docs.docs[0].data();
     } catch (err) {
         console.error(err);
@@ -183,13 +184,33 @@ const getSinglePrescriptionOrInvoice = async (id, type) => {
 
 const getTotalInvoiceAmount = async () => {
     try{
-        const q = query(collection(db, "invoice"));
+        const q = query(collection(db, "invoices"));
         const docs = await getDocs(q);
         let total = 0;
+        console.log(docs.docs.length);
         for (let i = 0; i < docs.docs.length; i++) {
             total += docs.docs[i].data().amount;
         }
         return total; 
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
+const getTotalInvoiceAmountByDocId = async (id) => {
+    try{
+        const q = query(collection(db, "invoices"), where("DocId", "==", id));
+        const docs = await getDocs(q);
+        let total = 0;
+        for (let i = 0; i < docs.docs.length; i++) {
+            if(docs.docs[i].data().status !== "Cancelled"){
+                total += docs.docs[i].data().amount;
+            } else {
+                console.log("Cancelled");
+            }
+        }
+        return total;
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -204,6 +225,7 @@ const getBookings = async (type, id) => {
         for (let i = 0; i < docs.docs.length; i++) {
             bookings.push(docs.docs[i].data());
         }
+        console.log(bookings);
         return bookings;
     } catch (err) {
         console.error(err);
@@ -223,6 +245,7 @@ export {
     getPrescriptionOrInvoice,
     getSinglePrescriptionOrInvoice,
     getTotalInvoiceAmount,
+    getTotalInvoiceAmountByDocId,
     getBookings
 };
 

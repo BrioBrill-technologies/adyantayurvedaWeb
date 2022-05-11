@@ -43,8 +43,15 @@ const updateUser = async (data) => {
 
 const addBooking = async (data) => {
     try {
-        console.log(data);
-        await addDoc(collection(db, "bookings"), data);
+        const invoiced = await addInvoice(data)
+        if(invoiced) {
+            console.log(invoiced)
+            data.invoiceId = invoiced;
+            data.status = "booked";
+            await addDoc(collection(db, "bookings"), data);
+        } else {
+            alert("Could not add invoice");
+        }
     } catch (err) {
         console.error(err);
         alert(err.message);
@@ -62,7 +69,17 @@ const addPrescription = async (data) => {
 
 const addInvoice = async (data) => {
     try {
-        await setDoc(doc(db, "invoices"), data);
+        let invoiced
+        const newInvoice = {
+            DocId: data.DocId,
+            patientId: data.patientId,
+            date: data.date,
+            amount: data.amount,
+        };
+        await addDoc(collection(db, "invoices"), newInvoice).then((res) => {
+            invoiced = res.id;
+        });
+        return invoiced;
     } catch (err) {
         console.error(err);
         alert(err.message);

@@ -27,6 +27,7 @@ import TherapistProfile from "./Components/Pages/Therapists/profile";
 import DocDashboard from "./Components/Pages/Doctors/Dashboard";
 import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
 import DocRegister from "./Components/Pages/Auth/DocRegister";
+import TherapistRegister from "./Components/Pages/Auth/TherapyRegister";
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [type, setType] = useState(""); 
@@ -40,8 +41,8 @@ function App() {
           setType('admin')
         } else if (data.type === 'doctor'){
           setType('doctor')
-        } else if (data.type === 'therapists'){
-          setType('therapists')
+        } else if (data.type === 'therapist'){
+          setType('therapist')
         } else {
           setType('patient')
         }
@@ -86,6 +87,7 @@ function App() {
         <Route path='doctor/profile' element={<DoctorProfile />} />
         <Route path='doctor/dashboard' element={<DocDashboard />} />
         {/* Therapist Routes */}
+        <Route path="therapist/register" element={<TherapistRegister />} />
         <Route path='therapist/profile' element={<TherapistProfile />} />
         <Route path='therapist/dashboard' element={<TherapistDashboard />} />
       </Routes>

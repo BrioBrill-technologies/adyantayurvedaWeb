@@ -59,7 +59,6 @@ function Booking () {
         try {
             const data = await getSingleApproved(state.id, state.type);
             setDoctor(data);
-            console.log(data);
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");

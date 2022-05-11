@@ -28,8 +28,10 @@ export default function AdminProfile() {
 
     const fetchUserName = async () => {
         try {
+            console.log("fetching user name", user.uid);
             const q = query(collection(db, "admins"), where("uid", "==", user?.uid));
             const doc = await getDocs(q);
+            console.log("doc", doc.docs[0]);
             const data = doc.docs[0].data();
             setName(data.name);
             setEmail(data.email);

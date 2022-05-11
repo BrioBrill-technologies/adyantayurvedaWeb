@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../../firebase";
 import moment from "moment";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
 function Appointments(){
     const [user, loading, error] = useAuthState(auth);
@@ -17,18 +17,17 @@ function Appointments(){
             const doc = await getDocs(q);
             for(let i = 0; i < doc.docs.length; i++){
                 const data = doc.docs[i].data();
-                data.date = new Date(data.date.seconds*1000)
+                // data.date = new Date(data.date.seconds*1000)
                 const docs = await getDocs(query(collection(db, "doctors")));
                 for(let j = 0; j < docs.docs.length; j++){
                     const doc = docs.docs[j].data();
-                    if(doc.id === data.doctorId){
+                    if(doc.uid === data.DocId){
                         data.doctor = doc;
                         break;
                     }
                 }
                 setBookings(bookings => [...bookings, data]);
             }
-            // setBookings(docs);
         } catch (error) {
             console.error(error);
             alert("An error occurred while fetching Appointment data");
@@ -41,28 +40,47 @@ function Appointments(){
     }, [user, loading]);
 
     return(
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Time</TableCell>
-                        <TableCell>Doctor</TableCell>
-                        <TableCell>Reason</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {bookings.map((booking, index) => (
-                        <TableRow key={index}>
-                            <TableCell>{moment(booking.date).format("MMMM Do YYYY")}</TableCell>
-                            <TableCell>{booking.time}</TableCell>
-                            <TableCell>{booking.doctor.name}</TableCell>
-                            <TableCell>{booking.reason}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <Paper>
+                <Typography variant="h5" component="h5">
+                    Upcoming Appointments
+                </Typography>
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Date</TableCell>
+                                <TableCell>Time</TableCell>
+                                <TableCell>Doctor</TableCell>
+                                <TableCell>Reason</TableCell>
+                                <TableCell>Status</TableCell>
+                                <TableCell>Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {bookings.map((booking, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{moment(booking.date).format("MMMM Do YYYY")}</TableCell>
+                                    <TableCell>{booking.time}</TableCell>
+                                    <TableCell>{booking.doctor.name}</TableCell>
+                                    <TableCell>{booking.reason}</TableCell>
+                                    <TableCell>{booking.status}</TableCell>
+                                    <TableCell>
+                                        <button onClick={() => {
+                                            navigate(`/appointments/${booking.id}`);
+                                        }}>View</button>
+                                        <button onClick={() => {
+                                            navigate(`/appointments/${booking.id}/edit`);
+                                        }}>Cancel</button>    
+                                    </TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </div>
     )
 }
 

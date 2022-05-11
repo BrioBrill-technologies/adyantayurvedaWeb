@@ -12,6 +12,7 @@ function Doctors(){
     const fetchDoctors = async () => {
         try {
             const docs = await getApproved("doctors");
+            console.log(docs);
             setDoctors(docs);
         } catch (err) {
             console.error(err);
@@ -50,7 +51,7 @@ function Doctors(){
                                 <Typography>
                                     {doctor.specialization}
                                 </Typography>
-                                <Button variant="contained" color="primary" onClick={() => handleBooking(doctor.id)}>
+                                <Button variant="contained" color="primary" onClick={() => handleBooking(doctor.uid)}>
                                     Book Appointment
                                 </Button>
                             </CardContent>
