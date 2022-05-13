@@ -24,8 +24,10 @@ const getPatients = async () => {
 
 const getSinglePatient = async (id) => {
     try {
+        console.log(id);
         const q = query(collection(db, "patients"), where("uid", "==", id));
         const docs = await getDocs(q);
+        console.log(docs);
         console.log(docs.docs[0].data());
         return docs.docs[0].data();
     } catch (err) {
@@ -222,10 +224,12 @@ const getBookings = async (type, id) => {
         const bookings = []
         const q = query(collection(db, "bookings") , where(type, "==", id));
         const docs = await getDocs(q);
+        console.log(docs.docs.length);
         for (let i = 0; i < docs.docs.length; i++) {
-            bookings.push(docs.docs[i].data());
+            const document = docs.docs[i].data();
+            document.id = docs.docs[i].id;
+            bookings.push(document);
         }
-        console.log(bookings);
         return bookings;
     } catch (err) {
         console.error(err);

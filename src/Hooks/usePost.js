@@ -104,10 +104,29 @@ const addApproval = async (id, type) => {
     }
 };
 
+const modifyBooking = async (id, status) => {
+    try {
+        const q = query(collection(db, "bookings"));
+        const docs = await getDocs(q);
+        for (let i = 0; i < docs.docs.length; i++) {
+            if (docs.docs[i].id === id) {
+                const ref = doc(db, "bookings", docs.docs[i].id);
+                await updateDoc(ref, {
+                    status,
+                });
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
 export{
     updateUser,
     addBooking,
     addPrescription,
     addInvoice,
-    addApproval
+    addApproval,
+    modifyBooking
 }

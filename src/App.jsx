@@ -9,9 +9,12 @@ import {
 } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
+// Auth
 import Login from './Components/Pages/Auth/Login';
 import Reset from './Components/Pages/Auth/Reset';
 import Register from './Components/Pages/Auth/Register';
+
+// Patient
 import Profile from './Components/Pages/Patients/profile';
 import Therapies from './Components/Pages/Patients/Therapies';
 import Menubar from "./Components/Navbar/MenuBar";
@@ -28,6 +31,11 @@ import DocDashboard from "./Components/Pages/Doctors/Dashboard";
 import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
 import DocRegister from "./Components/Pages/Auth/DocRegister";
 import TherapistRegister from "./Components/Pages/Auth/TherapyRegister";
+import BookingDetails from "./Components/Pages/Patients/BookingDetails";
+import AppointmentDetails from "./Components/Pages/Doctors/AppointmentDetails";
+import DoctorDetails from "./Components/Pages/Patients/DoctorDetails";
+import PatientDetails from "./Components/Pages/Doctors/PatientDetails";
+import AddPrescription from "./Components/Pages/Doctors/AddPrescription";
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [type, setType] = useState(""); 
@@ -79,6 +87,8 @@ function App() {
         <Route path="doctors" element={<Doctors />} />
         <Route path="booking" element={<Booking />} />
         <Route path="appointments" element={<Appointments />} />
+        <Route path="appointmentDetails" element={<BookingDetails />} />
+        <Route path="doctorDetails" element={<DoctorDetails />} />
         {/* Admin Routes */}
         <Route path="admin/" element={<AdminHome />} />
         <Route path="admin/profile" element={<AdminProfile />} />
@@ -86,6 +96,9 @@ function App() {
         <Route path="doctor/register" element={<DocRegister />} />
         <Route path='doctor/profile' element={<DoctorProfile />} />
         <Route path='doctor/dashboard' element={<DocDashboard />} />
+        <Route path='doctor/appointmentDetails' element={<AppointmentDetails />} />
+        <Route path='doctor/patientDetails' element={<PatientDetails />} />
+        <Route path='doctor/Prescription' element={<AddPrescription />} />
         {/* Therapist Routes */}
         <Route path="therapist/register" element={<TherapistRegister />} />
         <Route path='therapist/profile' element={<TherapistProfile />} />

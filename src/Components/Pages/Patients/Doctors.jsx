@@ -12,7 +12,6 @@ function Doctors(){
     const fetchDoctors = async () => {
         try {
             const docs = await getApproved("doctors");
-            console.log(docs);
             setDoctors(docs);
         } catch (err) {
             console.error(err);
@@ -28,6 +27,11 @@ function Doctors(){
 
     const handleBooking = (id) => {
         if(user) navigate(`/booking/` , { state: { id , type: 'doctors', amount: 3000} });
+        else navigate("/login");
+    }
+
+    const handleView = (id) => {
+        if(user) navigate(`/doctorDetails/` , { state: { id } });
         else navigate("/login");
     }
     return (
@@ -51,6 +55,9 @@ function Doctors(){
                                 <Typography>
                                     {doctor.specialization}
                                 </Typography>
+                                <Button variant="contained" color="primary" onClick={() => handleView(doctor.uid)}>
+                                    View Doctor Profile
+                                </Button>
                                 <Button variant="contained" color="primary" onClick={() => handleBooking(doctor.uid)}>
                                     Book Appointment
                                 </Button>
