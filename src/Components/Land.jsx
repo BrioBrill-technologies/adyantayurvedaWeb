@@ -1,5 +1,5 @@
 import { Box, Button, Grid } from "@material-ui/core";
-import { Typography } from "@mui/material";
+import { Input, TextareaAutosize, Typography } from "@mui/material";
 import React, {  } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core'
@@ -303,6 +303,72 @@ const useStyles = makeStyles({
     lineHeight: '30px',
   },
 
+  head16: {
+    fontFamily: 'Josefin Sans !important',
+    fontSize: '20px !important',
+    color: '#0C0C0C',
+    fontWeight: '500 !important',
+    fontStyle: 'normal !important',
+    lineHeight: '30px',
+    textAlign: 'center',
+    marginTop: '2vw !important',
+    paddingTop: '2vw !important',
+    marginBottom: '1vw !important',
+  }, 
+
+  head17: {
+    fontFamily: 'Lora !important',
+    fontSize: '38px !important',
+    color: '#0C0C0C',
+    fontWeight: '600 !important',
+    fontStyle: 'normal !important',
+    lineHeight: '1.5em',
+    textAlign: 'center',
+  },
+
+  head18: {
+    fontFamily: 'Josefin Sans !important',
+    fontSize: '20px !important',
+    color: '#0C0C0C',
+    fontWeight: '400 !important',
+    fontStyle: 'normal !important',
+    lineHeight: '30px',
+    textAlign: 'center',
+    marginBottom: '1vw !important',
+  },
+
+  input: {
+    width: '150%',
+    border: 'none !important',
+    borderRadius: '15px',
+    fontFamily: 'Josefin Sans !important',
+    fontSize: '20px !important',
+    background: '#FAFAFA',
+    color: '#74613C',
+    fontWeight: '400 !important',
+    fontStyle: 'normal !important',
+    lineHeight: '30px',
+    textAlign: 'center',
+    marginTop: '2vw !important',
+    paddingTop: '2vw !important',
+    marginBottom: '1vw !important',
+  },
+
+  btn4: {
+    background: '#74613C',
+    color: 'white !important',
+    marginTop: '4vw',
+    padding: '1vw',
+    borderRadius: '15px',
+    fontFamily: 'Josefin Sans !important',
+    fontWeight: '600 !important',
+    fontSize: '24px !important',
+    textTransform: 'none !important',
+    '&:hover': {
+      background: '#74613C',
+      color: 'white',
+    },
+  },
 
 })
 function Land() {
@@ -519,8 +585,8 @@ function Land() {
 
         <Box style={{background:'#FFFBF3', paddingBottom:'5vw'}}>
 
-        <img className={classes.rightTree} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FrightTree.png?alt=media&token=850d25a8-f2ca-42d7-a41c-34e38afa891e" /> 
-            
+          <img className={classes.rightTree} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FrightTree.png?alt=media&token=850d25a8-f2ca-42d7-a41c-34e38afa891e" /> 
+ 
           <Typography className={classes.head11}>
           OUR TESTIMONIALS
           </Typography>
@@ -567,6 +633,35 @@ function Land() {
               </Typography>
             </Box>
           </Box>
+        </Box>
+
+        <Box>
+          <Typography className={classes.head16}>
+          PAY A VISIT TO US
+          </Typography>
+          <Typography className={classes.head17}>
+          Made with love, right here in Bangalore
+          </Typography>
+          <Typography className={classes.head18}>
+          Come visit our friendly staff at one of our ayurveda centres.
+          </Typography>
+          <Box style={{
+            display: 'flex',
+            marginTop: '2vw',
+            marginLeft: '10vw',
+          }}>
+            <img style={{ width:'45%' }}
+            src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fmap.png?alt=media&token=943b04f6-d636-474a-a5ad-f6513142a2e5"/>
+            <Box style={{display:'flex', flexDirection:'column', marginLeft:'5vw' }}>
+              <Input className={classes.input} placeholder="Your Name" />
+              <Input className={classes.input} placeholder="Phone" />
+              <Input className={classes.input} placeholder="Email" />
+              <TextareaAutosize className={classes.textarea} placeholder="Message" />
+              <Button className={classes.btn4}>
+                Send
+              </Button>
+            </Box>
+            </Box>
         </Box>
       </Box>
     </div>
