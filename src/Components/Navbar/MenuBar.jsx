@@ -4,109 +4,80 @@ import {
     Typography,
     Box,
     Avatar,
-    Button,
 } from '@mui/material';
 import { makeStyles } from '@material-ui/core'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { createTheme } from '@mui/material/styles';
-import { auth, db } from "../../firebase";
-import { logout } from '../../Hooks/useAuth';
-import { query, collection, getDocs, where } from "firebase/firestore";
-const theme = createTheme();
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const useStyles = makeStyles({
   typo: {
     color: 'black',
-    padding: '0 2vw 0 2vw',
+    padding: '0 0 0 2vw',
+    cursor: 'pointer',
+    fontFamily: 'Lora !important',
   },
   firstTypo: {
     color: 'black',
-    padding: '0 2vw 0 10vw',
+    padding: '0 0 0 5vw',
     cursor: 'pointer',
+    fontFamily: 'Lora !important',
   },
-  lastTypo: {
-    color: 'black',
-    padding: '0 10vw 0 2vw',
+  logo: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '7vw',
+  },
+  endLogin: {
+    marginLeft: 'auto',
+    marginRight: '5vw',
     cursor: 'pointer',
   },
 })
 function Menubar(){
   const classes = useStyles();
     const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
     const navigate = useNavigate();
 
     const profile = () => {
-      if(user.type === "doctor"){
-        navigate("/doctor/profile");
-      } else if(user.type === "patient"){
-        navigate('/profile')
-      } else if(user.type === "admin"){
-        navigate("/admin/profile");
+      if(user){
+        console.log('here');
+        if(user.type === "doctor"){
+          navigate("/doctor/profile");
+        } else if(user.type === "patient"){
+          navigate('/profile')
+        } else if(user.type === "admin"){
+          navigate("/admin/profile");
+        } else if(user.type === "therapist"){
+          navigate("/therapist/profile");
+        } else {
+          console.log('error');
+        }
       } else {
-        navigate("/therapist/profile");
+        navigate("/login");
       }
     }
 
-    const fetchUserName = async () => {
-      try {
-        let l
-        if(user.type === 'admin'){
-          l = query(collection(db, "admins"), where("uid", "==", user?.uid));
-        } else if (user.type === 'doctor'){
-          l = query(collection(db, "doctors"), where("uid", "==", user?.uid));
-        } else if (user.type === 'therapist'){
-          l = query(collection(db, "therapists"), where("uid", "==", user?.uid));
-        } else {
-          l = query(collection(db, "patients"), where("uid", "==", user?.uid));
-        }
-        const doc1 = await getDocs(l);
-        const data1 = doc1.docs[0].data();
-        if(data1.name) setName(data1.name);
-        else setName(data1.email);
-      } catch (err) {
-        console.error(err);
-        alert("An error occurred while fetching user data");
-      }
-    };
-  
-    useEffect(() => {
-      if (loading) return;
-      if (!user) return navigate("/");
-      if(user.type){
-        fetchUserName();
-      }
-    }, [user, loading]);
     return (
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{background: 'aliceblue'}}>
+      <Box sx={{ flexGrow: 1, background:'#FFFBF3' }}>
+        <AppBar position="static" style={{background: 'transparent', boxShadow:'none'}}>
           <Toolbar>
-            <Link to='/'>
-              <img src='/logo.png' alt='logo' style={{
-                width: '5vw', 
-                marginLeft:'10vw'
-              }}/>
-            </Link>
-            <Typography className={classes.firstTypo} onClick={() => { navigate('/doctors')}}> Find Doctors</Typography>
-            <Typography className={classes.typo}> Video Consult </Typography>
-            <Typography className={classes.typo}> Medicines </Typography>
-            <Typography className={classes.typo}> Lab Tests </Typography>
-            <Typography className={classes.lastTypo} onClick={() => { navigate('therapies')}}>Therapies</Typography>
-            <Avatar onClick={profile}>
-              {name ? name.charAt(0).toUpperCase() : "U"}
-            </Avatar>
-            <Button style={{left: '5vw'}}
-                variant="contained"
-                color="secondary"
-                onClick={logout}>
-                LOGOUT
-            </Button>
+            <Typography className={classes.firstTypo} onClick={() => {navigate('/therapies')}}>
+              Specialties
+            </Typography> 
+            <Typography className={classes.typo} onClick={() => {navigate('/doctors')}}>
+              Doctors
+            </Typography>
+            <Typography className={classes.typo} onClick={() => {navigate('/therapies')}}>
+              Contact Us
+            </Typography>
+            <img className={classes.logo} src='https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Flogo.png?alt=media&token=133422cd-c16f-4575-8d80-afb240030125' alt="logo" />
+            <Avatar className={classes.endLogin} onClick={profile} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fprofile.svg?alt=media&token=7592369f-93b5-4300-96f2-de1c52da98ad"/>
           </Toolbar>
         </AppBar>
       </Box>        
     )
 }
 
-export default Menubar
+export default Menubar;

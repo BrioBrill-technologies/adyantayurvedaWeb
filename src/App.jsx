@@ -5,37 +5,43 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import {
   Routes,
   Route,
-  useNavigate,
 } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
-// Auth
+// Common Routes
+import Menubar from "./Components/Navbar/MenuBar";
+import Land from "./Components/Land";
 import Login from './Components/Pages/Auth/Login';
 import Reset from './Components/Pages/Auth/Reset';
 import Register from './Components/Pages/Auth/Register';
-
-// Patient
-import Profile from './Components/Pages/Patients/profile';
-import Therapies from './Components/Pages/Patients/Therapies';
-import Menubar from "./Components/Navbar/MenuBar";
-import Navbar from "./Components/Navbar/Navbar";
-import Doctors from "./Components/Pages/Patients/Doctors";
-import Booking from "./Components/Pages/Patients/Booking";
-import Land from "./Components/Land";
-import Appointments from "./Components/Pages/Patients/appoitments";
-import AdminHome from "./Components/Pages/Admin/AdminHome";
-import AdminProfile from "./Components/Pages/Admin/profile";
-import DoctorProfile from "./Components/Pages/Doctors/profile";
-import TherapistProfile from "./Components/Pages/Therapists/profile";
-import DocDashboard from "./Components/Pages/Doctors/Dashboard";
-import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
 import DocRegister from "./Components/Pages/Auth/DocRegister";
 import TherapistRegister from "./Components/Pages/Auth/TherapyRegister";
+
+// Patient Routes
+import Profile from './Components/Pages/Patients/profile';
+import Therapies from './Components/Pages/Patients/Therapies';
+import Doctors from "./Components/Pages/Patients/Doctors";
+import Booking from "./Components/Pages/Patients/Booking";
+import Appointments from "./Components/Pages/Patients/appoitments";
 import BookingDetails from "./Components/Pages/Patients/BookingDetails";
-import AppointmentDetails from "./Components/Pages/Doctors/AppointmentDetails";
 import DoctorDetails from "./Components/Pages/Patients/DoctorDetails";
+
+// Admin Routes
+import AdminHome from "./Components/Pages/Admin/AdminHome";
+import AdminProfile from "./Components/Pages/Admin/profile";
+
+// Doctor Routes
+import DoctorProfile from "./Components/Pages/Doctors/profile";
+import DocDashboard from "./Components/Pages/Doctors/Dashboard";
+import AppointmentDetails from "./Components/Pages/Doctors/AppointmentDetails";
 import PatientDetails from "./Components/Pages/Doctors/PatientDetails";
 import AddPrescription from "./Components/Pages/Doctors/AddPrescription";
+
+// Therapist Routes
+import TherapistProfile from "./Components/Pages/Therapists/profile";
+import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
+
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [type, setType] = useState(""); 
@@ -68,12 +74,7 @@ function App() {
   }, [user, loading]);
   return (
     <div className="app">
-      {user && (
-        <Menubar />
-      )}
-      {!user && (
-        <Navbar />
-      )}
+      <Menubar />
       <Routes>
         <Route path="/" element={<Land />} />
         <Route path="*" element={<Land />} />
@@ -98,7 +99,7 @@ function App() {
         <Route path='doctor/dashboard' element={<DocDashboard />} />
         <Route path='doctor/appointmentDetails' element={<AppointmentDetails />} />
         <Route path='doctor/patientDetails' element={<PatientDetails />} />
-        <Route path='doctor/Prescription' element={<AddPrescription />} />
+        <Route path='doctor/prescription' element={<AddPrescription />} />
         {/* Therapist Routes */}
         <Route path="therapist/register" element={<TherapistRegister />} />
         <Route path='therapist/profile' element={<TherapistProfile />} />

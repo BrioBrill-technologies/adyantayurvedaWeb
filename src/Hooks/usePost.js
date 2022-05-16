@@ -60,7 +60,7 @@ const addBooking = async (data) => {
 
 const addPrescription = async (data) => {
     try {
-        await setDoc(doc(db, "prescriptions"), data);
+        await addDoc(collection(db, "prescriptions"), data);
     } catch (err) {
         console.error(err);
         alert(err.message);

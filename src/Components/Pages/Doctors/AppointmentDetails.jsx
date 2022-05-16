@@ -93,7 +93,7 @@ function AppointmentDetails() {
                         }}>Complete</Button>
                     <Button variant='contained' color='primary'
                         onClick={() => {
-                            navigate("/doctor/Prescription", {state: {booking: booking, patient: patient}});
+                            navigate("/doctor/prescription", {state: {id: booking.id}});
                         }}>Add Prescription</Button>
                 </>
             )}

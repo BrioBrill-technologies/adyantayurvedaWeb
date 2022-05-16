@@ -27,8 +27,6 @@ const getSinglePatient = async (id) => {
         console.log(id);
         const q = query(collection(db, "patients"), where("uid", "==", id));
         const docs = await getDocs(q);
-        console.log(docs);
-        console.log(docs.docs[0].data());
         return docs.docs[0].data();
     } catch (err) {
         console.error(err);
@@ -237,6 +235,23 @@ const getBookings = async (type, id) => {
     }
 }
 
+const getSingleBooking = async (id) => {
+    try{
+        const q = query(collection(db, "bookings"));
+        const docs = await getDocs(q);
+        for (let i = 0; i < docs.docs.length; i++) {
+            if(docs.docs[i].id === id){
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                return document;
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
 export {
     getPatients,
     getSinglePatient,
@@ -250,6 +265,7 @@ export {
     getSinglePrescriptionOrInvoice,
     getTotalInvoiceAmount,
     getTotalInvoiceAmountByDocId,
-    getBookings
+    getBookings,
+    getSingleBooking
 };
 
