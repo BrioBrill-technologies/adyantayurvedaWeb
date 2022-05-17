@@ -1,4 +1,4 @@
-import { Button, Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
+import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -51,9 +51,6 @@ function Doctors(){
                                 </Typography>
                                 <Typography color="textSecondary">
                                     {doctor.address}
-                                </Typography>
-                                <Typography>
-                                    {doctor.specialization}
                                 </Typography>
                                 <Button variant="contained" color="primary" onClick={() => handleView(doctor.uid)}>
                                     View Doctor Profile

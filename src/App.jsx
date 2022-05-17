@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // Common Routes
 import Menubar from "./Components/Navbar/MenuBar";
@@ -42,6 +43,14 @@ import AddPrescription from "./Components/Pages/Doctors/AddPrescription";
 import TherapistProfile from "./Components/Pages/Therapists/profile";
 import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#74613C',
+    },
+  },
+});
+
 function App() {
   const [user, loading, error] = useAuthState(auth);
   const [type, setType] = useState(""); 
@@ -73,7 +82,7 @@ function App() {
     fetchUser();
   }, [user, loading]);
   return (
-    <div className="app">
+    <ThemeProvider theme={theme}>
       <Menubar />
       <Routes>
         <Route path="/" element={<Land />} />
@@ -105,7 +114,7 @@ function App() {
         <Route path='therapist/profile' element={<TherapistProfile />} />
         <Route path='therapist/dashboard' element={<TherapistDashboard />} />
       </Routes>
-    </div>
+    </ThemeProvider>
   );
 }
 
