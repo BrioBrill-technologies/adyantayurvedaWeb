@@ -3,9 +3,6 @@ import { CssBaseline, Input, InputBase, TextareaAutosize, Typography } from "@mu
 import React, {  } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core'
-import { fontWeight, height } from "@mui/system";
-import { BurstMode } from "@mui/icons-material";
-import zIndex from "@mui/material/styles/zIndex";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const useStyles = makeStyles({
   typo: {
@@ -421,9 +418,9 @@ function Land() {
   let navigate = useNavigate();
   return (
     <div>
-      <Grid style={{display:'flex', flexDirection:'row'}}>
+      <Grid style={{display:'flex', flexDirection:'row', background:'#FFFBF3'}}>
         <Grid item xs={12} >
-          <Box className={classes.boxType} style={{background:'#FFFBF3', width:'200%'}}>
+          <Box className={classes.boxType}>
             <Typography className={classes.typo} variant="h6">
               SKIN CARE
             </Typography>

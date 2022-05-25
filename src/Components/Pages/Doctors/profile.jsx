@@ -4,13 +4,18 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, db } from "../../../firebase";
-import { updateUser } from "../../../Hooks/usePost";
+import { updateProfilePhoto, updateUser } from "../../../Hooks/usePost";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import { Avatar, Button, Container, CssBaseline, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import moment from "moment";
+import { styled } from '@mui/material/styles';
+
+const Input = styled('input')({
+    display: 'none',
+});
 
 const theme = createTheme();
 export default function DoctorProfile() {
@@ -24,6 +29,7 @@ export default function DoctorProfile() {
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [country, setCountry] = useState("");
+    const [photo, setPhoto] = useState("");
     const navigate = useNavigate();
 
     const fetchUserName = async () => {
@@ -40,6 +46,7 @@ export default function DoctorProfile() {
             setZip(data.zip);
             setCountry(data.country);
             setBirthday(data.dob);
+            setPhoto(data?.photoURL);
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");
@@ -54,10 +61,14 @@ export default function DoctorProfile() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Avatar
-                    src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/findDocs.webp?alt=media&token=cefbf081-908b-4918-9ee3-4b97495bf38f"
-                    sx={{ width: 200, height: 200, mt: 5, mb: 3, ml: "auto", mr: "auto" }}
-                />
+                <label htmlFor="profileImg">
+                    <Input accept="image/*" id="profileImg" type="file" onChange={(e) =>{
+                        updateProfilePhoto(e.target.files[0], user.uid, 'profilePhotos');
+                    }}/>
+                    <Avatar
+                        src={photo}
+                        sx={{ width: 200, height: 200, mt: 5, mb: 3, ml: "auto", mr: "auto" }}/>
+                </label>
                 <Box component="form" noValidate sx={{ mt: 1, width: 400, ml:"auto", display:"flex", flexDirection:"column", mr:"auto"}}>
                     <Box sx={{ display: "flex", flexDirection: "row", mt:1}}>
                         <TextField

@@ -42,7 +42,6 @@ function Menubar(){
 
     const profile = () => {
       if(user){
-        console.log('here');
         if(user.type === "doctor"){
           navigate("/doctor/profile");
         } else if(user.type === "patient"){

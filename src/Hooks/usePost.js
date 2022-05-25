@@ -1,4 +1,4 @@
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import {
     query,
     getDocs,
@@ -9,6 +9,7 @@ import {
     updateDoc,
     addDoc,
 } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const updateUser = async (data) => {
     try {
@@ -32,7 +33,8 @@ const updateUser = async (data) => {
             }
             const docs1 = await getDocs(q);
             if (docs1.docs.length > 0) {
-                await setDoc(doc(db, database, docs1.docs[0].id), data);
+                const ref = doc(db, database, docs1.docs[0].id);
+                await updateDoc(ref, data);
             }
         }
     } catch (err) {
@@ -122,11 +124,51 @@ const modifyBooking = async (id, status) => {
     }
 }
 
+const updateProfilePhoto = async (data, uid, type) => {
+    try {
+        const metaData = {
+            contentType: "image/png",
+        };
+        console.log(data);
+        const storageRef = ref(storage, `${type}/` + uid);
+        const uploadTask = uploadBytesResumable(storageRef, data, metaData);
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                    case 'running':
+                        break;
+                    case 'paused':
+                        break;
+                    case 'success':
+                        break;
+                }
+            },
+            (error) => {
+                console.log(error);
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    updateUser({
+                        photoURL: downloadURL,
+                        uid,
+                    });
+                });
+            }
+        );
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+}
+
 export{
     updateUser,
     addBooking,
     addPrescription,
     addInvoice,
     addApproval,
-    modifyBooking
+    modifyBooking,
+    updateProfilePhoto,
 }

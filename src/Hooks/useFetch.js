@@ -189,7 +189,7 @@ const getTotalInvoiceAmount = async () => {
         let total = 0;
         console.log(docs.docs.length);
         for (let i = 0; i < docs.docs.length; i++) {
-            total += docs.docs[i].data().amount;
+            total += parseInt(docs.docs[i].data().amount);
         }
         return total; 
     } catch (err) {

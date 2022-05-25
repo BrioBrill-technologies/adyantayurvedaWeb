@@ -70,7 +70,6 @@ function App() {
           setType('patient')
         }
         user.type = data.type;
-        console.log(user)
       }
     } catch (err) {
       console.error(err);
