@@ -59,7 +59,7 @@ function Menubar(){
     }
 
     return (
-      <Box sx={{ flexGrow: 1, background:'#FFFBF3' }}>
+      <Box sx={{ flexGrow: 1}}>
         <AppBar position="static" style={{background: 'transparent', boxShadow:'none'}}>
           <Toolbar>
             <Typography className={classes.firstTypo} onClick={() => {navigate('/therapies')}}>
