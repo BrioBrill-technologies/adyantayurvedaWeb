@@ -11,8 +11,8 @@ import {
   Box,
   Typography,
   Container,
-  Paper} from '@mui/material';
-
+  Paper
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Footer from "../../Navbar/Footer";
 import { makeStyles } from '@material-ui/core'

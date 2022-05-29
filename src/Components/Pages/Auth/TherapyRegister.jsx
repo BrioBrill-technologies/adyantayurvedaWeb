@@ -8,22 +8,37 @@ import {
 } from '../../../Hooks/useAuth';
 import { 
   Button,
-  Avatar,
-  CssBaseline,
   TextField,
   FormControlLabel,
   Checkbox,
   Box,
   Typography,
   Container,
-  Grid
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+  Paper} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Footer from "../../Navbar/Footer";
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  login : {
+    fontFamily: 'Josefin Sans !important',
+    fontSize: '28px !important',
+    fontWeight: '600 !important',
+    color: '#3E3E3E !important',
+  }, 
+  register__btn: {
+    fontFamily: 'Josefin Sans !important',
+    fontSize: '20px !important',
+    fontWeight: '400 !important',
+    color: '#3E3E3E !important',
+    textTransform: 'none !important',
+  },
+});
 
 const theme = createTheme();
 
 function TherapistRegister() {
+  const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -50,24 +65,22 @@ function TherapistRegister() {
   return (
     <>
       <ThemeProvider theme={theme}>
-      <Grid container component="main" className="root">
-      <Grid item xs={12} sm={8} md={4} component={Container}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              REGISTER
+        <div style={{zIndex:-1,position:'absolute',top:0}}>
+          <svg width="530" height="676" viewBox="0 0 530 676" fill="none" xmlns="http://www.w3.org/2000/svg" >
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M201.233 661.903C91.3224 681.028 -31.9961 688.711 -117.595 617.214C-205.677 543.643 -234.938 418.992 -226.576 304.572C-219.014 201.086 -155.635 112.168 -75.8345 45.7823C-6.293 -12.0693 84.5632 -17.706 174.342 -28.9526C277.828 -41.9163 397.071 -92.2216 475.265 -23.254C553.787 46.0031 526.758 171.111 519.556 275.529C513.397 364.832 494.692 451.474 437.757 520.581C377.059 594.254 295.309 645.534 201.233 661.903Z" fill="#FFF6E4"/>
+          </svg>
+        </div>
+        <Paper sx={{ ml:50, pt:15 }}>
+          <Box sx={{ display:'flex', flexDirection:'row', alignItems:'center'}}>
+            <Typography sx={{marginLeft:10 }} className={classes.login}>
+              Register
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Button variant="text" className={classes.register__btn} sx={{fontWeight:'bold', marginLeft:25}} onClick={() => navigate('/register')}>
+              Are you a Customer? Register here
+            </Button>
+          </Box>
+          <Container maxWidth="xs" sx={{ ml:20 }}>
+            <Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
               <TextField
                 margin="normal"
                 required
@@ -90,38 +103,45 @@ function TherapistRegister() {
                 autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <FormControlLabel
+                  sx={{marginLeft:-10}}
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Link to="/reset" 
+                  style={{
+                    textDecoration:'none',
+                    color:'#3E3E3E',
+                    fontSize:14,
+                    fontWeight:'400',
+                    marginLeft:30
+                  }}>Forgot Password?</Link>
+              </Box>
+              <Button
+                type="submit"
+                title="Login"
+                onClick={register}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, background:'#74613C', textTransform: 'none !important'}}>
+                  Register
+              </Button>
+              <Typography variant="h6" sx={{fontWeight:'bold' }}>
+                Or Register with
+              </Typography>
+              <Button
+                className="register__btn register__google"
+                onClick={googleRegister}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, background:'#EFEFF1', color:"black", textTransform: 'none !important', }}>
+                Login with Google
+              </Button>
             </Box>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"/>
-            <Button
-              type="submit"
-              title="Login"
-              onClick={register}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>
-                Register
-            </Button>
-            <Button
-              className="register__btn register__google"
-              onClick={googleRegister}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}>
-              Register with Google
-            </Button>
-            <div>
-              Already have an account? <Link to="/login">Login</Link> now.
-            </div>
-          </Box>
-        </Container>
-        </Grid>
-        <Grid item xs={false} sm={4} md={8} className="image">
-              <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/docreg.webp?alt=media&token=6dc9e064-0393-45ad-9fa8-7a83bd4bf65d" 
-              width={'80%'} style={{margin:'2vw'}}  alt="doctor" />
-          </Grid>
-      </Grid>
+          </Container>
+        </Paper>
+        <Footer />
       </ThemeProvider>
     </>
   );
