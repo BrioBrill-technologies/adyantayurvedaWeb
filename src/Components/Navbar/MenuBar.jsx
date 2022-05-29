@@ -85,7 +85,7 @@ function Menubar() {
               Doctors
             </Typography>
             <Typography className={classes.typo} onClick={() => {navigate('/therapies')}}>
-              Contact Us
+              Register With Us
             </Typography>
               {/* {profile.map((item) =>
                 <Link 
@@ -126,7 +126,7 @@ function Menubar() {
               Doctors
             </Typography>
             <Typography className={classes.typo} onClick={() => { navigate('/therapies') }}>
-              Contact Us
+              Register With Us
             </Typography>
 
           </List>
