@@ -364,7 +364,7 @@ function Land() {
   const classes = useStyles();
   let navigate = useNavigate();
   return (
-    <div style={   { position: 'absolute',
+    <div style={{ position: 'absolute',
       top: 0,
       width: '-webkit-fill-available',
       zIndex: -1}}>
@@ -520,7 +520,9 @@ function Land() {
             </Typography>
           </Box>
         </Box>
-        <Button className={classes.btn1} variant="contained" color="primary">
+        <Button className={classes.btn1} variant="contained" color="primary" onClick={()=>{
+          navigate('/therapies')
+        }}>
            More Specialities
         </Button>
       </Box>      <Box>
@@ -563,8 +565,10 @@ function Land() {
             <Typography>A small description about the header.</Typography>
           </Box>
         </Box>
-        <Button className={classes.btn1} variant="contained" color="primary">
-           More Specialities
+        <Button className={classes.btn1} variant="contained" color="primary"onClick={()=>{
+          navigate('/doctors')
+        }}>
+           More Doctors
         </Button>
       </Box>
       <Box>

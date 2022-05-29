@@ -3,6 +3,7 @@ import { Input, Typography } from "@mui/material";
 import React, {  } from "react";
 import { makeStyles } from '@material-ui/core'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Navigate, useNavigate } from "react-router-dom";
 const useStyles = makeStyles({
     input1: {
         width: '250px !important',
@@ -58,6 +59,7 @@ const useStyles = makeStyles({
 })
 function Footer () {
     const classes = useStyles();
+    const navigate = useNavigate();
   return (
       <>
         <img style={{width:"100%", marginTop:'-12vw', zIndex:'-1'}} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Ffooter.svg?alt=media&token=9a65161a-6982-4717-b995-10781d733bf1"/>
@@ -100,7 +102,7 @@ function Footer () {
               Yoga
               </Typography>
               <Typography className={classes.head22}>
-              Swarn Bindu Prashana
+              Swarna Bindu Prashana
               </Typography>
               <Typography className={classes.head22}>
               Branding
@@ -110,10 +112,10 @@ function Footer () {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={2}>
-              <Typography className={classes.head21}>
-              Specialities
+              <Typography className={classes.head21} onClick={() => navigate('/therapies')}>
+              Specialties
               </Typography>
-              <Typography className={classes.head22}>
+              <Typography className={classes.head22} onClick={() => navigate('/doctors')}>
               Doctors
               </Typography>
               <Typography className={classes.head22}>

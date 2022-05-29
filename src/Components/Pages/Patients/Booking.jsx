@@ -101,14 +101,14 @@ function Booking () {
                         <CssBaseline />
                             <Box
                                 sx={{
-                                marginTop: 15,
-                                background:'#ffffff6e',
-                                display: 'flex',
-                                alignItems: 'center',
-                                flexDirection: 'column',
-                                border: '1px solid grey',
-                                borderRadius: '2vw',
-                                padding: '1rem',
+                                    marginTop: 15,
+                                    background:'#ffffff6e',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    flexDirection: 'column',
+                                    border: '1px solid grey',
+                                    borderRadius: '2vw',
+                                    padding: '1rem',
                                 }}>
                             <Typography className={classes.font45}>Book an Appointment</Typography>
                             <Box component="form" noValidate sx={{ mt: 1, ml:10}}>
