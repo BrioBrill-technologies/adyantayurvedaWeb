@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, db } from "../../../firebase";
 import { updateProfilePhoto, updateUser } from "../../../Hooks/usePost";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { Avatar, Button, Container, CssBaseline, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
+import { Avatar, Button, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
