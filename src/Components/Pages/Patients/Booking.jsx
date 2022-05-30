@@ -42,6 +42,9 @@ const useStyles = makeStyles({
     sub:{
         margin: '2vw 4vw 0 !important',
     },
+    fontJosefin:{
+        fontFamily: 'Josefin Sans !important'
+    },
 })
 function Booking () {
     const classes = useStyles();
@@ -107,7 +110,15 @@ function Booking () {
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M201.233 661.903C91.3224 681.028 -31.9961 688.711 -117.595 617.214C-205.677 543.643 -234.938 418.992 -226.576 304.572C-219.014 201.086 -155.635 112.168 -75.8345 45.7823C-6.293 -12.0693 84.5632 -17.706 174.342 -28.9526C277.828 -41.9163 397.071 -92.2216 475.265 -23.254C553.787 46.0031 526.758 171.111 519.556 275.529C513.397 364.832 494.692 451.474 437.757 520.581C377.059 594.254 295.309 645.534 201.233 661.903Z" fill="#FFF6E4"/>
                 </svg>
             </div>
-            <Paper sx={{ ml:50, mt:5 }}>
+            <Paper sx={{ ml:60, mt:5 }}>
+                <img
+                    style={{
+                        position: 'absolute',
+                        right: 0,
+                        width: '20%',
+                    
+                    }}
+                    src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FTopTree.png?alt=media&token=184c4654-8237-454c-ba6a-de617cd2a5cf" />
                 <FormControl sx={{ml:25, pt:10}}>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
@@ -146,7 +157,7 @@ function Booking () {
                         <ToggleButton value="01:00">01:00 PM</ToggleButton>
                         <ToggleButton value="02:00">02:00 PM</ToggleButton>
                     </ToggleButtonGroup>
-                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10}}>
+                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2}}>
                         Book Appointment
                     </Button>
                 </FormControl>
