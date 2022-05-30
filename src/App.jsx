@@ -25,6 +25,7 @@ import Profile from './Components/Pages/Patients/profile';
 import Therapies from './Components/Pages/Patients/Therapies';
 import Doctors from "./Components/Pages/Patients/Doctors";
 import Booking from "./Components/Pages/Patients/Booking";
+import Pay from './Components/Pages/Patients/Pay';
 import Confirmation from "./Components/Pages/Patients/bookingConfirmation";
 import Appointments from "./Components/Pages/Patients/appoitments";
 import BookingDetails from "./Components/Pages/Patients/BookingDetails";
@@ -44,6 +45,7 @@ import AddPrescription from "./Components/Pages/Doctors/AddPrescription";
 // Therapist Routes
 import TherapistProfile from "./Components/Pages/Therapists/profile";
 import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
+import Footer from "./Components/Navbar/Footer";
 
 const theme = createTheme({
   palette: {
@@ -98,6 +100,7 @@ function App() {
         <Route path="therapies" element={<Therapies />} />
         <Route path="doctors" element={<Doctors />} />
         <Route path="booking" element={<Booking />} />
+        <Route path="pay" element={<Pay />} />
         <Route path="confirmation" element={<Confirmation />} />
         <Route path="appointments" element={<Appointments />} />
         <Route path="appointmentDetails" element={<BookingDetails />} />

@@ -146,8 +146,6 @@ const getSingleApproved = async (id, type) => {
                 const document = docs.docs[i].data();
                 document.id = docs.docs[i].id;
                 return document;
-            } else {
-                return null;
             }
         }
     } catch (err) {

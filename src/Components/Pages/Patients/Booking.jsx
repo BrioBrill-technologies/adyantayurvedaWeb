@@ -1,22 +1,12 @@
 import { 
-    Box,
     Button,
-    CssBaseline,
     TextField,
-    Chip,
-    Stack,
-    InputLabel,
-    MenuItem,
     FormControl,
-    Select,
-    Container,
     Typography,
-    Grid,
     Paper,
     RadioGroup,
     FormControlLabel,
     Radio,
-    FormLabel,
     Divider,
     ToggleButtonGroup,
     ToggleButton
@@ -30,7 +20,6 @@ import { makeStyles } from '@material-ui/core';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { addBooking } from '../../../Hooks/usePost';
 import Footer from '../../Navbar/Footer';
 const useStyles = makeStyles({
     marginT: {
@@ -47,56 +36,53 @@ const useStyles = makeStyles({
     },
 })
 function Booking () {
-    const classes = useStyles();
     const { state } = useLocation();
     const [time, setTime] = useState('');
     const [date, setDate] = useState(null);
-    const [status, setStatus] = useState(null);
     const [user, loading, error] = useAuthState(auth);
     const [place, setPlace] = useState(null);
-    const [doctor, setDoctor] = useState([]);
-    const [name, setName] = useState(null);
-    const [birthday, setBirthday] = useState(null);
+    const [amount, setAmount] = useState(0);
+
     const navigate = useNavigate();
     
-    const fetchDoctor = async () => {
-        try {
-            const data = await getSingleApproved(state.id, state.type);
-            setDoctor(data);
-        } catch (err) {
-            console.error(err);
-            alert("An error occurred while fetching user data");
-        }
-    };
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
-        fetchDoctor();
     }, [loading]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addBooking({
-            DocId:state.id,
-            type:state.type,
-            patientId:user.uid,
-            date, 
-            time, 
-            status,
-            amount:state.amount,
-        }).then(() => {
-            navigate('/appointments');
-        }).catch(err => {
-            console.log(err);
-        });
-    }
-
-    const handleGender = (e) => {
-        setStatus(e.target.value);
+        navigate("/pay", { state: { 
+            id: state.id,
+            type: state.type,
+            place: place,
+            date: date,
+            time: time,
+            amount: amount,
+        } });
+        // e.preventDefault();
+        // addBooking({
+        //     DocId:state.id,
+        //     type:state.type,
+        //     patientId:user.uid,
+        //     date, 
+        //     time, 
+        //     status,
+        //     amount:state.amount,
+        // }).then(() => {
+        //     navigate('/appointments');
+        // }).catch(err => {
+        //     console.log(err);
+        // });
     }
 
     const handlePlace = (e) => {
         setPlace(e.target.value);
+        if(e.target.value === 'IN-CLINIC APPOINTMENT'){
+            setAmount(700);
+        } else if(e.target.value === 'VIDEO CONSULTATION'){
+            setAmount(500);
+        }
     }
 
     const handleChange = (event, newAlignment) => {
@@ -125,8 +111,8 @@ function Booking () {
                         onChange={handlePlace}
                         value = {place}
                         name="radio-buttons-group">
-                        <FormControlLabel value="female" control={<Radio />} label="IN-CLINIC APPOINTMENT ₹ 700" />
-                        <FormControlLabel value="male" control={<Radio />} label="VIDEO CONSULTATION ₹ 500" />
+                        <FormControlLabel value="IN-CLINIC APPOINTMENT" control={<Radio />} label="IN-CLINIC APPOINTMENT ₹ 700" />
+                        <FormControlLabel value="VIDEO CONSULTATION" control={<Radio />} label="VIDEO CONSULTATION ₹ 500" />
                     </RadioGroup>
                     <Divider sx={{mb:2}} />
                     <LocalizationProvider dateAdapter={AdapterDateFns} >
