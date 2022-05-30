@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from '../../../firebase';
-import {signInWithGoogle,logInWithEmailAndPassword} from '../../../Hooks/useAuth';
+import { auth } from '../../firebase';
+import {signInWithGoogle,logInWithEmailAndPassword} from '../../Hooks/useAuth';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { 
   Button,
@@ -14,7 +14,7 @@ import {
   Paper
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from "../../Navbar/Footer";
+import Footer from "../../Components/Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({

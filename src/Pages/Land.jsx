@@ -3,7 +3,7 @@ import { InputBase, TextareaAutosize, Typography } from "@mui/material";
 import React, {  } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core'
-import Footer from "./Navbar/Footer";
+import Footer from "../Components/Navbar/Footer";
 const useStyles = makeStyles({
   typo: {
     color: '#74613C',
@@ -383,12 +383,12 @@ function Land() {
               Health Needs At Your Doorstep.
             </Typography>
             <Box style={{display:'flex', flexDirection:'row', marginTop:'2vw'}}>
-            <Button variant="contained" color="primary" className={classes.btn} >
-              Consult Now
-            </Button>
-            <Button variant="contained" color="primary" className={classes.btn} >
-              Book Therapy
-            </Button>
+              <Button variant="contained" color="primary" className={classes.btn} >
+                Consult Now
+              </Button>
+              <Button variant="contained" color="primary" className={classes.btn} >
+                Book Therapy
+              </Button>
             </Box>
             <Box style={{display:'flex', marginTop: '5vw'}} className={classes.boxType}>
               <Typography className={classes.openHours}>

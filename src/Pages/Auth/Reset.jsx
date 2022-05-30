@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { auth } from "../../../firebase";
-import { sendPasswordReset } from "../../../Hooks/useAuth";
+import { auth } from "../../firebase";
+import { sendPasswordReset } from "../../Hooks/useAuth";
 import { 
   Button,
   Avatar,
@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from "../../Navbar/Footer";
+import Footer from "../../Components/Navbar/Footer";
 
 const theme = createTheme();
 

@@ -12,12 +12,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 // Common Routes
 import Menubar from "./Components/Navbar/MenuBar";
-import Land from "./Components/Land";
-import Login from './Components/Pages/Auth/Login';
-import Reset from './Components/Pages/Auth/Reset';
-import Register from './Components/Pages/Auth/Register';
-import DocRegister from "./Components/Pages/Auth/DocRegister";
-import TherapistRegister from "./Components/Pages/Auth/TherapyRegister";
+import Land from "./Pages/Land";
+import Login from "./Pages/Auth/Login";
+import Reset from './Pages/Auth/Reset';
+import Register from './Pages/Auth/Register';
+import DocRegister from "./Pages/Auth/DocRegister";
+import TherapistRegister from "./Pages/Auth/TherapyRegister";
 
 // Patient Routes
 import Profile from './Components/Pages/Patients/profile';

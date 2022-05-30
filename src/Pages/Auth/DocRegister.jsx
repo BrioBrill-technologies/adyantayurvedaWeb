@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import {auth} from "../../../firebase";
+import {auth} from "../../firebase";
 import { 
   signInWithGoogle,
   registerWithEmailAndPassword,
-} from '../../../Hooks/useAuth';
+} from '../../Hooks/useAuth';
 import { 
   Button,
   TextField,
@@ -16,7 +16,8 @@ import {
   Container,
   Paper} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from "../../Navbar/Footer";
+
+import Footer from "../../Components/Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({

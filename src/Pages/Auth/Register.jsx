@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import {auth} from "../../../firebase";
+import {auth} from "../../firebase";
+import Footer from "../../Components/Navbar/Footer";
 import { 
   signInWithGoogle,
   registerWithEmailAndPassword,
-} from '../../../Hooks/useAuth';
+} from '../../Hooks/useAuth';
 import { 
   Button,
   TextField,
@@ -16,7 +17,6 @@ import {
   Container,
   Paper} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from "../../Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
@@ -34,10 +34,9 @@ const useStyles = makeStyles({
     textTransform: 'none !important',
   },
 });
-
 const theme = createTheme();
 
-function TherapistRegister() {
+function Register() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,16 +44,16 @@ function TherapistRegister() {
   const navigate = useNavigate();
 
   const register = () => {
-    const newRegister = registerWithEmailAndPassword( email, password, 'therapist');
+    const newRegister = registerWithEmailAndPassword( email, password, 'patient');
     if(newRegister) {
-      navigate('/therapist/profile');
+      navigate('/profile');
     } else {
       alert('Something went wrong');
     }
   };
 
   const googleRegister = () => {
-    signInWithGoogle('doctor');
+    signInWithGoogle('patient');
   };
 
   useEffect(() => {
@@ -75,8 +74,8 @@ function TherapistRegister() {
             <Typography sx={{marginLeft:10 }} className={classes.login}>
               Register
             </Typography>
-            <Button variant="text" className={classes.register__btn} sx={{fontWeight:'bold', marginLeft:25}} onClick={() => navigate('/register')}>
-              Are you a Customer? Register here
+            <Button variant="text" className={classes.register__btn} sx={{fontWeight:'bold', marginLeft:25}} onClick={() => navigate('/doctor/register')}>
+              Are you a doctor? Register here
             </Button>
           </Box>
           <Container maxWidth="xs" sx={{ ml:20 }}>
@@ -147,4 +146,4 @@ function TherapistRegister() {
   );
 }
 
-export default TherapistRegister;
+export default Register;
