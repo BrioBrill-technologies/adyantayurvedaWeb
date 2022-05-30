@@ -18,6 +18,7 @@ import Reset from './Pages/Auth/Reset';
 import Register from './Pages/Auth/Register';
 import DocRegister from "./Pages/Auth/DocRegister";
 import TherapistRegister from "./Pages/Auth/TherapyRegister";
+import Contact from "./Pages/contact";
 
 // Patient Routes
 import Profile from './Components/Pages/Patients/profile';
@@ -91,6 +92,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="reset" element={<Reset />} />
         <Route path="register" element={<Register />} />
+        <Route path="contact" element={<Contact />} />
         {/* Patient Routes */}
         <Route path="profile" element={<Profile />} />
         <Route path="therapies" element={<Therapies />} />
