@@ -21,7 +21,14 @@ import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
+import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const useStyles = makeStyles({
   typo: {
@@ -52,20 +59,30 @@ function Menubar() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const profile = () => {
+  const handleOpenUserMenu = (event) => {
+    if (user.type === "doctor") {
+      navigate("/doctor/profile");
+    } else if (user.type === "patient") {
+      navigate('/profile')
+    } else if (user.type === "admin") {
+      navigate("/admin/profile");
+    } else if (user.type === "therapist") {
+      navigate("/therapist/profile");
+    } else {
+      console.log('error');
+    }
+    
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const profile = (event) => {
     if (user) {
-      if (user.type === "doctor") {
-        navigate("/doctor/profile");
-      } else if (user.type === "patient") {
-        navigate('/profile')
-      } else if (user.type === "admin") {
-        navigate("/admin/profile");
-      } else if (user.type === "therapist") {
-        navigate("/therapist/profile");
-      } else {
-        console.log('error');
-      }
+      setAnchorElUser(event.currentTarget);
     } else {
       navigate("/login");
     }
@@ -103,7 +120,28 @@ function Menubar() {
 
             <img onClick={() => {navigate('/')}} className={classes.logo} src='https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Flogo.png?alt=media&token=133422cd-c16f-4575-8d80-afb240030125' alt="logo" />
             <Avatar className={classes.endLogin} onClick={profile} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fprofile.svg?alt=media&token=7592369f-93b5-4300-96f2-de1c52da98ad" />
-
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
           </Toolbar>
         </Container>
         <SwipeableDrawer
