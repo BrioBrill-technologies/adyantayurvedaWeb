@@ -90,7 +90,7 @@ function Booking () {
     };
 
     return(
-        <div>
+        <div >
             <div style={{zIndex:-1,position:'absolute',top:0}}>
                 <svg width="530" height="676" viewBox="0 0 530 676" fill="none" xmlns="http://www.w3.org/2000/svg" >
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M201.233 661.903C91.3224 681.028 -31.9961 688.711 -117.595 617.214C-205.677 543.643 -234.938 418.992 -226.576 304.572C-219.014 201.086 -155.635 112.168 -75.8345 45.7823C-6.293 -12.0693 84.5632 -17.706 174.342 -28.9526C277.828 -41.9163 397.071 -92.2216 475.265 -23.254C553.787 46.0031 526.758 171.111 519.556 275.529C513.397 364.832 494.692 451.474 437.757 520.581C377.059 594.254 295.309 645.534 201.233 661.903Z" fill="#FFF6E4"/>
@@ -102,7 +102,9 @@ function Booking () {
                         position: 'absolute',
                         right: 0,
                         width: '20%',
-                    
+                        fontFamily:'Josefin Sans',
+                        fontWeight: 500,
+                        fontSize: '22px'
                     }}
                     src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FTopTree.png?alt=media&token=184c4654-8237-454c-ba6a-de617cd2a5cf" />
                 <FormControl sx={{ml:25, pt:10}}>
@@ -111,39 +113,39 @@ function Booking () {
                         onChange={handlePlace}
                         value = {place}
                         name="radio-buttons-group">
-                        <FormControlLabel value="IN-CLINIC APPOINTMENT" control={<Radio />} label="IN-CLINIC APPOINTMENT ₹ 700" />
-                        <FormControlLabel value="VIDEO CONSULTATION" control={<Radio />} label="VIDEO CONSULTATION ₹ 500" />
+                        <FormControlLabel  value="IN-CLINIC APPOINTMENT" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>IN-CLINIC APPOINTMENT ₹ 700</Typography> }/>
+                        <FormControlLabel value="VIDEO CONSULTATION" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>VIDEO CONSULTATION ₹ 500</Typography>} />
                     </RadioGroup>
-                    <Divider sx={{mb:2}} />
-                    <LocalizationProvider dateAdapter={AdapterDateFns} >
+                    <Divider sx={{mb:2,marginTop:'1vw'}} />
+                    <LocalizationProvider dateAdapter={AdapterDateFns} sx={{marginTop:'2vw'}} >
                         <DatePicker
                             minDate= {new Date()}
-                            label="Date of Appointment"
+                            label={<Typography style={{fontFamily:'Josefin Sans'}}>Date of Appointment</Typography>}
                             value={date}
                             onChange={(e) => { setDate(e) }}
                             renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}/>
                     </LocalizationProvider>
-                    <Typography>
+                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.6vw'}}>
+                        Evening (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="5:00">05:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="6:00">06:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="7:00">07:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="8:00">08:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="9:00">09:00 PM</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
                         Morning (5 slots)
                     </Typography>
-                    <ToggleButtonGroup value={time} exclusive onChange={handleChange}>
-                        <ToggleButton value="5:00">05:00 PM</ToggleButton>
-                        <ToggleButton value="6:00">06:00 PM</ToggleButton>
-                        <ToggleButton value="7:00">07:00 PM</ToggleButton>
-                        <ToggleButton value="8:00">08:00 PM</ToggleButton>
-                        <ToggleButton value="9:00">09:00 PM</ToggleButton>
+                    <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="10:00">10:00 AM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="11:00">11:00 AM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="12:00">12:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="01:00">01:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}}value="02:00">02:00 PM</ToggleButton>
                     </ToggleButtonGroup>
-                    <Typography>
-                        Morning (5 slots)
-                    </Typography>
-                    <ToggleButtonGroup value={time} exclusive onChange={handleChange} sx={{mb:2}}>
-                        <ToggleButton value="10:00">10:00 AM</ToggleButton>
-                        <ToggleButton value="11:00">11:00 AM</ToggleButton>
-                        <ToggleButton value="12:00">12:00 PM</ToggleButton>
-                        <ToggleButton value="01:00">01:00 PM</ToggleButton>
-                        <ToggleButton value="02:00">02:00 PM</ToggleButton>
-                    </ToggleButtonGroup>
-                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2}}>
+                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
                         Book Appointment
                     </Button>
                 </FormControl>
