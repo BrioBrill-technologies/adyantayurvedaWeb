@@ -9,18 +9,22 @@ import Footer from "../../Navbar/Footer";
 
 const useStyles = makeStyles({
     firstTypo: {
+        position:'absolute',
         color: '#3E3E3E',
         fontFamily: 'Lora !important',
         fontWeight: '600 !important',
         fontStyle: 'normal !important',
-        lineHeight: '1.5em',
-        padding: '0 0 0 5vw',
+        top:'14vw',
+        left:'6vw',
     },
 
     secondFont: {
+        position:'absolute',
+        top:'24.7vw',
         color: '#3E3E3E',
         fontFamily: 'Josefin Sans !important',
         padding: '0 0 0 5vw',
+        left:'1.2vw',
     },
 
     btn: {
@@ -131,15 +135,18 @@ function Doctors(){
                         </Typography>
                         <TextField
                             id="outlined-start-adornment"
-                            sx={{ 
+                            sx={{
+                                position:'absolute', 
                                 m: 1,
-                                width: '50ch',
+                                width: '40ch',
                                 background: '#FFFFFF',
                                 borderRadius: '15px',
                                 border: '1px solid #E0E0E0',
                                 fontFamily: 'Josefin Sans !important',
                                 fontWeight: '600 !important',
                                 fontSize: '24px !important',
+                                top:'28.5vw',
+                                left:'5.3vw',
                                 '&:hover': {
                                     border: '1px solid #E0E0E0',
                                 },
@@ -157,7 +164,7 @@ function Doctors(){
                     </Box>
                 </Grid>
                 <Grid item xs={12} style={{zIndex:'1'}}>
-                    <Box style={{width:'fit-content', marginLeft:'auto'}}>
+                    <Box style={{width:'fit-content', marginLeft:'auto',marginTop:'5vw'}}>
                         <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fdoctors.png?alt=media&token=b51840e5-82b8-422e-9141-4aca3aa6b6e9"/>
                     </Box>
                 </Grid>
