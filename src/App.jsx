@@ -24,6 +24,7 @@ import Profile from './Components/Pages/Patients/profile';
 import Therapies from './Components/Pages/Patients/Therapies';
 import Doctors from "./Components/Pages/Patients/Doctors";
 import Booking from "./Components/Pages/Patients/Booking";
+import Confirmation from "./Components/Pages/Patients/bookingConfirmation";
 import Appointments from "./Components/Pages/Patients/appoitments";
 import BookingDetails from "./Components/Pages/Patients/BookingDetails";
 import DoctorDetails from "./Components/Pages/Patients/DoctorDetails";
@@ -95,6 +96,7 @@ function App() {
         <Route path="therapies" element={<Therapies />} />
         <Route path="doctors" element={<Doctors />} />
         <Route path="booking" element={<Booking />} />
+        <Route path="confirmation" element={<Confirmation />} />
         <Route path="appointments" element={<Appointments />} />
         <Route path="appointmentDetails" element={<BookingDetails />} />
         <Route path="doctorDetails" element={<DoctorDetails />} />

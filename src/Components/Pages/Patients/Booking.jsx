@@ -11,9 +11,16 @@ import {
     Select,
     Container,
     Typography,
-    Grid
+    Grid,
+    Paper,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    FormLabel,
+    Divider,
+    ToggleButtonGroup,
+    ToggleButton
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -24,6 +31,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { addBooking } from '../../../Hooks/usePost';
+import Footer from '../../Navbar/Footer';
 const useStyles = makeStyles({
     marginT: {
         marginTop: '1rem !important'
@@ -34,22 +42,15 @@ const useStyles = makeStyles({
     sub:{
         margin: '2vw 4vw 0 !important',
     },
-    back:{
-        background: 'URL(https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/istockphoto-1157591198-612x612.jpeg?alt=media&token=e1c2d5f5-533e-4c2b-a8c5-0899c25217fa)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '100vh',
-    },
 })
-const theme = createTheme();
 function Booking () {
     const classes = useStyles();
     const { state } = useLocation();
-    const [time, setTime] = useState(null);
+    const [time, setTime] = useState('');
     const [date, setDate] = useState(null);
     const [status, setStatus] = useState(null);
     const [user, loading, error] = useAuthState(auth);
+    const [place, setPlace] = useState(null);
     const [doctor, setDoctor] = useState([]);
     const [name, setName] = useState(null);
     const [birthday, setBirthday] = useState(null);
@@ -91,96 +92,67 @@ function Booking () {
         setStatus(e.target.value);
     }
 
+    const handlePlace = (e) => {
+        setPlace(e.target.value);
+    }
+
+    const handleChange = (event, newAlignment) => {
+      setTime(newAlignment);
+    };
+
     return(
-        <ThemeProvider theme={theme}>
-            <div className={classes.back}>
-            <Grid container component="main" className="root">
-                <Grid item xs={false} sm={4} md={3.5}></Grid>
-                <Grid item xs={12} sm={8} md={5} component={Container}>
-                    <Container component="main" maxWidth="xs">
-                        <CssBaseline />
-                            <Box
-                                sx={{
-                                    marginTop: 15,
-                                    background:'#ffffff6e',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    flexDirection: 'column',
-                                    border: '1px solid grey',
-                                    borderRadius: '2vw',
-                                    padding: '1rem',
-                                }}>
-                            <Typography className={classes.font45}>Book an Appointment</Typography>
-                            <Box component="form" noValidate sx={{ mt: 1, ml:10}}>
-                                <LocalizationProvider dateAdapter={AdapterDateFns} >
-                                    <DatePicker
-                                        minDate= {new Date()}
-                                        label="Date of Appointment"
-                                        value={date}
-                                        onChange={(e) => {
-                                            setDate(e);
-                                        }}
-                                        renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}
-                                    />
-                                </LocalizationProvider>
-                                <Stack direction="column" spacing={3} className={classes.marginT} sx={{ml:-7}}>
-                                    <Stack direction="row" spacing={3}>
-                                    <Chip label="09:00" onClick={()=>{setTime('9:00')}}/>
-                                    <Chip label="10:00" variant="outlined" onClick={()=>{setTime('10:00')}}/>
-                                    <Chip label="11:00" variant="outlined" onClick={()=>{setTime('11:00')}}/>
-                                    <Chip label="12:00" variant="outlined" onClick={()=>{setTime('12:00')}}/>
-                                    </Stack>
-                                    <Stack direction="row" spacing={3}>
-                                    <Chip label="13:00" variant="outlined" onClick={()=>{setTime('13:00')}}/>
-                                    <Chip label="14:00" variant="outlined" onClick={()=>{setTime('14:00')}}/>
-                                    <Chip label="15:00" variant="outlined" onClick={()=>{setTime('15:00')}}/>
-                                    <Chip label="16:00" variant="outlined" onClick={()=>{setTime('16:00')}}/>
-                                    </Stack>
-                                </Stack>
-                                <FormControl style={{width:'70%'}} className={classes.marginT}>
-                                    <InputLabel id="GenderLabel">Gender</InputLabel>
-                                    <Select
-                                        labelId="GenderLabel"
-                                        defaultValue={''}
-                                        id="demo-simple-select"
-                                        label="Gender"
-                                        onChange={handleGender}>
-                                        <MenuItem value={'Male'}>Male</MenuItem>
-                                        <MenuItem value={'Female'}>Female</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <TextField 
-                                    className={classes.marginT}
-                                    style={{marginBottom:'1vw',width:'70%'}}
-                                    label="Full Name"
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                                <LocalizationProvider dateAdapter={AdapterDateFns} >
-                                    <DatePicker
-                                        maxDate= {new Date()}
-                                        label="Date of Birth"
-                                        value={birthday}
-                                        onChange={(e) => {
-                                            setBirthday(e);
-                                        }}
-                                        renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}
-                                    />
-                                </LocalizationProvider>
-                                <div></div>
-                                <Button 
-                                    className={classes.sub}
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={(e) => handleSubmit(e)}>
-                                    Submit
-                                </Button>
-                            </Box>
-                        </Box>
-                    </Container>
-                </Grid>
-            </Grid>
+        <div>
+            <div style={{zIndex:-1,position:'absolute',top:0}}>
+                <svg width="530" height="676" viewBox="0 0 530 676" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M201.233 661.903C91.3224 681.028 -31.9961 688.711 -117.595 617.214C-205.677 543.643 -234.938 418.992 -226.576 304.572C-219.014 201.086 -155.635 112.168 -75.8345 45.7823C-6.293 -12.0693 84.5632 -17.706 174.342 -28.9526C277.828 -41.9163 397.071 -92.2216 475.265 -23.254C553.787 46.0031 526.758 171.111 519.556 275.529C513.397 364.832 494.692 451.474 437.757 520.581C377.059 594.254 295.309 645.534 201.233 661.903Z" fill="#FFF6E4"/>
+                </svg>
             </div>
-        </ThemeProvider>
+            <Paper sx={{ ml:50, mt:5 }}>
+                <FormControl sx={{ml:25, pt:10}}>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        onChange={handlePlace}
+                        value = {place}
+                        name="radio-buttons-group">
+                        <FormControlLabel value="female" control={<Radio />} label="IN-CLINIC APPOINTMENT ₹ 700" />
+                        <FormControlLabel value="male" control={<Radio />} label="VIDEO CONSULTATION ₹ 500" />
+                    </RadioGroup>
+                    <Divider sx={{mb:2}} />
+                    <LocalizationProvider dateAdapter={AdapterDateFns} >
+                        <DatePicker
+                            minDate= {new Date()}
+                            label="Date of Appointment"
+                            value={date}
+                            onChange={(e) => { setDate(e) }}
+                            renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}/>
+                    </LocalizationProvider>
+                    <Typography>
+                        Morning (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup value={time} exclusive onChange={handleChange}>
+                        <ToggleButton value="5:00">05:00 PM</ToggleButton>
+                        <ToggleButton value="6:00">06:00 PM</ToggleButton>
+                        <ToggleButton value="7:00">07:00 PM</ToggleButton>
+                        <ToggleButton value="8:00">08:00 PM</ToggleButton>
+                        <ToggleButton value="9:00">09:00 PM</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Typography>
+                        Morning (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup value={time} exclusive onChange={handleChange} sx={{mb:2}}>
+                        <ToggleButton value="10:00">10:00 AM</ToggleButton>
+                        <ToggleButton value="11:00">11:00 AM</ToggleButton>
+                        <ToggleButton value="12:00">12:00 PM</ToggleButton>
+                        <ToggleButton value="01:00">01:00 PM</ToggleButton>
+                        <ToggleButton value="02:00">02:00 PM</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10}}>
+                        Book Appointment
+                    </Button>
+                </FormControl>
+            </Paper>
+            <Footer />
+        </div>
     )
 }
 
