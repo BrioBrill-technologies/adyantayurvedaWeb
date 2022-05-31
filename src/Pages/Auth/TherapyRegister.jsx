@@ -15,7 +15,6 @@ import {
   Typography,
   Container,
   Paper} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Footer from "../../Components/Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
 
@@ -34,8 +33,6 @@ const useStyles = makeStyles({
     textTransform: 'none !important',
   },
 });
-
-const theme = createTheme();
 
 function TherapistRegister() {
   const classes = useStyles();
@@ -63,8 +60,7 @@ function TherapistRegister() {
   }, [user, loading]);
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
+      <div>
         <div style={{zIndex:-1,position:'absolute',top:0}}>
           <svg width="530" height="676" viewBox="0 0 530 676" fill="none" xmlns="http://www.w3.org/2000/svg" >
             <path fill-rule="evenodd" clip-rule="evenodd" d="M201.233 661.903C91.3224 681.028 -31.9961 688.711 -117.595 617.214C-205.677 543.643 -234.938 418.992 -226.576 304.572C-219.014 201.086 -155.635 112.168 -75.8345 45.7823C-6.293 -12.0693 84.5632 -17.706 174.342 -28.9526C277.828 -41.9163 397.071 -92.2216 475.265 -23.254C553.787 46.0031 526.758 171.111 519.556 275.529C513.397 364.832 494.692 451.474 437.757 520.581C377.059 594.254 295.309 645.534 201.233 661.903Z" fill="#FFF6E4"/>
@@ -124,7 +120,8 @@ function TherapistRegister() {
                 onClick={register}
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, background:'#74613C', textTransform: 'none !important'}}>
+                color="primary"
+                sx={{ mt: 3, mb: 2, textTransform: 'none !important'}}>
                   Register
               </Button>
               <Typography variant="h6" sx={{fontWeight:'bold' }}>
@@ -142,8 +139,7 @@ function TherapistRegister() {
           </Container>
         </Paper>
         <Footer />
-      </ThemeProvider>
-    </>
+      </div>
   );
 }
 

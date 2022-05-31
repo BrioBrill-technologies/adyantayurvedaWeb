@@ -3,15 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom"
 import { auth } from "../../firebase";
 function BookingDetails() {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [user, loading, error] = useAuthState(auth);
-    const [booking, setBooking] = useState(null);
-    const [doctor, setDoctor] = useState(null);
-    const [patient, setPatient] = useState(null);
-    const [amount, setAmount] = useState(0);
-
-
     return (
         // <Paper>
         //     <Typography variant="h5" component="h5">

@@ -3,7 +3,6 @@ import {
     getTotalInvoiceAmount,
     getApproved,
     getPatients,
-    getSingleApproved,
     getNotApproved,
 } from '../../Hooks/useFetch'
 import { auth, db } from '../../firebase';
@@ -18,11 +17,9 @@ import {
     TableRow,
     Paper,
     Button,
-    Typography,
-    Modal, 
+    Typography, 
 } from '@mui/material';
 import { addApproval } from '../../Hooks/usePost';
-import StaffDetails from './StaffDetails';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 function AdminHome() {

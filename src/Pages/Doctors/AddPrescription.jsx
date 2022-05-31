@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation } from "react-router-dom";
 import { auth } from "../../firebase";
-import { getBookings, getSingleBooking, getSinglePatient } from "../../Hooks/useFetch";
+import { getSingleBooking, getSinglePatient } from "../../Hooks/useFetch";
 import { addPrescription } from "../../Hooks/usePost";
 
 function AddPrescription() {
@@ -59,6 +59,7 @@ function AddPrescription() {
                 <Input placeholder="Date" disabled value={new Date()}/>
                 <Button 
                     type="submit"
+                     color="primary"
                     onClick={(e) => {
                         handleSubmit(e, booking.id);
                     }}

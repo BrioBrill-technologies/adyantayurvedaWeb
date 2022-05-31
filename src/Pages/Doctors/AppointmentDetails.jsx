@@ -8,7 +8,6 @@ import { modifyBooking } from '../../Hooks/usePost';
 function AppointmentDetails() {
     const [user, loading, error] = useAuthState(auth);
     const [booking, setBooking] = useState(null);
-    const [doctor, setDoctor] = useState(null);
     const [patient, setPatient] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();

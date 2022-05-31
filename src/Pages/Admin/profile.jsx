@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, db } from "../../firebase";
 import { updateProfilePhoto, updateUser } from "../../Hooks/usePost";
 import { query, collection, getDocs, where } from "firebase/firestore";
@@ -17,7 +16,6 @@ const Input = styled('input')({
     display: 'none',
   });
 
-const theme = createTheme();
 export default function AdminProfile() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
@@ -60,7 +58,7 @@ export default function AdminProfile() {
         fetchUserName();
     }, [user, loading]);
     return (
-        <ThemeProvider theme={theme}>
+        <div>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <label htmlFor="profileImg">
@@ -172,6 +170,6 @@ export default function AdminProfile() {
                     </Button>
                 </Box>
             </Container>
-        </ThemeProvider>
+        </div>
     )
 }
