@@ -192,7 +192,6 @@ function Therapies(){
                             component="img"
                             style={{
                                 height:'15vw',
-                                width:'15vw', 
                                 marginLeft:'auto',
                                 marginRight:'auto'}}
                             image={therapy.image}
