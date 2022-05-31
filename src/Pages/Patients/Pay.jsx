@@ -28,9 +28,11 @@ function Pay(){
     const {state} = useLocation();
     const [user, loading, error] = useAuthState(auth);
     const [doctor, setDoctor] = useState(null);
+    const [amount, setAmount] = useState(state.amount);
+    const [tax, setTax] = useState(state.amount * 0.1);
+    const [totalAmount, setTotalAmount] = useState(amount + tax);
     
     const classes = useStyles();
-
     const navigate = useNavigate();
     const fetchDoctor = async () => {
         try {
@@ -211,7 +213,7 @@ function Pay(){
                                             fontSize:'18px',
                                             fontWeight:400,
                                             marginTop:'0.8vw'}}>
-                            {state.amount}
+                            {tax}
                             </Typography>
                         </Box>
                         <svg width="472" height="2" viewBox="0 0 472 2" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -229,7 +231,7 @@ function Pay(){
                                             fontSize:'18px',
                                             fontWeight:400,
                                             marginTop:'0.8vw'}}>
-                            {state.amount}
+                            {totalAmount}
                             </Typography>
                         </Box>
                         <Button variant="contained" color="primary" className={classes.btn4}>

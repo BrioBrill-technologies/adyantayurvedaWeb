@@ -59,9 +59,7 @@ const getTherapyType = async () => {
         const q = query(collection(db, "Therapies"));
         const docs = await getDocs(q);
         for (let i = 0; i < docs.docs.length; i++) {
-            if(therapyType.includes(docs.docs[i].data().type)){
-                break;
-            } else {
+            if(!therapyType.includes(docs.docs[i].data().type)){
                 therapyType.push(docs.docs[i].data().type);
             }
         }
