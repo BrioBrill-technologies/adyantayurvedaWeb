@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getSingleApproved } from "../../Hooks/useFetch";
 import Footer from "../../Components/Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
+import moment from "moment";
 const useStyles = makeStyles({
     btn4: {
         background: '#74613C',
@@ -26,17 +27,17 @@ const useStyles = makeStyles({
 
 function Pay(){
     const {state} = useLocation();
+    console.log(state)
     const [user, loading, error] = useAuthState(auth);
     const [doctor, setDoctor] = useState(null);
     const [amount, setAmount] = useState(state.amount);
     const [tax, setTax] = useState(state.amount * 0.1);
     const [totalAmount, setTotalAmount] = useState(amount + tax);
-    
+    const [date, setDate] = useState(new Date(state.date));
     const classes = useStyles();
     const navigate = useNavigate();
     const fetchDoctor = async () => {
         try {
-            console.log(state.id, state.type);
             const data = await getSingleApproved(state.id, state.type);
             console.log(data);
             setDoctor(data);
@@ -61,49 +62,60 @@ function Pay(){
             {doctor && (
             <Grid display="flex" sx={{marginTop:10}}>
                 <Grid item md={3} style={{marginLeft:"14%"}}>
-                    <Card sx={{height:'22vw',
-                               width:'32vw',
-                               border: '1px solid #DDDDDD',}}>
+                    <Card 
+                        sx={{
+                            height:'22vw',
+                            width:'32vw',
+                            border: '1px solid #DDDDDD',}}>
                         <CardContent>
-                            <Typography sx={{fontFamily:'Josefin Sans',
-                                             fontWeight:600,
-                                             fontSize:'16px',
-                                             marginTop:'1vw'}}
-                                             >{state.place}</Typography>
-                            <Typography sx={{fontFamily:'Josefin Sans',
-                                             fontSize:'14px',
-                                             color:'#7E7E7E',
-                                             marginTop:'0.6vw'}}
-                                             >Includes Prescription</Typography>
+                            <Typography 
+                                sx={{
+                                    fontFamily:'Josefin Sans',
+                                    fontWeight:600,
+                                    fontSize:'16px',
+                                    marginTop:'1vw'}}
+                                    >{state.place}</Typography>
+                            <Typography
+                                sx={{
+                                    fontFamily:'Josefin Sans',
+                                    fontSize:'14px',
+                                    color:'#7E7E7E',
+                                    marginTop:'0.6vw'}}
+                                    >Includes Prescription</Typography>
                             <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" >
-                                <Typography sx={{fontFamily:'Josefin Sans',
-                                                 fontWeight:600,
-                                                 fontSize:'18px',
-                                                 marginTop:'1vw'}}>
+                                <Typography 
+                                    sx={{
+                                        fontFamily:'Josefin Sans',
+                                        fontWeight:600,
+                                        fontSize:'18px',
+                                        marginTop:'1vw'}}>
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1999 6.75H1.7999V16.2H16.1999V6.75ZM16.1999 5.85H1.7999V2.7H16.1999V5.85ZM17.0999 2.7C17.0999 2.20294 16.697 1.8 16.1999 1.8H1.7999C1.30285 1.8 0.899902 2.20294 0.899902 2.7V16.2C0.899902 16.6971 1.30285 17.1 1.7999 17.1H16.1999C16.697 17.1 17.0999 16.6971 17.0999 16.2V2.7Z" fill="#3E3E3E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.9499 4.5V0H5.8499V4.5H4.9499ZM12.1499 4.5V0H13.0499V4.5H12.1499Z" fill="#3E3E3E"/>
                                     </svg>
-                                    <span style={{marginLeft:'0.8vw'}}>On May 22, 2022</span>
+                                    <span style={{marginLeft:'0.8vw'}}>{moment(date).format('DD-MM-YYYY')}</span>
                                 </Typography>
-                                <Typography style={{marginLeft:"auto",
-                                                    fontFamily:'Josefin Sans',
-                                                    fontWeight:600,
-                                                    fontSize:'18px',
-                                                    marginTop:'1vw',
-                                                    marginLeft:'8vw'}}>
+                                <Typography 
+                                    style={{
+                                        marginLeft:"auto",
+                                        fontFamily:'Josefin Sans',
+                                        fontWeight:600,
+                                        fontSize:'18px',
+                                        marginTop:'1vw',}}>
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9 17.1C13.4735 17.1 17.1 13.4735 17.1 9C17.1 4.52649 13.4735 0.9 9 0.9C4.52649 0.9 0.9 4.52649 0.9 9C0.9 13.4735 4.52649 17.1 9 17.1ZM9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#3E3E3E"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.1 4.05H9V8.3636L13.3682 12.7318L12.7318 13.3682L8.1 8.7364V4.05Z" fill="#3E3E3E"/>
                                     </svg>
-                                    <span style={{marginLeft:'0.8vw'}}>At 10:00 AM</span>
+                                    <span style={{marginLeft:'0.8vw'}}>At {state.time}</span>
                                 </Typography>
                             </Box>
-                            <Typography sx={{fontFamily:'Josefin Sans',
-                                             fontSize:'14px',
-                                             color:'#7E7E7E',
-                                             marginTop:'0.6vw'}}>Change date & time</Typography>
+                            <Typography 
+                                sx={{
+                                    fontFamily:'Josefin Sans',
+                                    fontSize:'14px',
+                                    color:'#7E7E7E',
+                                    marginTop:'0.6vw'}}>Change date & time</Typography>
                             <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" flexDirection="row" >
                                 <CardMedia
@@ -119,19 +131,22 @@ function Pay(){
                                     }}
                                     image={doctor.photoURL}/>
                                 <Box display="flex" flexDirection="column" style={{marginLeft: '8vw',marginTop:'0.5vw'}}>
-                                    <Typography style={{
-                                                        fontFamily:'Josefin Sans',
-                                                        fontWeight:600,
-                                                        fontSize:'18px',
-                                                        marginTop:'1vw'}}>{doctor.name}</Typography>
-                                    <Typography sx={{fontFamily:'Josefin Sans',
-                                                fontSize:'14px',
-                                                color:'#7E7E7E'}}
-                                                >{doctor.education}</Typography>
-                                    <Typography sx={{fontFamily:'Josefin Sans',
-                                                fontSize:'13px',
-                                                color:'#7E7E7E'}}
-                                                >{doctor.specialization}</Typography>
+                                    <Typography 
+                                        style={{
+                                            fontFamily:'Josefin Sans',
+                                            fontWeight:600,
+                                            fontSize:'18px',
+                                            marginTop:'1vw'}}>{doctor.name}</Typography>
+                                    <Typography 
+                                        sx={{
+                                            fontFamily:'Josefin Sans',
+                                            fontSize:'14px',
+                                            color:'#7E7E7E'}}>{doctor.education}</Typography>
+                                    <Typography 
+                                        sx={{
+                                            fontFamily:'Josefin Sans',
+                                            fontSize:'13px',
+                                            color:'#7E7E7E'}}>{doctor.specialization}</Typography>
                                 </Box>
                             </Box>
                         </ CardContent>
@@ -139,51 +154,66 @@ function Pay(){
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Box style={{marginLeft: '16vw'}}>
-                        <Typography sx={{fontFamily:'Lora',
-                                         fontSize:'28px',
-                                         color:'#3E3E3E',
-                                         fontWeight:600,}}>Patient Details</Typography>
-                        <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'20px',
-                                         color:'#3E3E3E',
-                                         fontWeight:600,
-                                         marginTop:'0.8vw'}}>This in-clinic appointment is for:</Typography>
-                        <Typography sx={{border:'1px solid #DDDDDD',
-                                        padding: '8px 6vw 8px 18px',
-                                        fontFamily:'Josefin Sans',
-                                        fontWeight:400,
-                                        fontSize:'20px',
-                                        width:'68%'}}>Ramesh Rajan</Typography>
-                        <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'20px',
-                                         color:'#3E3E3E',
-                                         fontWeight:600,
-                                         marginTop:'0.8vw'}}>Please provide following information about Ramesh Rajan</Typography>
-                        <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'20px',
-                                         color:'#3E3E3E',
-                                         fontWeight:400,
-                                         marginTop:'0.8vw',
-                                         }}>
+                        <Typography 
+                            sx={{
+                                fontFamily:'Lora',
+                                fontSize:'28px',
+                                color:'#3E3E3E',
+                                fontWeight:600,}}>Patient Details</Typography>
+                        <Typography 
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'20px',
+                                color:'#3E3E3E',
+                                fontWeight:600,
+                                marginTop:'0.8vw'}}>This in-clinic appointment is for:</Typography>
+                        <Typography 
+                            sx={{
+                                border:'1px solid #DDDDDD',
+                                padding: '8px 6vw 8px 18px',
+                                fontFamily:'Josefin Sans',
+                                fontWeight:400,
+                                fontSize:'20px',
+                                width:'68%'}}>Ramesh Rajan</Typography>
+                        <Typography 
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'20px',
+                                color:'#3E3E3E',
+                                fontWeight:600,
+                                marginTop:'0.8vw'}}>Please provide following information about Ramesh Rajan</Typography>
+                        <Typography 
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'20px',
+                                color:'#3E3E3E',
+                                fontWeight:400,
+                                marginTop:'0.8vw',
+                            }}>
                             Full Name*
                         </Typography>
-                        <InputBase sx={{border:'1px solid #DDDDDD',
-                                        padding: '8px 16vw 8px 18px'}}
-                                         id="name" placeholder="Your Name"  />
-                        <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'20px',
-                                         color:'#3E3E3E',
-                                         fontWeight:400,
-                                         marginTop:'0.8vw',}}>
+                        <InputBase
+                             sx={{
+                                border:'1px solid #DDDDDD',
+                                padding: '8px 16vw 8px 18px'}}
+                            id="name" 
+                            placeholder="Your Name"  />
+                        <Typography 
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'20px',
+                                color:'#3E3E3E',
+                                fontWeight:400,
+                                marginTop:'0.8vw',}}>
                             Your Mobile Number*
                         </Typography>
-                        <InputBase sx={{border:'1px solid #DDDDDD',
-                                        padding: '8px 16vw 8px 18px'}}
-                                         id="mobile" placeholder="Mobile Number"  />
-                        <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'24px',
-                                         fontWeight:500,
-                                         marginTop:'0.8vw'}}>
+                        <InputBase sx={{border:'1px solid #DDDDDD', padding: '8px 16vw 8px 18px'}} id="mobile" placeholder="Mobile Number"  />
+                        <Typography
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'24px',
+                                fontWeight:500,
+                                marginTop:'0.8vw'}}>
                             Bill Details
                         </Typography>
                         <Box display="flex" flexDirection="row">
