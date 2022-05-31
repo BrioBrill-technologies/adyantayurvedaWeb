@@ -38,12 +38,12 @@ function Pay(){
         </div>
             {doctor && (
             <Grid display="flex" justifyContent="center" alignItems="center" sx={{marginTop:10}}>
-                <Grid item sx={3} md={{marginLeft:40}}>
+                <Grid item md={3} style={{marginLeft:"25%"}}>
                     <Card>
                         <CardContent>
                             <Typography>{state.place}</Typography>
                             <Typography>Includes Prescription</Typography>
-                            <Divider />
+                            <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" >
                                 <Typography>
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@ function Pay(){
                                 </Typography>
                             </Box>
                             <Typography>Change date & time</Typography>
-                            <Divider />
+                            <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" justifyContent="center" alignItems="center">
                                 <CardMedia
                                     component="img"
