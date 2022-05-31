@@ -7,6 +7,7 @@ import {
     Typography,
     TextField,
     InputAdornment,
+    CardMedia,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, {useEffect, useState} from "react";
@@ -53,9 +54,20 @@ const useStyles = makeStyles({
     },
 
     head11: {
-        fontFamily: 'Lora !important',
+        fontFamily: 'Josefin Sans !important',
         fontWeight: '600 !important',
-        fontSize: '40px !important',
+        fontSize: '24px !important',
+        paddingLeft: '0.5vw',
+    },
+
+    bookBtn: {
+        color: '#74613C',
+        fontFamily: 'Josefin Sans !important',
+        fontWeight: '600 !important',
+        fontSize: '24px !important',
+        '&:hover': {
+            color: '#74613C',
+        },
     },
 })
 
@@ -169,24 +181,36 @@ function Therapies(){
                 <Button onClick={() => fetchAyurveda(item)}>{item}</Button>
             </Grid>
         ))}
-        <Grid sx={{ flexGrow: 1 }} justifyContent="center" marginTop="2vw" marginLeft="0.25vw" container spacing={2}>
+        <Grid justifyContent="center" marginTop="2vw" marginLeft="0.25vw" container spacing={3}>
             {Therapy.map((therapy) => (
-                <Grid item xs={10} sm={10} md={2}  key={therapy.id}>
-                    <Card sx={{maxHeight: 200, maxWidth:200}} >
+                <Grid item xs={12} sm={6} md={3} lg={4}  key={therapy.id}
+                style={{ maxWidth: '25.333333%'}}>
+                    <Card sx={{
+                        marginLeft: 'auto',
+                        marginRight: 'auto',}} >
+                        <CardMedia
+                            component="img"
+                            style={{
+                                height:'15vw',
+                                width:'15vw', 
+                                marginLeft:'auto',
+                                marginRight:'auto'}}
+                            image={therapy.image}
+                        />
                         <CardContent>
-                            <Typography>
+                            <Typography className={classes.head11}>
                                 {therapy.name}
                             </Typography>
-                            <Typography>
-                                {therapy.type}
-                            </Typography>
-
                             <CardActionArea>
-                                <Button onClick={() => {
-                                    console.log(therapy.id, therapy.amount);
+                                <Button 
+                                className={classes.bookBtn}
+                                onClick={() => {
                                     handleBooking(therapy.id, therapy.amount)
                                 }}>
                                     Book Now 
+                                    <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
+                                    </svg>
                                 </Button>
                             </CardActionArea>
                         </CardContent>

@@ -15,25 +15,10 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
-import { makeStyles } from '@material-ui/core';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Footer from '../../Components/Navbar/Footer';
-const useStyles = makeStyles({
-    marginT: {
-        marginTop: '1rem !important'
-    },
-    font45:{
-        fontSize: '25px !important'
-    },
-    sub:{
-        margin: '2vw 4vw 0 !important',
-    },
-    fontJosefin:{
-        fontFamily: 'Josefin Sans !important'
-    },
-})
 function Booking () {
     const { state } = useLocation();
     const [time, setTime] = useState('');

@@ -77,8 +77,7 @@ function Doctors(){
     }
 
     const handleView = (id) => {
-        if(user) navigate(`/doctorDetails/` , { state: { id } });
-        else navigate("/login");
+        navigate(`/doctorDetails/` , { state: { id } });
     }
     return (
         <div style={{ position: 'absolute',
