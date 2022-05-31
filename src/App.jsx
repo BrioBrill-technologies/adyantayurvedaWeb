@@ -21,31 +21,30 @@ import TherapistRegister from "./Pages/Auth/TherapyRegister";
 import Contact from "./Pages/contact";
 
 // Patient Routes
-import Profile from './Components/Pages/Patients/profile';
-import Therapies from './Components/Pages/Patients/Therapies';
-import Doctors from "./Components/Pages/Patients/Doctors";
-import Booking from "./Components/Pages/Patients/Booking";
-import Pay from './Components/Pages/Patients/Pay';
-import Confirmation from "./Components/Pages/Patients/bookingConfirmation";
-import Appointments from "./Components/Pages/Patients/appoitments";
-import BookingDetails from "./Components/Pages/Patients/BookingDetails";
-import DoctorDetails from "./Components/Pages/Patients/DoctorDetails";
+import Profile from './Pages/Patients/profile';
+import Therapies from './Pages/Patients/Therapies';
+import Doctors from "./Pages/Patients/Doctors";
+import Booking from "./Pages/Patients/Booking";
+import Pay from './Pages/Patients/Pay';
+import Confirmation from "./Pages/Patients/bookingConfirmation";
+import Appointments from "./Pages/Patients/appointments";
+import BookingDetails from "./Pages/Patients/BookingDetails";
+import DoctorDetails from "./Pages/Patients/DoctorDetails";
 
 // Admin Routes
-import AdminHome from "./Components/Pages/Admin/AdminHome";
-import AdminProfile from "./Components/Pages/Admin/profile";
+import AdminHome from "./Pages/Admin/AdminHome";
+import AdminProfile from "./Pages/Admin/profile";
 
 // Doctor Routes
-import DoctorProfile from "./Components/Pages/Doctors/profile";
-import DocDashboard from "./Components/Pages/Doctors/Dashboard";
-import AppointmentDetails from "./Components/Pages/Doctors/AppointmentDetails";
-import PatientDetails from "./Components/Pages/Doctors/PatientDetails";
-import AddPrescription from "./Components/Pages/Doctors/AddPrescription";
+import DoctorProfile from "./Pages/Doctors/profile";
+import DocDashboard from "./Pages/Doctors/Dashboard";
+import AppointmentDetails from "./Pages/Doctors/AppointmentDetails";
+import PatientDetails from "./Pages/Doctors/PatientDetails";
+import AddPrescription from "./Pages/Doctors/AddPrescription";
 
 // Therapist Routes
-import TherapistProfile from "./Components/Pages/Therapists/profile";
-import TherapistDashboard from "./Components/Pages/Therapists/Dashboard";
-import Footer from "./Components/Navbar/Footer";
+import TherapistProfile from "./Pages/Therapists/profile";
+import TherapistDashboard from "./Pages/Therapists/Dashboard";
 
 const theme = createTheme({
   palette: {

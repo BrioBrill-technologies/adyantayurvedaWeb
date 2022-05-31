@@ -1,4 +1,6 @@
 import {
+  Menu,
+  MenuItem,
   Typography
 } from '@mui/material';
 import {
@@ -20,15 +22,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-
-import Menu from '@mui/material/Menu';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { logout } from '../../Hooks/useAuth';
 
 const useStyles = makeStyles({
   typo: {
@@ -61,19 +55,13 @@ function Menubar() {
   const [open, setOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    if (user.type === "doctor") {
-      navigate("/doctor/profile");
-    } else if (user.type === "patient") {
-      navigate('/profile')
-    } else if (user.type === "admin") {
-      navigate("/admin/profile");
-    } else if (user.type === "therapist") {
-      navigate("/therapist/profile");
-    } else {
-      console.log('error');
-    }
-    
+  const handleProfile = () => {
+    handleCloseUserMenu();
+    if (user.type === "doctor") navigate("/doctor/profile");
+    else if (user.type === "patient") navigate('/profile')
+    else if (user.type === "admin") navigate("/admin/profile");
+    else if (user.type === "therapist") navigate("/therapist/profile");
+    else console.log('error');
   };
 
   const handleCloseUserMenu = () => {
@@ -104,13 +92,6 @@ function Menubar() {
             <Typography className={classes.typo} onClick={() => {navigate('/therapies')}}>
               Register With Us
             </Typography>
-              {/* {profile.map((item) =>
-                <Link 
-                  className={classes.firstTypo}
-                  >
-                    {item.name}
-                </Link>
-              )} */}
             </Hidden>
             <Hidden smUp>
               <IconButton>
@@ -134,13 +115,19 @@ function Menubar() {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              onClose={handleCloseUserMenu}>
+              <MenuItem onClick={handleProfile}>
+                <Typography textAlign="center">View/Update profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={()=>{navigate('/appointments')}}>
+                <Typography textAlign="center">My Dashboard</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleProfile}>
+                <Typography textAlign="center">Settings</Typography>
+              </MenuItem>
+              <MenuItem onClick={logout}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Toolbar>
         </Container>
