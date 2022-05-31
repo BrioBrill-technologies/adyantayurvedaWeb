@@ -6,8 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { auth, db } from "../../firebase";
 import { updateProfilePhoto, updateUser } from "../../Hooks/usePost";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { Avatar, Button, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Avatar, Button, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import moment from "moment";
@@ -67,6 +66,16 @@ export default function Profile() {
                 </svg>
             </div>
             <Paper sx={{ ml:50 }}>
+                <img
+                    style={{
+                        position: 'absolute',
+                        right: 0,
+                        width: '20%',
+                        fontFamily:'Josefin Sans',
+                        fontWeight: 500,
+                        fontSize: '22px'
+                    }}
+                    src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FTopTree.png?alt=media&token=184c4654-8237-454c-ba6a-de617cd2a5cf" />
                 <Box sx={{ display: "flex", flexDirection: "row", mt:1, }}>
                     <Box sx={{ display: "flex", flexDirection: "column", mt:1}}>
                         <label htmlFor="profileImg">
@@ -115,7 +124,7 @@ export default function Profile() {
                                     renderInput={(params) => <TextField style={{width:'100%', background: '#EFEFF1'}} {...params} />}
                                 />
                             </LocalizationProvider>
-                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
                             <Select
                                 sx={{mb:2, background: '#EFEFF1'}}
                                 labelId="demo-simple-select-label"

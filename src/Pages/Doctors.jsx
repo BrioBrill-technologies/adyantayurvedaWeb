@@ -48,6 +48,27 @@ const useStyles = makeStyles({
         fontWeight: '600 !important',
         fontSize: '40px !important',
     },
+
+    docName: {
+        fontFamily: 'Josefin Sans !important',
+        fontWeight: '600 !important',
+        fontSize: '24px !important',
+    },
+    docSpec: {
+        fontFamily: 'Josefin Sans !important',
+        fontWeight: '600 !important',
+        fontSize: '20px !important',
+    },
+    docExp: {
+        fontFamily: 'Josefin Sans !important',
+        fontWeight: '600 !important',
+        fontSize: '15px !important',
+    },
+    docBook: {
+        fontFamily: 'Josefin Sans !important',
+        fontWeight: '600 !important',
+        fontSize: '15px !important',
+    },
 })
 
 function Doctors(){
@@ -167,25 +188,22 @@ function Doctors(){
                                 />
                                 <CardContent>
                                     
-                                    <Typography variant="h5" component="h2">
+                                    <Typography className={classes.docName}>
                                         {doctor.name}
                                     </Typography>
-                                    <Typography color="textSecondary">
-                                        {doctor.email}
+                                    <Typography color="textSecondary" className={classes.docSpec}>
+                                        {doctor.specialization}
                                     </Typography>
-                                    <Typography color="textSecondary">
-                                        {doctor.phone}
-                                    </Typography>
-                                    <Typography color="textSecondary">
-                                        {doctor.address}
+                                    <Typography color="textSecondary" className={classes.docExp}>
+                                        {doctor.experience} YRS EXPERIENCE
                                     </Typography>
                                     
                                 </CardContent>
                                 <CardActions style={{justifyContent:'center'}}>
-                                    <Button variant="outlined" color="primary" onClick={() => handleView(doctor.uid)}>
+                                    <Button variant="outlined" color="primary" className={classes.docBook} onClick={() => handleView(doctor.uid)}>
                                         View Profile
                                     </Button>
-                                    <Button variant="contained" color="primary" onClick={() => handleBooking(doctor.uid)}>
+                                    <Button variant="contained" color="primary" className={classes.docBook} onClick={() => handleBooking(doctor.uid)}>
                                         Book Now
                                     </Button>
                                 </CardActions>
