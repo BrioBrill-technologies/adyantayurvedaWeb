@@ -6,6 +6,7 @@ import { auth } from "../../firebase";
 import { getApproved } from "../../Hooks/useFetch";
 import { makeStyles } from '@material-ui/core'
 import Footer from "../../Components/Navbar/Footer";
+import Mobile from "../../Components/mobile";
 
 const useStyles = makeStyles({
     firstTypo: {
@@ -41,50 +42,11 @@ const useStyles = makeStyles({
           color: 'white',
         },
     },
-    head8: {
-        fontFamily: 'Josefin Sans !important',
-        color: '#74613C',
-        fontWeight: '400 !important',
-        fontStyle: 'normal !important',
-        lineHeight: '30px',
-        padding: '0 0 0 10vw',
-        marginTop: '10vw !important',
-    },
-    
-    head9: {
+
+    head11: {
         fontFamily: 'Lora !important',
-        color: '#3E3E3E',
         fontWeight: '600 !important',
-        fontStyle: 'normal !important',
-        lineHeight: '1.5em',
-        paddingLeft: '10vw',
-    },
-
-    head10: {
-        fontFamily: 'Josefin Sans !important',
-        color: '#3E3E3E',
-        fontWeight: '400 !important',
-        fontStyle: 'normal !important',
-        lineHeight: '30px',
-        padding: '0 0 0 10vw',
-        marginTop: '2vw !important',
-        marginBottom: '2vw !important',
-    },
-
-    btn2: {
-        background: '#74613C',
-        color: 'white !important',
-        marginBottom: '4vw',
-        marginLeft:'16vw',
-        padding: '1vw 2vw',
-        borderRadius: '15px',
-        fontFamily: 'Josefin Sans !important',
-        fontWeight: '600 !important',
-        transform: 'translateX(-50%)',
-        textTransform: 'none !important',
-        '&:hover': {
-            color: 'white',
-        },
+        fontSize: '40px !important',
     },
 })
 
@@ -165,8 +127,8 @@ function Doctors(){
                     </Box>
                 </Grid>
                 <Grid item xs={12} style={{zIndex:'1'}}>
-                    <Box style={{width:'fit-content', marginLeft:'auto',marginTop:'5vw'}}>
-                        <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fdoctors.png?alt=media&token=b51840e5-82b8-422e-9141-4aca3aa6b6e9"/>
+                    <Box>
+                        <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fdoctors.png?alt=media&token=b51840e5-82b8-422e-9141-4aca3aa6b6e9" style={{width: '80%',marginLeft: '20%'}}/>
                     </Box>
                 </Grid>
             </Grid>
@@ -175,9 +137,15 @@ function Doctors(){
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
                 </svg>
             </div>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FleftTree.png?alt=media&token=35388919-8f64-4977-9f5f-a520c227e5ac" style={{position:'absolute', top:"70vh"}}/>
             <Box sx={{marginBottom:'5vw', marginTop:'-10vw'}}>
-                <Typography variant="h4" style={{textAlign:'center'}}>
-                    Our Qualified Doctors
+                <Typography 
+                    className={classes.head11}
+                    style={{
+                        textAlign:'center',
+                        marginBottom: '8vw',
+                        marginTop: '2vw',
+                    }}>Our Qualified Doctors
                 </Typography>
                 <Grid container spacing={3} style={{justifyContent:'center', marginTop:'5vw'}}>
                     {doctors.map(doctor => (
@@ -227,49 +195,7 @@ function Doctors(){
                     ))}
                 </Grid>
             </Box>
-            <Box style={{display:'flex'}}>
-                <Box style={{marginLeft:'5vw'}}>
-                    <img style={{
-                            marginTop: '13vw',
-                            marginLeft: '5vw',
-                        }}
-                        src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fbgdoc.png?alt=media&token=d892d555-b44c-4ab0-9871-90eec511a5ae"/>
-                    <img style={{
-                            position: 'absolute',
-                            marginLeft: '-5vw',
-                        }}
-                        src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Frating.png?alt=media&token=87926b2f-fce9-4613-8a9c-6ecabb3c236f"/>
-                    <img 
-                        style={{
-                            position: 'absolute',
-                            marginTop: 0,
-                            left: '10vw',
-                        }}
-                        src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fmobile.png?alt=media&token=ce93bf58-f45b-4456-8092-faedd9c0ef53"/>
-                    <img style={{
-                        position: 'absolute',
-                        left: '9vw',
-                        marginTop: '35vw',
-                        }}
-                        src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocCard.png?alt=media&token=ab0cad4b-b9ff-46eb-9c6b-bb6a7a223cec"/>
-                </Box>
-                <Box>
-                    <Typography className={classes.head8} variant="h6">
-                        NOW IN YOUR POCKETS 
-                    </Typography>
-                    <Typography className={classes.head9} variant="h3">
-                        Your personal therapist <br></br>
-                        is here..
-                    </Typography>
-                    <Typography className={classes.head10} variant="h5">
-                        Let your skin heal and glow from within,<br></br>
-                        with our intensive Ayurveda Therapies.
-                    </Typography>
-                    <Button className={classes.btn2} variant="contained" color="primary">
-                        Download Now
-                    </Button>
-                </Box>
-            </Box>
+            <Mobile />
             <Footer />
         </div>
     )
