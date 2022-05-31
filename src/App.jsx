@@ -19,17 +19,17 @@ import Register from './Pages/Auth/Register';
 import DocRegister from "./Pages/Auth/DocRegister";
 import TherapistRegister from "./Pages/Auth/TherapyRegister";
 import Contact from "./Pages/contact";
+import Therapies from './Pages/Therapies';
+import Doctors from "./Pages/Doctors";
+import DoctorDetails from "./Pages/DoctorDetails";
 
 // Patient Routes
 import Profile from './Pages/Patients/profile';
-import Therapies from './Pages/Patients/Therapies';
-import Doctors from "./Pages/Patients/Doctors";
 import Booking from "./Pages/Patients/Booking";
 import Pay from './Pages/Patients/Pay';
 import Confirmation from "./Pages/Patients/bookingConfirmation";
 import Appointments from "./Pages/Patients/appointments";
 import BookingDetails from "./Pages/Patients/BookingDetails";
-import DoctorDetails from "./Pages/Patients/DoctorDetails";
 
 // Admin Routes
 import AdminHome from "./Pages/Admin/AdminHome";
