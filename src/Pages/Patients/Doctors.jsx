@@ -135,6 +135,7 @@ function Doctors(){
                         </Typography>
                         <TextField
                             id="outlined-start-adornment"
+                            placeholder="Search doctors, services, specialisation"
                             sx={{
                                 position:'absolute', 
                                 m: 1,

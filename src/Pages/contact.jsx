@@ -1,5 +1,4 @@
-import { Grid, Paper, Typography,Box,Button, InputBase, TextareaAutosize} from "@mui/material"
-import Footer from "../Components/Navbar/Footer"
+import { Paper, Typography,Box,Button, InputBase, TextareaAutosize} from "@mui/material"
 import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles({
     input: {
