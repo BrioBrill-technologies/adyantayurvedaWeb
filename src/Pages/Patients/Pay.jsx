@@ -52,6 +52,57 @@ function Pay(){
         if(loading) return;
         fetchDoctor();
     }, [user, loading]);
+
+    const loadScript = (src) => {
+        return new Promise((resolve) =>{
+            const script = document.createElement('script')
+            script.src = src
+
+            script.onload = () => {
+                resolve(true)
+            }
+
+            script.onerror = () => {
+                resolve(false)
+            }
+
+            document.body.appendChild(script) 
+        })
+    }
+
+    const displayRazorpay = async (amount) => {
+        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+        if(!res) {
+            alert('You are offline... Failed to load Razorpay SDK')
+            return
+        }
+
+        const options = {
+            key: 'rzp_test_sOH0VCpkBQ9hOl',
+            currency: 'INR',
+            amount: 100,
+            name: 'Gagan',
+            description:'Thank You',
+            image:'https://adyantayurveda.com/wp-content/uploads/2021/01/Adyant-Logo.png',
+        
+            handler: function (response){
+                alert(response.razorpay_payment_id)
+                alert('Payment Successful')
+            },
+
+            prefill: {
+                name: 'Gagan'
+            }
+        
+            
+        };
+
+        const PaymentObject = new window.Razorpay(options)
+        PaymentObject.open()
+    }
+
+
     return (
         <div>
         <div style={{zIndex:-1,position:'absolute',top:0}}>
@@ -264,7 +315,7 @@ function Pay(){
                             {totalAmount}
                             </Typography>
                         </Box>
-                        <Button variant="contained" color="primary" className={classes.btn4}>
+                        <Button variant="contained" color="primary" className={classes.btn4} onClick={() => displayRazorpay()}>
                             Confirm & Pay
                         </Button>
                     
