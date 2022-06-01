@@ -4,13 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase";
 import { updateProfilePhoto, updateUser } from "../../Hooks/usePost";
-import { query, collection, getDocs, where } from "firebase/firestore";
 import { Box, Avatar, Button, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import moment from "moment";
 import { styled } from '@mui/material/styles';
 import Footer from "../../Components/Navbar/Footer";
+import { getSinglePatient } from "../../Hooks/useFetch";
 
 const Input = styled('input')({
     display: 'none',
@@ -32,9 +32,7 @@ export default function Profile() {
 
     const fetchUserName = async () => {
         try {
-            const q = query(collection(db, "patients"), where("uid", "==", user?.uid));
-            const doc = await getDocs(q);
-            const data = doc.docs[0].data();
+            const data = await getSinglePatient(user.uid);
             setName(data.name);
             setEmail(data.email);
             setPhone(data.phone);

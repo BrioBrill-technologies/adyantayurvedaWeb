@@ -52,6 +52,22 @@ const getTherapies = async () => {
     }
 };
 
+
+// Get Single Therapy Details
+const getSingleTherapy = async (id) => {
+    try {
+        const data = await getTherapies();
+        for(let i = 0; i < data.length; i++){
+            if(data[i].id === id){
+                return data[i];
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
 // Get Therapy Type
 const getTherapyType = async () => {
     try {
@@ -248,10 +264,21 @@ const getSingleBooking = async (id) => {
     }
 }
 
+const loadScript = async (url) => {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = url;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+};
+
 export {
     getPatients,
     getSinglePatient,
     getTherapies,
+    getSingleTherapy,
     getTherapyType,
     getSpecializations,
     getNotApproved,
@@ -262,6 +289,7 @@ export {
     getTotalInvoiceAmount,
     getTotalInvoiceAmountByDocId,
     getBookings,
-    getSingleBooking
+    getSingleBooking,
+    loadScript
 };
 

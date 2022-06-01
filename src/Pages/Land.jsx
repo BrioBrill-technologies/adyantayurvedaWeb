@@ -403,32 +403,50 @@ function Land() {
           transform:' translateX(-50%)'}}>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"/>
-            <Typography variant="h6">Rejuvenative Treatments</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Rejuvenative Treatments'}})}}
+             >Rejuvenative Treatments</Typography>
             <Typography>The medicated oil helps to rejuvenate, relax and strengthen your body.</Typography>
           </Box>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"/>
-            <Typography variant="h6">Weight Management</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Weight Management'}})}}
+             >Weight Management</Typography>
             <Typography>Is excessive weight bothering you? Here is the solution through Ayurveda in your comfort. </Typography>
           </Box>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec3.png?alt=media&token=5edba098-5cd7-42f6-89af-ee7a17952594"/>
-            <Typography variant="h6">Spine and Joint Care</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Spine and Joint Care'}})}}
+             >Spine and Joint Care</Typography>
             <Typography>Ayurveda has a solution for pain management in your comfort.</Typography>
           </Box>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec4.png?alt=media&token=a422ab5d-adc5-41c7-875a-49b3f621b8f5"/>
-            <Typography variant="h6">Skin and Haircare</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Skin and Haircare'}})}}
+             >Skin and Haircare</Typography>
             <Typography>A small description about the header.</Typography>
           </Box>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"/>
-            <Typography variant="h6">Post/Pre natal care</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Prenatal care – Post-natal care'}})}}
+             >Post/Pre natal care</Typography>
             <Typography> A combination of Ayurveda and yoga helps to get a healthy baby.</Typography>
           </Box>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"/>
-            <Typography variant="h6">Elderly care</Typography>
+            <Typography
+              variant="h6"
+              onClick={() => {navigate('/therapies', {state: {therapy: 'Elderly care'}})}}
+             >Elderly care</Typography>
             <Typography>After 60 years, do you think you can not enjoy, dance or run because of weakness, pain etc. With Ayurveda therapies, you can do that. 
             </Typography>
           </Box>
@@ -436,7 +454,7 @@ function Land() {
         <Button className={classes.btn1} variant="contained" color="primary" onClick={()=>{
           navigate('/therapies')
         }}>
-           More Specialities
+           More Specialties
         </Button>
       </Box>      <Box>
         <Typography className={classes.head6} variant="h2">

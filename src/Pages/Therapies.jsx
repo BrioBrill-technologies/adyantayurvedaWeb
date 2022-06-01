@@ -12,7 +12,7 @@ import {
 import { Box } from "@mui/system";
 import React, {useEffect, useState} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../Components/Navbar/Footer";
 import { auth } from '../firebase';
 import { getTherapies, getTherapyType } from '../Hooks/useFetch';
@@ -73,6 +73,7 @@ const useStyles = makeStyles({
 
 function Therapies(){
     const classes = useStyles();
+    const { state } = useLocation();
     const [user, loading, error] = useAuthState(auth);
     const [Therapy, setTherapy] = useState([]);
     const [therapyType, setTherapyType] = useState([]);
@@ -84,6 +85,9 @@ function Therapies(){
             setTherapy(data);
             const data2 = await getTherapyType();
             setTherapyType(data2);
+            if(state){
+                fetchAyurveda(state.therapy);
+            }
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching Therapy data");
@@ -96,6 +100,9 @@ function Therapies(){
 
     const fetchAyurveda = async (ayurveda) => {
         try {
+            if(state){
+                state.therapy = ayurveda;
+            }
             setTherapy([])
             const data = await getTherapies();
             for (let i = 0; i < data.length; i++) {
@@ -111,8 +118,8 @@ function Therapies(){
     }
 
     const handleBooking = (id, amount) => {
-        console.log(id, amount);
-        if(user) navigate(`/booking/` , { state: { id , type: 'Therapies', amount} });
+        console.log(id);
+        if(user) navigate(`/booking/` , { state: { id , type: 'Therapies', amount:3000} });
         else navigate("/login");
     }
 
@@ -204,7 +211,7 @@ function Therapies(){
                                 <Button 
                                 className={classes.bookBtn}
                                 onClick={() => {
-                                    handleBooking(therapy.id, therapy.amount)
+                                    handleBooking(therapy.id)
                                 }}>
                                     Book Now 
                                     <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">

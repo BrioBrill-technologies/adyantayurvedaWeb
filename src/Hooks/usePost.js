@@ -44,15 +44,15 @@ const updateUser = async (data) => {
 
 const addBooking = async (data) => {
     try {
-        const invoiced = await addInvoice(data)
-        if(invoiced) {
-            console.log(invoiced)
-            data.invoiceId = invoiced;
-            data.status = "booked";
+        // const invoiced = await addInvoice(data)
+        // if(invoiced) {
+        //     console.log(invoiced)
+        //     data.invoiceId = invoiced;
+        //     data.status = "booked";
             await addDoc(collection(db, "bookings"), data);
-        } else {
-            alert("Could not add invoice");
-        }
+        // } else {
+        //     alert("Could not add invoice");
+        // }
     } catch (err) {
         console.error(err);
         alert(err.message);
