@@ -52,6 +52,22 @@ const getTherapies = async () => {
     }
 };
 
+
+// Get Single Therapy Details
+const getSingleTherapy = async (id) => {
+    try {
+        const data = await getTherapies();
+        for(let i = 0; i < data.length; i++){
+            if(data[i].id === id){
+                return data[i];
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
 // Get Therapy Type
 const getTherapyType = async () => {
     try {
@@ -252,6 +268,7 @@ export {
     getPatients,
     getSinglePatient,
     getTherapies,
+    getSingleTherapy,
     getTherapyType,
     getSpecializations,
     getNotApproved,
