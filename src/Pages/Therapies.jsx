@@ -85,7 +85,7 @@ function Therapies(){
             setTherapy(data);
             const data2 = await getTherapyType();
             setTherapyType(data2);
-            if(state.therapy){
+            if(state){
                 fetchAyurveda(state.therapy);
             }
         } catch (err) {
@@ -100,6 +100,9 @@ function Therapies(){
 
     const fetchAyurveda = async (ayurveda) => {
         try {
+            if(state){
+                state.therapy = ayurveda;
+            }
             setTherapy([])
             const data = await getTherapies();
             for (let i = 0; i < data.length; i++) {
