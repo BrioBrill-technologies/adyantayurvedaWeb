@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getSingleApproved } from "../../Hooks/useFetch";
+import { getSingleApproved, getSinglePatient, loadScript } from "../../Hooks/useFetch";
 import Footer from "../../Components/Navbar/Footer";
 import { makeStyles } from '@material-ui/core'
+import { addBooking } from '../../Hooks/usePost';
 import moment from "moment";
 const useStyles = makeStyles({
     btn4: {
@@ -27,13 +28,15 @@ const useStyles = makeStyles({
 
 function Pay(){
     const {state} = useLocation();
-    console.log(state)
     const [user, loading, error] = useAuthState(auth);
     const [doctor, setDoctor] = useState(null);
     const [amount, setAmount] = useState(state.amount);
     const [tax, setTax] = useState(state.amount * 0.1);
     const [totalAmount, setTotalAmount] = useState(amount + tax);
     const [date, setDate] = useState(new Date(state.date));
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const classes = useStyles();
     const navigate = useNavigate();
     const fetchDoctor = async () => {
@@ -47,30 +50,19 @@ function Pay(){
         }
     };
 
-    useEffect(() => {
-        if(!user) return navigate("/");
-        if(loading) return;
-        fetchDoctor();
-    }, [user, loading]);
+    const fetchUserName = async () => {
+        try {
+            const data = await getSinglePatient(user.uid);
+            setName(data.name);
+            setEmail(data.email);
+            setPhone(data.phone);
+        } catch (err) {
+            console.error(err);
+            alert("An error occurred while fetching user data");
+        }
+    };
 
-    const loadScript = (src) => {
-        return new Promise((resolve) =>{
-            const script = document.createElement('script')
-            script.src = src
-
-            script.onload = () => {
-                resolve(true)
-            }
-
-            script.onerror = () => {
-                resolve(false)
-            }
-
-            document.body.appendChild(script) 
-        })
-    }
-
-    const displayRazorpay = async (amount) => {
+    const displayRazorpay = async () => {
         const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
 
         if(!res) {
@@ -81,27 +73,44 @@ function Pay(){
         const options = {
             key: 'rzp_test_sOH0VCpkBQ9hOl',
             currency: 'INR',
-            amount: 100,
-            name: 'Gagan',
-            description:'Thank You',
+            amount: 100 * totalAmount,
+            name: name,
+            description: 'Booking for ' + doctor.name,
             image:'https://adyantayurveda.com/wp-content/uploads/2021/01/Adyant-Logo.png',
-        
-            handler: function (response){
-                alert(response.razorpay_payment_id)
-                alert('Payment Successful')
-            },
-
             prefill: {
-                name: 'Gagan'
-            }
-        
-            
+                name: name,
+                email: email,
+                contact: phone
+            },
+            handler: function (response){
+                addBooking({
+                    DocId:state.id,
+                    type:state.type,
+                    patientId:user.uid,
+                    date:date,
+                    paymentId:response.razorpay_payment_id,
+                    time:state.time, 
+                    status: "Booked",
+                    amount: state.amount,
+                    tax: tax,
+                }).then(() => {
+                    navigate('/appointments');
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
         };
 
         const PaymentObject = new window.Razorpay(options)
         PaymentObject.open()
     }
 
+    useEffect(() => {
+        if(!user) return navigate("/");
+        if(loading) return;
+        fetchDoctor();
+        fetchUserName();
+    }, [user, loading]);
 
     return (
         <div>
@@ -225,14 +234,14 @@ function Pay(){
                                 fontFamily:'Josefin Sans',
                                 fontWeight:400,
                                 fontSize:'20px',
-                                width:'68%'}}>Ramesh Rajan</Typography>
+                                width:'68%'}}>{name}</Typography>
                         <Typography 
                             sx={{
                                 fontFamily:'Josefin Sans',
                                 fontSize:'20px',
                                 color:'#3E3E3E',
                                 fontWeight:600,
-                                marginTop:'0.8vw'}}>Please provide following information about Ramesh Rajan</Typography>
+                                marginTop:'0.8vw'}}>Please provide following information about {name}</Typography>
                         <Typography 
                             sx={{
                                 fontFamily:'Josefin Sans',
@@ -248,6 +257,7 @@ function Pay(){
                                 border:'1px solid #DDDDDD',
                                 padding: '8px 16vw 8px 18px'}}
                             id="name" 
+                            value={name}
                             placeholder="Your Name"  />
                         <Typography 
                             sx={{
@@ -258,7 +268,10 @@ function Pay(){
                                 marginTop:'0.8vw',}}>
                             Your Mobile Number*
                         </Typography>
-                        <InputBase sx={{border:'1px solid #DDDDDD', padding: '8px 16vw 8px 18px'}} id="mobile" placeholder="Mobile Number"  />
+                        <InputBase sx={{border:'1px solid #DDDDDD', padding: '8px 16vw 8px 18px'}}
+                         id="mobile"
+                            value={phone}
+                         placeholder="Mobile Number"  />
                         <Typography
                             sx={{
                                 fontFamily:'Josefin Sans',

@@ -264,6 +264,16 @@ const getSingleBooking = async (id) => {
     }
 }
 
+const loadScript = async (url) => {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = url;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+};
+
 export {
     getPatients,
     getSinglePatient,
@@ -279,6 +289,7 @@ export {
     getTotalInvoiceAmount,
     getTotalInvoiceAmountByDocId,
     getBookings,
-    getSingleBooking
+    getSingleBooking,
+    loadScript
 };
 
