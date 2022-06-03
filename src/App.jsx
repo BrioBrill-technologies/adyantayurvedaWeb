@@ -93,7 +93,7 @@ function App() {
         {/* Authentication Routes */}
         <Route path="login" element={<Login />} />
         <Route path="reset" element={<Reset />} />
-        <Route path="register" element={<Register />} />
+        {/* <Route path="register" element={<Register />} /> */}
         <Route path="contact" element={<Contact />} />
         {/* Patient Routes */}
         <Route path="profile" element={<Profile />} />
