@@ -52,6 +52,26 @@ const getTherapies = async () => {
     }
 };
 
+const TypeTherapies = async (type) => {
+    try {
+        const therapies = []
+        const q = query(collection(db, "Therapies"));
+        const docs = await getDocs(q);
+        for (let i = 0; i < docs.docs.length; i++) {
+            if(docs.docs[i].data().type === type){
+                const document = docs.docs[i].data();
+                document.id = docs.docs[i].id;
+                therapies.push(document);
+                console.log(therapies);
+            }
+        }
+        return therapies;
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
+
 
 // Get Single Therapy Details
 const getSingleTherapy = async (id) => {
@@ -278,6 +298,7 @@ export {
     getPatients,
     getSinglePatient,
     getTherapies,
+    TypeTherapies,
     getSingleTherapy,
     getTherapyType,
     getSpecializations,

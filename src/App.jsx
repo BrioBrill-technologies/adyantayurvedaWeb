@@ -45,6 +45,7 @@ import AddPrescription from "./Pages/Doctors/AddPrescription";
 // Therapist Routes
 import TherapistProfile from "./Pages/Therapists/profile";
 import TherapistDashboard from "./Pages/Therapists/Dashboard";
+import TherapyType from "./Pages/TherapieType";
 
 const theme = createTheme({
   palette: {
@@ -104,6 +105,7 @@ function App() {
         <Route path="appointments" element={<Appointments />} />
         <Route path="appointmentDetails" element={<BookingDetails />} />
         <Route path="doctorDetails" element={<DoctorDetails />} />
+        <Route path="therapyType" element={<TherapyType />} />
         {/* Admin Routes */}
         <Route path="admin/" element={<AdminHome />} />
         <Route path="admin/profile" element={<AdminProfile />} />

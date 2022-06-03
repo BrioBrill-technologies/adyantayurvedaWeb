@@ -419,7 +419,40 @@ function Land() {
                     <Button 
                     className={classes.bookBtn}
                     onClick={() => {
-                        
+                        navigate('therapyType', { state: { therapyType: 'Rejuvenative Treatments' } })
+                    }}>
+                        Book Now 
+                        <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
+                        </svg>
+                    </Button>
+                </CardActionArea>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+          <Card sx={{
+            width: 'fit-content',
+            padding: '0 0.5rem',
+            marginLeft: 'auto',
+            marginRight: 'auto',}} >
+            <CardMedia
+                component="img"
+                style={{
+                    height:'10vw',
+                    marginLeft:'auto',
+                    marginRight:'auto'}}
+                image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
+            />
+            <CardContent>
+                <Typography className={classes.head11}>
+                Spine and Joint Care
+                </Typography>
+                <CardActionArea>
+                    <Button 
+                    className={classes.bookBtn}
+                    onClick={() => {
+                      navigate('therapyType', { state: { therapyType: 'Spine and Joint Care' } })
                     }}>
                         Book Now 
                         <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -445,13 +478,13 @@ function Land() {
             />
             <CardContent>
                 <Typography className={classes.head11}>
-                Rejuvenative Treatments
+                Elderly care
                 </Typography>
                 <CardActionArea>
                     <Button 
                     className={classes.bookBtn}
                     onClick={() => {
-                        
+                      navigate('therapyType', { state: { therapyType: 'Elderly care' } })
                     }}>
                         Book Now 
                         <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -477,13 +510,13 @@ function Land() {
             />
             <CardContent>
                 <Typography className={classes.head11}>
-                Rejuvenative Treatments
+                Prenatal / Post-natal care
                 </Typography>
                 <CardActionArea>
                     <Button 
                     className={classes.bookBtn}
                     onClick={() => {
-                        
+                      navigate('therapyType', { state: { therapyType: 'Prenatal care – Post-natal care' } })
                     }}>
                         Book Now 
                         <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -509,13 +542,13 @@ function Land() {
             />
             <CardContent>
                 <Typography className={classes.head11}>
-                Rejuvenative Treatments
+                Skin and Haircare
                 </Typography>
                 <CardActionArea>
                     <Button 
                     className={classes.bookBtn}
                     onClick={() => {
-                        
+                      navigate('therapyType', { state: { therapyType: 'Skin and Haircare' } })
                     }}>
                         Book Now 
                         <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -541,45 +574,13 @@ function Land() {
             />
             <CardContent>
                 <Typography className={classes.head11}>
-                Rejuvenative Treatments
+                Weight Management
                 </Typography>
                 <CardActionArea>
                     <Button 
                     className={classes.bookBtn}
                     onClick={() => {
-                        
-                    }}>
-                        Book Now 
-                        <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
-                        </svg>
-                    </Button>
-                </CardActionArea>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
-          <Card sx={{
-            width: 'fit-content',
-            marginLeft: 'auto',
-            marginRight: 'auto',}} >
-            <CardMedia
-                component="img"
-                style={{
-                    height:'10vw',
-                    marginLeft:'auto',
-                    marginRight:'auto'}}
-                image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
-            />
-            <CardContent>
-                <Typography className={classes.head11}>
-                Rejuvenative Treatments
-                </Typography>
-                <CardActionArea>
-                    <Button 
-                    className={classes.bookBtn}
-                    onClick={() => {
-                        
+                      navigate('therapyType', { state: { therapyType: 'Weight Management' } })
                     }}>
                         Book Now 
                         <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -618,31 +619,55 @@ function Land() {
             Private online consultations with verified doctors in all specialists
           </Typography>
         </Grid>
-        <Box style={{display:'flex',justifyContent:'center',marginTop:'5vw', textAlign:'center'}}>
+        <Grid container spacing={0} style={{textAlign:'center'}}>
+          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
           <Box>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
-          <Box>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"/>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+            <Box>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
           <Box>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec3.png?alt=media&token=5edba098-5cd7-42f6-89af-ee7a17952594"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
+
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
           <Box>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec4.png?alt=media&token=a422ab5d-adc5-41c7-875a-49b3f621b8f5"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
+
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
           <Box>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
-          </Box>
-        <Button className={classes.btn1} variant="contained" color="primary"onClick={()=>{
-          navigate('/doctors')
-        }}>
+          </Grid>
+        </Grid>
+        <Button variant="contained" color="primary"
+          style={{
+            left: '50%',
+            transform: 'translateX(-50%)',
+            marginTop: '2rem',
+            backgroundColor: '#74613C',
+            color: 'white',
+            fontFamily: 'Josefin Sans',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            marginBottom:'5vw'
+          }}
+          onClick={()=>{
+            navigate('/doctors')
+          }}>
            More Doctors
         </Button>
       
