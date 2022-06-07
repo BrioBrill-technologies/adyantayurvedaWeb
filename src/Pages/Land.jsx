@@ -347,7 +347,7 @@ function Land() {
                 Book Therapy
               </Button>
             </Box>
-            <Box style={{display:'flex', marginTop: '5vw'}} className={classes.boxType}>
+            {/* <Box style={{display:'flex', marginTop: '5vw'}} className={classes.boxType}>
               <Typography className={classes.openHours}>
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0461 10.0005C20.0461 15.1095 15.9448 19.2505 10.8848 19.2505C5.82476 19.2505 1.72345 15.1095 1.72345 10.0005C1.72345 4.89149 5.82476 0.750488 10.8848 0.750488C15.9448 0.750488 20.0461 4.89149 20.0461 10.0005Z" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -363,8 +363,8 @@ function Land() {
                 </svg>
                 <span style={{marginLeft:'0.5vw'}}> CONTACT US</span> <br></br>
                 <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>info@adyantayurveda.com </span>
-              </Typography>
-              <Typography className={classes.callUs}>
+              </Typography> 
+              <Typography className={classes.openHours}>
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5317 11.4724C14.5208 15.4604 15.4258 10.8467 17.9656 13.3848C20.4143 15.8328 21.8216 16.3232 18.7192 19.4247C18.3306 19.737 15.8616 23.4943 7.1846 14.8197C-1.49348 6.144 2.26158 3.67244 2.57397 3.28395C5.68387 0.173846 6.16586 1.58938 8.61449 4.03733C11.1544 6.5765 6.54266 7.48441 10.5317 11.4724Z" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -372,7 +372,7 @@ function Land() {
                 <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>+91 99725 41009<br></br></span>
                 <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>080 42156164</span>
               </Typography>
-            </Box>
+            </Box> */}
           </Box>
         </Grid>
         <Grid item xs={12} style={{zIndex:'1'}}>
@@ -381,7 +381,7 @@ function Land() {
           </Box>
         </Grid>
       </Grid>
-      <div style={{zIndex:'-1', marginTop:'-10vw'}}>
+      <div style={{zIndex:'-1', marginTop:'-10vw', marginBottom:'-10vw'}}>
         <svg width="1440" height="432" viewBox="0 0 1440 432" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
         </svg>
