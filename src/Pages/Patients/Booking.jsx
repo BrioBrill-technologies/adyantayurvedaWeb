@@ -19,7 +19,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Footer from '../../Components/Navbar/Footer';
-import { getSingleTherapy } from '../../Hooks/useFetch';
 function Booking () {
     const { state } = useLocation();
     const [time, setTime] = useState('');
@@ -27,29 +26,11 @@ function Booking () {
     const [user, loading, error] = useAuthState(auth);
     const [place, setPlace] = useState(null);
     const [amount, setAmount] = useState(0);
-    const [therapy, setTherapy] = useState(null);
-    const [sessions, setSessions] = useState('');
-    const [type, setType] = useState(state.type);
-    let session = {}
     const navigate = useNavigate();
-
-
-    const fetchTherapyDetails = async () => {
-        try{
-            const data = await getSingleTherapy(state.id);
-            setTherapy(data);
-            Object.keys(data.sessions).forEach(e => {
-                session[e] = data.sessions[e];
-            });
-        }catch(err){
-            console.log(err);
-        }
-    }
     
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/");
-        if (state.type === 'Therapies') fetchTherapyDetails()
     }, [loading]);
 
     const handleSubmit = (e) => {
@@ -62,20 +43,6 @@ function Booking () {
             time: time,
             amount: amount,
         } });
-        // e.preventDefault();
-        // addBooking({
-        //     DocId:state.id,
-        //     type:state.type,
-        //     patientId:user.uid,
-        //     date, 
-        //     time, 
-        //     status,
-        //     amount:state.amount,
-        // }).then(() => {
-        //     navigate('/appointments');
-        // }).catch(err => {
-        //     console.log(err);
-        // });
     }
 
     const handlePlace = (e) => {
@@ -110,27 +77,14 @@ function Booking () {
                     }}
                     src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FTopTree.png?alt=media&token=184c4654-8237-454c-ba6a-de617cd2a5cf" />
                 <FormControl sx={{ml:25, pt:10}}>
-                    { state.type === 'doctors' &&(
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            onChange={handlePlace}
-                            value = {place}
-                            name="radio-buttons-group">
-                            <FormControlLabel  value="IN-CLINIC APPOINTMENT" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>IN-CLINIC APPOINTMENT ₹ 700</Typography> }/>
-                            <FormControlLabel value="VIDEO CONSULTATION" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>VIDEO CONSULTATION ₹ 500</Typography>} />
-                        </RadioGroup>
-                    )}
-                    { state.type === 'Therapies' && Object.keys(session).forEach(e => {
-                        return(
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                onChange={handlePlace}
-                                value = {place}
-                                name="radio-buttons-group">
-                                <FormControlLabel  value={e} control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>{e} ₹ {session[e]}</Typography> }/>
-                            </RadioGroup>
-                        )
-                    })}
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        onChange={handlePlace}
+                        value = {place}
+                        name="radio-buttons-group">
+                        <FormControlLabel  value="IN-CLINIC APPOINTMENT" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>IN-CLINIC APPOINTMENT ₹ 700</Typography> }/>
+                        <FormControlLabel value="VIDEO CONSULTATION" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>VIDEO CONSULTATION ₹ 500</Typography>} />
+                    </RadioGroup>
                     <Divider sx={{mb:2,marginTop:'1vw'}} />
                     <LocalizationProvider dateAdapter={AdapterDateFns} sx={{marginTop:'2vw'}} >
                         <DatePicker

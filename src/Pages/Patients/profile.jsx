@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { updateProfilePhoto, updateUser } from "../../Hooks/usePost";
 import { Box, Avatar, Button, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";

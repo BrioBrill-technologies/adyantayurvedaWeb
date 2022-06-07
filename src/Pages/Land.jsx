@@ -336,8 +336,8 @@ function Land() {
               HOME SERVICE
             </Typography>
             <Typography className={classes.secondFont} variant="h6">
-              An Ayurveda Health Solutions For Your<br></br>
-              Health Needs At Your Doorstep.
+              Ayurveda Health Solution for Your<br></br>
+              Health Needs at Your Doorstep.
             </Typography>
             <Box style={{display:'flex', flexDirection:'row', marginTop:'2vw'}}>
               <Button variant="contained" color="primary" className={classes.btn} onClick={() => navigate('/doctors')}>
@@ -394,7 +394,7 @@ function Land() {
           Our Ayurvedic Services
         </Typography>
         <Typography className={classes.head7} variant="h6">
-          Personlised Offline Therapies with verified therapists in all specialists
+          Personalized Offline Therapies with verified therapists in all Specialities
         </Typography>
       </Grid>
       <Grid container spacing={3} style={{justifyContent:'center', marginTop:'1vw', textAlign:'center'}}>
@@ -616,7 +616,7 @@ function Land() {
             Consult top doctors online
           </Typography>
           <Typography className={classes.head7} variant="h6">
-            Private online consultations with verified doctors in all specialists
+            Online consultations with verified doctors in all specialties
           </Typography>
         </Grid>
         <Grid container spacing={0} style={{textAlign:'center'}}>
@@ -733,10 +733,10 @@ function Land() {
 
       <Box style={{marginBottom:'2vw'}}>
           <Typography className={classes.head16} variant="h5">
-            PAY A VISIT TO US
+            PAY US A VISIT
           </Typography>
           <Typography className={classes.head17} variant="h3">
-            Made with love, right here in Bangalore
+            We are  right here in Bangalore
           </Typography>
           <Typography className={classes.head18} variant="h6">
             Come visit our friendly staff at one of our ayurveda centres.
@@ -746,8 +746,7 @@ function Land() {
             marginTop: '2vw',
             marginLeft: '10vw',
           }}>
-            <img style={{ width:'45%' }}
-            src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fmap.png?alt=media&token=943b04f6-d636-474a-a5ad-f6513142a2e5"/>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d248888.97900990263!2d77.4927761!3d12.9147718!3m2!1i1024!2i768!4f13.1!2m1!1sAdyant%20Ayurveda!5e0!3m2!1sen!2sin!4v1654586879569!5m2!1sen!2sin" width="600" height="600" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <Box style={{display:'flex', 
               flexDirection:'column',
               marginLeft:'5vw', 

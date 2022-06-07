@@ -15,7 +15,6 @@ import Menubar from "./Components/Navbar/MenuBar";
 import Land from "./Pages/Land";
 import Login from "./Pages/Auth/Login";
 import Reset from './Pages/Auth/Reset';
-import Register from './Pages/Auth/Register';
 import DocRegister from "./Pages/Auth/DocRegister";
 import TherapistRegister from "./Pages/Auth/TherapyRegister";
 import Contact from "./Pages/contact";
@@ -46,6 +45,7 @@ import AddPrescription from "./Pages/Doctors/AddPrescription";
 import TherapistProfile from "./Pages/Therapists/profile";
 import TherapistDashboard from "./Pages/Therapists/Dashboard";
 import TherapyType from "./Pages/TherapieType";
+import BookingTherapy from "./Pages/Patients/BookingTherapy";
 
 const theme = createTheme({
   palette: {
@@ -100,6 +100,7 @@ function App() {
         <Route path="therapies" element={<Therapies />} />
         <Route path="doctors" element={<Doctors />} />
         <Route path="booking" element={<Booking />} />
+        <Route path="bookingTherapy" element={<BookingTherapy />} />
         <Route path="pay" element={<Pay />} />
         <Route path="confirmation" element={<Confirmation />} />
         <Route path="appointments" element={<Appointments />} />
