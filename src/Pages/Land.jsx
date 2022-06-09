@@ -347,32 +347,6 @@ function Land() {
                 Book Therapy
               </Button>
             </Box>
-            {/* <Box style={{display:'flex', marginTop: '5vw'}} className={classes.boxType}>
-              <Typography className={classes.openHours}>
-                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0461 10.0005C20.0461 15.1095 15.9448 19.2505 10.8848 19.2505C5.82476 19.2505 1.72345 15.1095 1.72345 10.0005C1.72345 4.89149 5.82476 0.750488 10.8848 0.750488C15.9448 0.750488 20.0461 4.89149 20.0461 10.0005Z" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M14.2835 12.9429L10.5496 10.6939V5.84692" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span style={{marginLeft:'0.5vw', marginTop:'-0.5vw'}}> OPENING HOURS</span> <br></br>
-                <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>8AM to 8PM </span>
-              </Typography>
-              <Typography className={classes.contactUs}>
-                <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16.731 6.85107L12.3303 10.4641C11.4989 11.1301 10.3291 11.1301 9.49762 10.4641L5.05978 6.85107" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7468 19C18.759 19.0084 20.7892 16.5095 20.7892 13.4384V6.57001C20.7892 3.49883 18.759 1 15.7468 1H6.02318C3.01098 1 0.980835 3.49883 0.980835 6.57001V13.4384C0.980835 16.5095 3.01098 19.0084 6.02318 19H15.7468Z" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span style={{marginLeft:'0.5vw'}}> CONTACT US</span> <br></br>
-                <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>info@adyantayurveda.com </span>
-              </Typography> 
-              <Typography className={classes.openHours}>
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5317 11.4724C14.5208 15.4604 15.4258 10.8467 17.9656 13.3848C20.4143 15.8328 21.8216 16.3232 18.7192 19.4247C18.3306 19.737 15.8616 23.4943 7.1846 14.8197C-1.49348 6.144 2.26158 3.67244 2.57397 3.28395C5.68387 0.173846 6.16586 1.58938 8.61449 4.03733C11.1544 6.5765 6.54266 7.48441 10.5317 11.4724Z" stroke="#74613C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span style={{marginLeft:'0.5vw', fontWeight:'500'}}>CALL US</span> <br></br>
-                <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>+91 99725 41009<br></br></span>
-                <span style={{marginLeft:'2.5vw', color:'#8B8B8B'}}>080 42156164</span>
-              </Typography>
-            </Box> */}
           </Box>
         </Grid>
         <Grid item xs={12} style={{zIndex:'1'}}>
