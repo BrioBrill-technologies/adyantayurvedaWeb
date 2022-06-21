@@ -95,31 +95,35 @@ function Menubar() {
             <Typography className={classes.typo} onClick={() => {navigate('/doctors')}}>
               Doctors
             </Typography>
-            <Typography className={classes.typo} onClick={handleNav}>
-              Partner With Us
-            </Typography>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={userNav}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(userNav)}
-              onClose={handleCloseUserMenu}>
-                <MenuItem onClick={() => {navigate('/doctor/register')}}>
-                  <Typography textAlign="center">Register as Doctor</Typography>
-                </MenuItem>
-                <MenuItem onClick={()=>{navigate('/therapist/register')}}>
-                  <Typography textAlign="center">Register as Therapist</Typography>
-                </MenuItem>
-            </Menu>
+            {!user && 
+              <>
+                <Typography className={classes.typo} onClick={handleNav}>
+                  Partner With Us
+                </Typography>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={userNav}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(userNav)}
+                  onClose={handleCloseUserMenu}>
+                    <MenuItem onClick={() => {navigate('/doctor/register')}}>
+                      <Typography textAlign="center">Register as Doctor</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={()=>{navigate('/therapist/register')}}>
+                      <Typography textAlign="center">Register as Therapist</Typography>
+                    </MenuItem>
+                </Menu>
+              </>
+            }
             </Hidden>
             <Hidden smUp>
               <IconButton>
@@ -185,12 +189,16 @@ function Menubar() {
             <Typography className={classes.typo} onClick={() => { navigate('/doctors') }}>
               Doctors
             </Typography>
-            <Typography className={classes.typo} onClick={() => {navigate('/doctor/register')}}>
-              Register as Doctor
-            </Typography>
-            <Typography className={classes.typo} onClick={() => {navigate('/therapist/register')}}>
-              Register as Therapist
-            </Typography>
+            {!user &&
+              <>
+                <Typography className={classes.typo} onClick={() => {navigate('/doctor/register')}}>
+                  Register as Doctor
+                </Typography>
+                <Typography className={classes.typo} onClick={() => {navigate('/therapist/register')}}>
+                  Register as Therapist
+                </Typography>
+              </>
+            }
           </List>
         </SwipeableDrawer>
       </AppBar>

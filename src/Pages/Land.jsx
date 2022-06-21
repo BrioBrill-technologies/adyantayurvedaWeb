@@ -401,7 +401,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                         navigate('therapyType', { state: { therapyType: 'Rejuvenative Treatments' } })
@@ -432,7 +431,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                       navigate('therapyType', { state: { therapyType: 'Spine and Joint Care' } })
@@ -462,7 +460,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                       navigate('therapyType', { state: { therapyType: 'Elderly care' } })
@@ -492,7 +489,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                       navigate('therapyType', { state: { therapyType: 'Prenatal care – Post-natal care' } })
@@ -522,7 +518,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                       navigate('therapyType', { state: { therapyType: 'Skin and Haircare' } })
@@ -552,7 +547,6 @@ function Land() {
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    className={classes.bookBtn}
                     variant="outlined"
                     onClick={() => {
                       navigate('therapyType', { state: { therapyType: 'Weight Management' } })
