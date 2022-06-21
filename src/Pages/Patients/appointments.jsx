@@ -11,8 +11,6 @@ import Footer from "../../Components/Navbar/Footer";
 function Appointments(){
     const [user, loading, error] = useAuthState(auth);
     const [bookings, setBookings] = useState([]);
-    const [cancelledBookings, setCancelledBookings] = useState([]);
-    const [CompletedBookings, setCompletedBookings] = useState([]);
     const navigate = useNavigate();
     const fetchBookings = async () => {
         try{
@@ -21,7 +19,7 @@ function Appointments(){
             for(let i = 0; i < doc.docs.length; i++){ 
                 const data = doc.docs[i].data();
                 data.id = doc.docs[i].id;
-                // data.date = new Date(data.date.seconds*1000)
+
                 const docs = await getDocs(query(collection(db, "doctors")));
                 for(let j = 0; j < docs.docs.length; j++){
                     const doc = docs.docs[j].data();
@@ -30,13 +28,8 @@ function Appointments(){
                         break;
                     }
                 }
-                // if(data.status === 'Booked'){
-                    setBookings(bookings => [...bookings, data]);
-                // } else if (data.status === 'Cancelled'){
-                //     setCancelledBookings(bookings => [...bookings, data]);
-                // } else if (data.status === 'Completed'){
-                //     setCompletedBookings(bookings => [...bookings, data]);
-                // }
+                data.date = data.date.toDate()
+                setBookings(bookings => [...bookings, data]);
             }
         } catch (error) {
             console.error(error);
@@ -97,7 +90,6 @@ function Appointments(){
                                 <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613C'}}>Date</TableCell>
                                 <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613c'}}>Time</TableCell>
                                 <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613c'}}>Doctor</TableCell>
-                                <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613c'}}>Reason</TableCell>
                                 <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613c'}}>Status</TableCell>
                                 <TableCell sx={{fontFamily:'Josefin Sans',fontWeight:500,fontSize:'20px',color:'#74613c'}}>Actions</TableCell>
                             </TableRow>
@@ -107,8 +99,7 @@ function Appointments(){
                                 <TableRow key={index}>
                                     <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{moment(booking.date).format("MMMM Do YYYY")}</TableCell>
                                     <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{booking.time}</TableCell>
-                                    <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{booking.doctor.name}</TableCell>
-                                    <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{booking.reason}</TableCell>
+                                    <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{booking.doctor?.name}</TableCell>
                                     <TableCell sx={{fontFamily:'Lora',fontSize:'16px'}}>{booking.status}</TableCell>
                                     <TableCell>
                                         <Button onClick={() =>{

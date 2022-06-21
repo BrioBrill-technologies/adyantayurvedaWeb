@@ -51,7 +51,12 @@ function Login() {
   
     const signIn = async () => {
         generateRecaptchaVerifier();
-        const phoneNumber = "+91" + phone;
+        let phoneNumber
+        if(phone.length === 10) {
+         phoneNumber = "+91" + phone;
+        } else {
+          phoneNumber = phone;
+        }
         const appVerifier = window.recaptchaVerifier;
         generateRecaptchaVerifier();
         signInWithPhoneNumber(auth, phoneNumber, appVerifier)

@@ -79,6 +79,10 @@ function BookingTherapy () {
         }
     }
 
+    const handleChange = (event, newAlignment) => {
+        setTime(newAlignment);
+      };
+
     return(
         <div >
             <div style={{zIndex:-1,position:'absolute',top:0}}>
@@ -148,6 +152,29 @@ function BookingTherapy () {
                                 onChange={(e) => { setDate(e) }}
                                 renderInput={(params) => <TextField style={{width:'100%'}} {...params} />}/>
                         </LocalizationProvider>
+                        <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.6vw'}}>
+                        Evening (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="05:00 PM">05:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="06:00 PM">06:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="07:00 PM">07:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="08:00 PM">08:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="09:00 PM">09:00 PM</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
+                        Morning (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="01:00 PM">01:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="02:00 PM">02:00 PM</ToggleButton>
+                    </ToggleButtonGroup>
+                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
+                        Book Appointment
+                    </Button>
                         <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
                             Book Appointment
                         </Button>

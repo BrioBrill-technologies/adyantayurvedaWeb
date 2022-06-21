@@ -181,12 +181,13 @@ function Therapies(){
                 </svg>
             </div>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FleftTree.png?alt=media&token=35388919-8f64-4977-9f5f-a520c227e5ac" style={{position:'absolute', top:"70vh"}}/>
-            
-        {therapyType.map(item => (
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <Button onClick={() => fetchAyurveda(item)}>{item}</Button>
-            </Grid>
-        ))}
+        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" style={{position:'absolute', top:"70vh", width:'100%', height:'100%'}}>
+            {therapyType.map(item => (
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                    <Button onClick={() => fetchAyurveda(item)}>{item}</Button>
+                </Grid>
+            ))}
+        </Box>
         <Grid justifyContent="center" marginTop="2vw" marginLeft="0.25vw" container spacing={3}>
             {Therapy.map((therapy) => (
                 <Grid item xs={12} sm={6} md={3} lg={4}  key={therapy.id}
