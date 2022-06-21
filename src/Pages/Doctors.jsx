@@ -157,7 +157,9 @@ function Doctors(){
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
                 </svg>
             </div>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FleftTree.png?alt=media&token=35388919-8f64-4977-9f5f-a520c227e5ac" style={{position:'absolute', top:"70vh"}}/>
+            <img 
+            lg={12}
+            src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FleftTree.png?alt=media&token=35388919-8f64-4977-9f5f-a520c227e5ac" style={{position:'absolute', top:"70vh"}}/>
             <Box sx={{marginBottom:'5vw', marginTop:'-10vw'}}>
                 <Typography 
                     className={classes.head11}

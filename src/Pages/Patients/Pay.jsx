@@ -31,8 +31,7 @@ function Pay(){
     const [user, loading, error] = useAuthState(auth);
     const [doctor, setDoctor] = useState(null);
     const [amount, setAmount] = useState(state.amount);
-    const [tax, setTax] = useState(state.amount * 0.1);
-    const [totalAmount, setTotalAmount] = useState(amount + tax);
+    const [totalAmount, setTotalAmount] = useState(amount);
     const [date, setDate] = useState(new Date(state.date));
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -92,7 +91,6 @@ function Pay(){
                     time:state.time, 
                     status: "Booked",
                     amount: state.amount,
-                    tax: tax,
                 }).then(() => {
                     navigate('/appointments');
                 }).catch(err => {
@@ -293,21 +291,6 @@ function Pay(){
                                              fontWeight:400,
                                              marginTop:'0.8vw'}}>
                             {state.amount}
-                            </Typography>
-                        </Box>
-                        <Box display="flex" flexDirection="row">
-                            <Typography sx={{fontFamily:'Josefin Sans',
-                                         fontSize:'18px',
-                                         fontWeight:400,
-                                         marginTop:'0.8vw'}}>
-                            Service fee & Tax
-                            </Typography>
-                            <Typography sx={{marginLeft: '16.6vw',
-                                            fontFamily:'Josefin Sans',
-                                            fontSize:'18px',
-                                            fontWeight:400,
-                                            marginTop:'0.8vw'}}>
-                            {tax}
                             </Typography>
                         </Box>
                         <svg width="472" height="2" viewBox="0 0 472 2" fill="none" xmlns="http://www.w3.org/2000/svg">

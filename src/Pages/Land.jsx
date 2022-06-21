@@ -28,20 +28,6 @@ const useStyles = makeStyles({
     fontFamily: 'Josefin Sans !important',
     padding: '0 0 0 5vw',
   },
-  btn: {
-    background: '#74613C',
-    color: 'white !important',
-    marginLeft: '5vw',
-    marginTop: '3vw',
-    padding: '1vw 2vw',
-    borderRadius: '15px',
-    fontFamily: 'Josefin Sans !important',
-    fontWeight: '600 !important',
-    fontSize: '24px !important',
-    '&:hover': {
-      color: 'white',
-    },
-  },
 
   btn1: {
     background: '#74613C',
@@ -59,9 +45,6 @@ const useStyles = makeStyles({
     '&:hover': {
       color: 'white',
     },
-  },
-  boxType: {
-    paddingLeft: '24px',
   },
   openHours: {
     width: 'fit-content',
@@ -321,13 +304,14 @@ function Land() {
   const classes = useStyles();
   let navigate = useNavigate();
   return (
-    <div style={{ position: 'absolute',
+    <div style={{ 
+      position: 'absolute',
       top: 0,
       width: '-webkit-fill-available',
       zIndex: -1}}>
       <Grid style={{display:'flex', flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw'}}>
         <Grid item xs={12} >
-          <Box className={classes.boxType}>
+          <Box style={{ paddingLeft: '24px'}}>
             <Typography className={classes.typo} variant="h6">
               AYURVEDIC CARE
             </Typography>
@@ -340,10 +324,36 @@ function Land() {
               Health Needs at Your Doorstep.
             </Typography>
             <Box style={{display:'flex', flexDirection:'row', marginTop:'2vw'}}>
-              <Button variant="contained" color="primary" className={classes.btn} onClick={() => navigate('/doctors')}>
+              <Button variant="contained" color="primary" style={{
+                  background: '#74613C',
+                 color: 'white !important',
+                 marginLeft: '5vw',
+                 marginTop: '3vw',
+                 padding: '1vw 2vw',
+                 borderRadius: '10px',
+                 fontFamily: 'Josefin Sans !important',
+                 fontWeight: '600 !important',
+                 fontSize: '24px !important',
+                 '&:hover': {
+                   color: 'white',
+                 },}
+              } onClick={() => navigate('/doctors')}>
                 Consult Now
               </Button>
-              <Button variant="contained" color="primary" className={classes.btn} onClick={() => navigate('/therapies')}>
+              <Button variant="contained" color="primary" style={{
+                  background: '#74613C',
+                 color: 'white !important',
+                 marginLeft: '5vw',
+                 marginTop: '3vw',
+                 padding: '1vw 2vw',
+                 borderRadius: '10px',
+                 fontFamily: 'Josefin Sans !important',
+                 fontWeight: '600 !important',
+                 fontSize: '24px !important',
+                 '&:hover': {
+                   color: 'white',
+                 },}
+              }  onClick={() => navigate('/therapies')}>
                 Book Therapy
               </Button>
             </Box>

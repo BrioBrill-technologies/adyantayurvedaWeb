@@ -88,7 +88,6 @@ function Menubar() {
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-
             <Hidden xsDown>
               <Typography className={classes.firstTypo} onClick={() => {navigate('/therapies')}}>
               Specialties

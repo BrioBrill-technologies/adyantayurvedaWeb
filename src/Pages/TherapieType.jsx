@@ -102,9 +102,8 @@ function TherapyType(){
         fetchTherapies();
     }, [loading]);
 
-    const handleBooking = (id, amount) => {
-        console.log(id);
-        if(user) navigate(`/booking/` , { state: { id , type: 'Therapies', amount:3000} });
+    const handleBooking = (id) => {
+        if(user) navigate(`/bookingTherapy/` , { state: { id , type: 'Therapies'} });
         else navigate("/login");
     }
 

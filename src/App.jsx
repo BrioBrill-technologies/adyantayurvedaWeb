@@ -46,6 +46,7 @@ import TherapistProfile from "./Pages/Therapists/profile";
 import TherapistDashboard from "./Pages/Therapists/Dashboard";
 import TherapyType from "./Pages/TherapieType";
 import BookingTherapy from "./Pages/Patients/BookingTherapy";
+import TherapyPay from "./Pages/Patients/TherapyPay";
 
 const theme = createTheme({
   palette: {
@@ -102,6 +103,7 @@ function App() {
         <Route path="booking" element={<Booking />} />
         <Route path="bookingTherapy" element={<BookingTherapy />} />
         <Route path="pay" element={<Pay />} />
+        <Route path="therapyPayment" element={<TherapyPay />} />
         <Route path="confirmation" element={<Confirmation />} />
         <Route path="appointments" element={<Appointments />} />
         <Route path="appointmentDetails" element={<BookingDetails />} />
