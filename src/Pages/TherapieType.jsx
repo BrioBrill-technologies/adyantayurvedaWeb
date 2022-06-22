@@ -102,6 +102,16 @@ function TherapyType(){
         fetchTherapies();
     }, [loading]);
 
+    const searchResults = async (e) => {
+        e.preventDefault();
+        const search = e.target.value;
+        const data = await TypeTherapies(state.therapyType);
+        const filtered = data.filter(item => {
+            return item.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setTherapy(filtered);
+    }
+
     const handleBooking = (id) => {
         if(user) navigate(`/bookingTherapy/` , { state: { id , type: 'Therapies'} });
         else navigate("/login");
@@ -125,7 +135,13 @@ function TherapyType(){
                         </Typography>
                         <TextField
                             id="outlined-start-adornment"
-                            placeholder="Search doctors, services, specialisation"
+                            placeholder="Search doctors, services, specialization"
+                            onChange= {
+                                (e) => {
+                                    if(e.target.value === '') fetchTherapies();
+                                    else searchResults(e);
+                                }
+                            }
                             sx={{
                                 position:'absolute', 
                                 m: 1,

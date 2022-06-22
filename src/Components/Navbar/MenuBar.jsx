@@ -40,6 +40,7 @@ const useStyles = makeStyles({
   logo: {
     position: 'absolute',
     left: '50%',
+    cursor: 'pointer',
     transform: 'translateX(-50%)',
   },
   endLogin: {
@@ -134,8 +135,12 @@ function Menubar() {
             <img 
               onClick={() => {navigate('/')}} 
               className={classes.logo} 
-              sx={{ width: '15vw' }}
-              md={{ width: '8vw' }}
+              sx={{ 
+                width: '15vw',
+              }}
+              md={{ 
+                width: '8vw',
+              }}
               src='https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Flogo.png?alt=media&token=133422cd-c16f-4575-8d80-afb240030125' alt="logo" />
             <Avatar 
               className={classes.endLogin} 

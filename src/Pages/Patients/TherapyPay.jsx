@@ -225,7 +225,7 @@ function TherapyPay(){
                                 fontSize:'20px',
                                 color:'#3E3E3E',
                                 fontWeight:600,
-                                marginTop:'0.8vw'}}>This in-clinic appointment is for:</Typography>
+                                marginTop:'0.8vw'}}>This Therapy appointment is for:</Typography>
                         <Typography 
                             sx={{
                                 border:'1px solid #DDDDDD',
@@ -256,7 +256,7 @@ function TherapyPay(){
                                 border:'1px solid #DDDDDD',
                                 padding: '8px 16vw 8px 18px'}}
                             id="name" 
-                            value={name}
+                            defaultValue={name}
                             placeholder="Your Name"  />
                         <Typography 
                             sx={{
@@ -313,46 +313,56 @@ function TherapyPay(){
                             </Typography>
                         </Box>
                         {state.amount === 0 ?
-                        <Button
-                            sx={{
-                                backgroundColor:'#3E3E3E',
-                                color:'#fff',
-                                fontFamily:'Josefin Sans',
-                                fontSize:'18px',
-                                fontWeight:600,
-                                marginTop:'0.8vw',
-                                marginLeft:'0.8vw',
-                                width:'10vw',
-                                height:'5vw',
-                                borderRadius:'5px'}}
-                            onClick={() => {
-                                addBooking({
-                                    DocId:state.id,
-                                    type:state.type,
-                                    patientId:user.uid,
-                                    date:date,
-                                    status: "Requested",
-                                }).then(() => {
-                                    alert("Booking Requested");
-                                    navigate('/');
-                                })
-                            }
-                            }>
-                            Pay Now
-                        </Button>
+                        <Box display="flex" flexDirection="row">
+                            <Button
+                                variant='contained'
+                                color='primary' 
+                                sx={{
+                                    mb:10, 
+                                    width:'fit-content', 
+                                    p:2,fontFamily: 'Josefin Sans',
+                                    marginTop:'2vw'
+                                }}
+                                onClick={() => {
+                                    addBooking({
+                                        DocId:state.id,
+                                        type:state.type,
+                                        patientId:user.uid,
+                                        date:date,
+                                        status: "Requested",
+                                    }).then(() => {
+                                        alert("Booking Requested");
+                                        navigate('/');
+                                    })
+                                }}>
+                                Request Appointment
+                            </Button>
+                            <Button
+                                variant='contained'
+                                color='primary' 
+                                sx={{
+                                    mb:10, 
+                                    width:'fit-content', 
+                                    marginLeft:'1vw',
+                                    p:2,fontFamily: 'Josefin Sans',
+                                    marginTop:'2vw'
+                                }}
+                                onClick={() => {
+                                    navigate('/doctors');
+                                }}>
+                                Book A Doctor
+                            </Button>
+                        </Box>
                         :
                         <Button
+                            variant='contained' 
+                            color='primary' 
                             sx={{
-                                backgroundColor:'#3E3E3E',
-                                color:'#fff',
-                                fontFamily:'Josefin Sans',
-                                fontSize:'18px',
-                                fontWeight:600,
-                                marginTop:'0.8vw',
-                                marginLeft:'0.8vw',
-                                width:'10vw',
-                                height:'5vw',
-                                borderRadius:'5px'}}
+                                mb:10, 
+                                width:'fit-content', 
+                                p:2,fontFamily: 'Josefin Sans',
+                                marginTop:'2vw'
+                            }}
                             onClick={() => {
                                 displayRazorpay()
                             }

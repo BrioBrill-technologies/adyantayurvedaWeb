@@ -92,6 +92,16 @@ function Doctors(){
         }
     }, [doctors]);
 
+    const searchResults = async (e) => {
+        e.preventDefault();
+        const search = e.target.value;
+        const data = await getApproved("doctors");
+        const filtered = data.filter(item => {
+            return item.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setDoctors(filtered);
+    }
+
     const handleBooking = (id) => {
         if(user) navigate(`/booking/` , { state: { id , type: 'doctors', amount: 3000} });
         else navigate("/login");
@@ -113,11 +123,17 @@ function Doctors(){
                             and for us, you.
                         </Typography>
                         <Typography className={classes.secondFont} variant="h6">
-                            Find and book
+                            Find and book a doctor near you
                         </Typography>
                         <TextField
                             id="outlined-start-adornment"
-                            placeholder="Search doctors, services, specialisation"
+                            placeholder="Search doctors"
+                            onChange= {
+                                (e) => {
+                                    if(e.target.value === '') fetchDoctors();
+                                    else searchResults(e);
+                                }
+                            }
                             sx={{
                                 position:'absolute', 
                                 m: 1,

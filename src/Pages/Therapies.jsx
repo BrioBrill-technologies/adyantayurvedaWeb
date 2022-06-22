@@ -79,6 +79,7 @@ function Therapies(){
     const [user, loading, error] = useAuthState(auth);
     const [Therapy, setTherapy] = useState([]);
     const [therapyType, setTherapyType] = useState([]);
+    const [value, setValue] = useState('one');
     const navigate = useNavigate();
     
     const fetchTherapies = async () => {
@@ -100,6 +101,16 @@ function Therapies(){
     useEffect(() => {
         fetchTherapies();
     }, [loading]);
+
+    const searchResults = async (e) => {
+        e.preventDefault();
+        const search = e.target.value;
+        const data = await getTherapies();
+        const filtered = data.filter(item => {
+            return item.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setTherapy(filtered);
+    }
 
     const fetchAyurveda = async (ayurveda) => {
         try {
@@ -125,9 +136,7 @@ function Therapies(){
         else navigate("/login");
     }
 
-    const [value, setValue] = React.useState('one');
     const handleChange = (event, newValue) => {
-        console.log(newValue);
         setValue(newValue);
         if(newValue === 'one'){
             fetchTherapies();
@@ -150,11 +159,18 @@ function Therapies(){
                         the body and soul of yours.
                     </Typography>
                     <Typography className={classes.secondFont} variant="h6">
-                        Find and book
+                        Find and book your next rejuvenating therapy.
                     </Typography>
                     <TextField
                         id="outlined-start-adornment"
-                        placeholder="Search doctors, services, specialisation"
+                        placeholder="Search Therapies"
+                        onChange={
+                            (e) => {
+                                if(e.target.value === '') fetchTherapies();
+                                else searchResults(e);
+                            }
+                        }
+
                         sx={{
                             position:'absolute', 
                             m: 1,
@@ -193,7 +209,7 @@ function Therapies(){
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
                 </svg>
             </div>
-            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}>    
+            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', marginTop: '-5vw' }}>    
                 <Tabs
                     orientation="vertical"
                     value={value}
@@ -208,43 +224,56 @@ function Therapies(){
                             <Tab key={index} label={item} value={item} />
                         ))}
                 </Tabs>
-        <Grid justifyContent="center" marginTop="2vw" marginLeft="0.25vw" container spacing={3}>
-            {Therapy.map((therapy) => (
-                <Grid item xs={12} sm={6} md={3} lg={4}  key={therapy.id}
-                style={{ maxWidth: '25.333333%'}}>
-                    <Card sx={{
-                        marginLeft: 'auto',
-                        marginRight: 'auto',}} >
-                        <CardMedia
-                            component="img"
+                <Grid justifyContent="center" marginLeft="0.25vw" container spacing={3}>
+                    <Typography style={{
+                        fontFamily: 'Josefin Sans !important', 
+                        fontWeight: '600 !important', 
+                        fontSize: '24px !important', 
+                        paddingLeft: '5vw',
+                        paddingRight: '30vw'}}>
+                        <h2
                             style={{
-                                height:'15vw',
-                                marginLeft:'auto',
-                                marginRight:'auto'}}
-                            image={therapy.image}
-                        />
-                        <CardContent>
-                            <Typography className={classes.head11}>
-                                {therapy.name}
-                            </Typography>
-                            <CardActionArea>
-                                <Button 
-                                className={classes.bookBtn}
-                                onClick={() => {
-                                    handleBooking(therapy.id)
-                                }}>
-                                    Book Now 
-                                    <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
-                                    </svg>
-                                </Button>
-                            </CardActionArea>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            ))}
-        </Grid> 
-        </Box>
+                                marginBottom: '0.5vw !important',
+                            }}
+                        >Nourishing Therapies</h2> <br/>
+                        Click on the therapy name card  to book and know more about them.
+                    </Typography>
+                    {Therapy.map((therapy) => (
+                        <Grid item xs={12} sm={6} md={3} lg={4}  key={therapy.id}
+                        style={{ maxWidth: '25.333333%'}}>
+                            <Card sx={{
+                                marginLeft: 'auto',
+                                marginRight: 'auto',}} >
+                                <CardMedia
+                                    component="img"
+                                    style={{
+                                        height:'15vw',
+                                        marginLeft:'auto',
+                                        marginRight:'auto'}}
+                                    image={therapy.image}
+                                />
+                                <CardContent>
+                                    <Typography className={classes.head11}>
+                                        {therapy.name}
+                                    </Typography>
+                                    <CardActionArea>
+                                        <Button 
+                                        className={classes.bookBtn}
+                                        onClick={() => {
+                                            handleBooking(therapy.id)
+                                        }}>
+                                            Book Now 
+                                            <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
+                                            </svg>
+                                        </Button>
+                                    </CardActionArea>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid> 
+            </Box>
         <Footer />
     </div>
     )

@@ -10,7 +10,8 @@ import {
     Radio,
     Divider,
     ToggleButtonGroup,
-    ToggleButton
+    ToggleButton,
+    Alert
 } from '@mui/material';
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -29,6 +30,9 @@ function BookingTherapy () {
     const [place, setPlace] = useState(null);
     const [amount, setAmount] = useState(0);
     const [therapy, setTherapy] = useState(null);
+    const [benefits , setBenefits] = useState([]);
+    const [alert, setAlert] = useState(false);
+    const [alertText, setAlertText] = useState('');
     const navigate = useNavigate();
 
 
@@ -36,7 +40,23 @@ function BookingTherapy () {
         try{
             const data = await getSingleTherapy(state.id);
             setTherapy(data);
-            console.log(data);
+            if(data.session1){
+                setPlace('session1');  
+                setAmount(data.session1);          
+            } else if(data.price){
+                setPlace('price');  
+                setAmount(data.price);          
+            } else if (data.session8){
+                setPlace('session8');
+                setAmount(data.session8);
+            }
+            if(data.benefits){
+                if(benefits.length === 0){
+                    data.benefits.split('.').map(benefit => {
+                        benefits.push(benefit);
+                    })
+                } 
+            }
         }catch(err){
             console.log(err);
         }
@@ -50,17 +70,27 @@ function BookingTherapy () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/therapyPayment", { state: { 
-            id: state.id,
-            type: state.type,
-            place: place,
-            date: date,
-            amount: amount,
-        } });
+        if(date && time){
+            navigate("/therapyPayment", { state: { 
+                id: state.id,
+                type: state.type,
+                place: place,
+                date: date,
+                amount: amount,
+            } });
+        } else if(!date){
+            setAlert(true);
+            setAlertText('Please select a date');
+        } else if(!time){
+            setAlert(true);
+            setAlertText('Please select a time');
+        } else {
+            setAlert(true);
+            setAlertText('Please select a date and time');
+        }
     }
 
     const handlePlace = (e) => {
-        console.log(e.target.value);
         setPlace(e.target.value);
         if(e.target.value === 'price'){
             setAmount(therapy.price);
@@ -91,13 +121,27 @@ function BookingTherapy () {
                 </svg>
             </div>
             <Box display="flex" flexDirection="row" marginLeft={15}>
-                <Paper style={{padding:20, marginTop:50, width:580, height:'fit-content'}}>
+                <Paper style={{
+                    padding:20, 
+                    marginTop:50,
+                    width:580, 
+                    height:'fit-content'}}>
+                    <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+                        <img src={therapy?.image} alt="therapy" style={{ width:'100%' }} />
+                    </Box>
+                    <Divider sx={{mb:2,marginTop:'1vw'}} />
                     <Typography variant="h4" style={{marginBottom:20}}>
                         {state.type === 'Therapies' ? therapy?.name : state.type}
                     </Typography>
-                    <Divider />
                     <Typography variant="body1" style={{marginBottom:20}}>
                         {state.type === 'Therapies' ? therapy?.description : state.type}
+                    </Typography>
+                    <Divider />
+                    <Typography variant="body1" style={{marginBottom:20}}>
+                        <h3> Benefits of {therapy?.name}</h3>
+                        {benefits.map(benefit => {
+                            return <li>{benefit}</li>
+                        })}
                     </Typography>
                     <Divider />
                 </Paper>
@@ -112,7 +156,7 @@ function BookingTherapy () {
                             fontSize: '22px'
                         }}
                         src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FTopTree.png?alt=media&token=184c4654-8237-454c-ba6a-de617cd2a5cf" />
-                    <FormControl sx={{padding:'10vw 10vw 0'}}>
+                    <FormControl sx={{padding:'5vw 10vw 0'}}>
                         { therapy?.price && (
                             <RadioGroup
                                 aria-labelledby="demo-radio-buttons-group-label"
@@ -144,6 +188,9 @@ function BookingTherapy () {
                             </RadioGroup>
                         )}
                         <Divider sx={{mb:2,marginTop:'1vw'}} />
+                        <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
+                            Please select your preferred Date
+                        </Typography>
                         <LocalizationProvider dateAdapter={AdapterDateFns} sx={{marginTop:'2vw'}} >
                             <DatePicker
                                 minDate= {new Date()}
@@ -152,29 +199,32 @@ function BookingTherapy () {
                                 onChange={(e) => { setDate(e) }}
                                 renderInput={(params) => <TextField style={{width:'100%'}} {...params} />}/>
                         </LocalizationProvider>
+                        <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
+                            Please select your preferred time slot
+                        </Typography>
                         <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.6vw'}}>
-                        Evening (5 slots)
-                    </Typography>
-                    <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="05:00 PM">05:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="06:00 PM">06:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="07:00 PM">07:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="08:00 PM">08:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="09:00 PM">09:00 PM</ToggleButton>
-                    </ToggleButtonGroup>
-                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
-                        Morning (5 slots)
-                    </Typography>
-                    <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="01:00 PM">01:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="02:00 PM">02:00 PM</ToggleButton>
-                    </ToggleButtonGroup>
-                    <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
-                        Book Appointment
-                    </Button>
+                            Evening (5 slots)
+                        </Typography>
+                        <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="05:00 PM">05:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="06:00 PM">06:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="07:00 PM">07:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="08:00 PM">08:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="09:00 PM">09:00 PM</ToggleButton>
+                        </ToggleButtonGroup>
+                        <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
+                            Morning (5 slots)
+                        </Typography>
+                        <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="01:00 PM">01:00 PM</ToggleButton>
+                            <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="02:00 PM">02:00 PM</ToggleButton>
+                        </ToggleButtonGroup>
+                        { alert && (
+                            <Alert severity="error"> {alertText} </Alert>
+                        )}
                         <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
                             Book Appointment
                         </Button>
