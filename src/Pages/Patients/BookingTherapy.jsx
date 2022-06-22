@@ -33,6 +33,9 @@ function BookingTherapy () {
     const [benefits , setBenefits] = useState([]);
     const [alert, setAlert] = useState(false);
     const [alertText, setAlertText] = useState('');
+    const [pack, setPack] = useState([]);
+    const [pack4, setPack4] = useState([]);
+    const [pack7, setPack7] = useState([]);
     const navigate = useNavigate();
 
 
@@ -49,6 +52,9 @@ function BookingTherapy () {
             } else if (data.session8){
                 setPlace('session8');
                 setAmount(data.session8);
+            } else if (data.session0){
+                setPlace('session0');
+                setAmount(data.session0);
             }
             if(data.benefits){
                 if(benefits.length === 0){
@@ -56,6 +62,20 @@ function BookingTherapy () {
                         benefits.push(benefit);
                     })
                 } 
+            }
+            console.log(data);
+            if(data.package1){
+                setPack(data.package1);
+                if(pack4.length === 0){
+                    data.package4.split('.').map(benefit => {
+                        pack4.push(benefit);
+                    })
+                }
+                if(pack7.length === 0){
+                    data.package7.split('.').map(benefit => {
+                        pack7.push(benefit);
+                    })
+                }
             }
         }catch(err){
             console.log(err);
@@ -137,13 +157,39 @@ function BookingTherapy () {
                         {state.type === 'Therapies' ? therapy?.description : state.type}
                     </Typography>
                     <Divider />
-                    <Typography variant="body1" style={{marginBottom:20}}>
-                        <h3> Benefits of {therapy?.name}</h3>
-                        {benefits.map(benefit => {
-                            return <li>{benefit}</li>
-                        })}
-                    </Typography>
-                    <Divider />
+                    { therapy?.benefits &&
+                        <>
+                            <Typography variant="body1" style={{marginBottom:20}}>
+                                <h3> Benefits of {therapy?.name}</h3>
+                                {benefits.map(benefit => {
+                                    return <li>{benefit}</li>
+                                })}
+                            </Typography>
+                            <Divider />
+                        </>
+                    }
+                    { therapy?.package1 &&
+                        <>
+                            <Typography variant="body1" style={{marginBottom:20}}>
+                                <h3> One day Package</h3>
+                                {pack}
+                            </Typography>
+                            <Divider />
+                            <Typography variant="body1" style={{marginBottom:20}}>
+                                <h3> Four day Package</h3>
+                                {pack4.map(benefit => {
+                                    return <li>{benefit}</li>
+                                })}
+                            </Typography>
+                            <Divider />
+                            <Typography variant="body1" style={{marginBottom:20}}>
+                                <h3> Seven day Package</h3>
+                                {pack7.map(benefit => {
+                                    return <li>{benefit}</li>
+                                })}
+                            </Typography>
+                        </>
+                    }
                 </Paper>
                 <Paper sx={{ ml:5, mt:3}}>
                     <img
@@ -181,10 +227,21 @@ function BookingTherapy () {
                             onChange={handlePlace}
                             value = {place}
                             name="radio-buttons-group">
-                                <FormControlLabel value="session1" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>1 Session ₹ {therapy.session1} ({therapy.duration}) minutes</Typography> }/>
-                                <FormControlLabel value="session5" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>5 Session ₹ {therapy.session5} ({therapy.duration}) minutes</Typography> }/>
-                                <FormControlLabel value="session7" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>7 Session ₹ {therapy.session7} ({therapy.duration}) minutes</Typography> }/>
-                                <FormControlLabel value="session12" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>12 Session ₹ {therapy.session12} ({therapy.duration}) minutes</Typography> }/>
+                                <FormControlLabel value="session1" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>1 Session ₹ {therapy.session1} ({therapy.duration} minutes) </Typography> }/>
+                                <FormControlLabel value="session5" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>5 Session ₹ {therapy.session5} ({therapy.duration} minutes) </Typography> }/>
+                                <FormControlLabel value="session7" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>7 Session ₹ {therapy.session7} ({therapy.duration} minutes) </Typography> }/>
+                                <FormControlLabel value="session12" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>12 Session ₹ {therapy.session12} ({therapy.duration} minutes) </Typography> }/>
+                            </RadioGroup>
+                        )}
+                        { therapy?.session0 && (
+                            <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            onChange={handlePlace}
+                            value = {place}
+                            name="radio-buttons-group">
+                                <FormControlLabel value="session0" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>1 Session ₹ {therapy.session0} ({therapy.duration} minutes) </Typography> }/>
+                                <FormControlLabel value="session4" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>4 Session ₹ {therapy.session4} ({therapy.duration} minutes) </Typography> }/>
+                                <FormControlLabel value="session7" control={<Radio />} label={<Typography style={{fontFamily:'Josefin Sans'}}>7 Session ₹ {therapy.session7} ({therapy.duration} minutes) </Typography> }/>
                             </RadioGroup>
                         )}
                         <Divider sx={{mb:2,marginTop:'1vw'}} />
