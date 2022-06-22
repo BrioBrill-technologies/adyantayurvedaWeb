@@ -3,17 +3,26 @@ import { InputBase, TextareaAutosize, Typography,
   Card, 
   CardActionArea, 
   CardContent, 
-  CardMedia, } from "@mui/material";
+  CardMedia,
+  Stack
+   } from "@mui/material";
 import React, {  } from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core'
 import Footer from "../Components/Navbar/Footer";
 import Mobile from "../Components/mobile";
-const useStyles = makeStyles({
+
+
+const useStyles = makeStyles((theme) => ({
   typo: {
     color: '#74613C',
     fontFamily: 'Josefin Sans !important',
     padding: '7vw 0 0 5vw',
+    [theme.breakpoints.down("md")]: {
+      paddingLeft:'2vw',
+      paddingTop:'20vw',
+      fontSize:'h1 !important'
+    },
   },
   firstTypo: {
     color: '#3E3E3E',
@@ -22,11 +31,33 @@ const useStyles = makeStyles({
     fontStyle: 'normal !important',
     lineHeight: '1.5em',
     padding: '0 0 0 5vw',
+    [theme.breakpoints.down("md")]: {
+      paddingLeft:'1vw',
+    },
   },
   secondFont: {
     color: '#3E3E3E',
     fontFamily: 'Josefin Sans !important',
     padding: '0 0 0 5vw',
+    [theme.breakpoints.down("md")]: {
+      paddingLeft:'1vw',
+    },
+  },
+
+  img: {
+    [theme.breakpoints.down("md")]: {
+      marginTop:'1.8rem',
+      marginLeft:'2.5rem',
+      width:'20rem',
+      
+    },
+  },
+
+  grid:{
+    [theme.breakpoints.up("md")]: {
+      display:'flex'  
+    },
+    
   },
 
   btn1: {
@@ -299,7 +330,8 @@ const useStyles = makeStyles({
     fontStyle: 'normal !important',
     lineHeight: '30px',
   },
-})
+}));
+
 function Land() {
   const classes = useStyles();
   let navigate = useNavigate();
@@ -309,22 +341,23 @@ function Land() {
       top: 0,
       width: '-webkit-fill-available',
       zIndex: -1}}>
-      <Grid style={{display:'flex', flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw'}}>
-        <Grid item xs={12} >
+      <Grid className={classes.grid} style={{ flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw'}}>
+        <Grid item xs={14} >
           <Box style={{ paddingLeft: '24px'}}>
-            <Typography className={classes.typo} variant="h6">
+            <Typography className={classes.typo} variant="h6" fontSize={{lg: 30,xs: 12}}>
               AYURVEDIC CARE
             </Typography>
-            <Typography className={classes.firstTypo} variant="h2">
-              ADYANT AYURVEDA  <br></br>
+            <Typography className={classes.firstTypo} variant="h2" fontSize={{lg: 60,xs: 30}}>
+              ADYANT AYURVEDA
               HOME SERVICE
             </Typography>
-            <Typography className={classes.secondFont} variant="h6">
+            <Typography className={classes.secondFont} variant="h6" fontSize={{lg: 20,xs: 15}}>
               Ayurveda Health Solution for Your<br></br>
               Health Needs at Your Doorstep.
             </Typography>
-            <Box style={{display:'flex', flexDirection:'row', marginTop:'2vw'}}>
-              <Button variant="contained" color="primary" style={{
+            {/* <Box style={{display:'flex', flexDirection:'row'}}> */}
+              <Stack spacing={2} direction='row'>
+              <Button variant="contained" color="primary" className={classes.button} style={{
                   background: '#74613C',
                  color: 'white !important',
                  marginLeft: '5vw',
@@ -336,7 +369,8 @@ function Land() {
                  fontSize: '24px !important',
                  '&:hover': {
                    color: 'white',
-                 },}
+                 },
+                } 
               } onClick={() => navigate('/doctors')}>
                 Consult Now
               </Button>
@@ -356,12 +390,13 @@ function Land() {
               }  onClick={() => navigate('/therapies')}>
                 Book Therapy
               </Button>
-            </Box>
+              </Stack>
+            {/* </Box> */}
           </Box>
         </Grid>
-        <Grid item xs={12} style={{zIndex:'1'}}>
-          <Box style={{width:'fit-content', marginLeft:'auto'}}>
-            <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FPlaceImage.png?alt=media&token=6c137edf-1cd5-4ea4-8666-dbaa62cd39af"/>
+        <Grid item  style={{zIndex:'1'}}>
+          <Box style={{width:'fit-content'}}>
+            <img className={classes.img} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FPlaceImage.png?alt=media&token=6c137edf-1cd5-4ea4-8666-dbaa62cd39af"/>
           </Box>
         </Grid>
       </Grid>
