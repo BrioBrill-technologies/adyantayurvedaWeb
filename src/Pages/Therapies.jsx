@@ -258,14 +258,12 @@ function Therapies(){
                                     </Typography>
                                     <CardActionArea>
                                         <Button 
+                                        variant="outlined"
                                         className={classes.bookBtn}
                                         onClick={() => {
                                             handleBooking(therapy.id)
                                         }}>
                                             Book Now 
-                                            <svg width="66" height="6" viewBox="0 0 66 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M65.0039 3L60.0039 0.113249V5.88675L65.0039 3ZM0.996094 3.5H60.5039V2.5H0.996094V3.5Z" fill="#74613C"/>
-                                            </svg>
                                         </Button>
                                     </CardActionArea>
                                 </CardContent>
