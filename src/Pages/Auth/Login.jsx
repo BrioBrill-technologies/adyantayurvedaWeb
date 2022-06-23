@@ -110,10 +110,12 @@ function Login() {
         <Paper sx={{ ml:50, pt:15 }}>
           <Box sx={{ display:'flex', flexDirection:'row', alignItems:'center'}}>
             <Typography sx={{
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              textAlign:"center" }} className={classes.login}>
-              Login
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                textAlign:"center" 
+              }} 
+              className={classes.login}>
+              Login / Register
             </Typography>
           </Box>
           <Container maxWidth="xs" sx={{ ml:20 }}>
