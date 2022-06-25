@@ -99,6 +99,7 @@ function BookingTherapy () {
                 place: place,
                 date: date,
                 amount: amount,
+                time: time,
             } });
         } else if(!date){
             setAlert(true);
