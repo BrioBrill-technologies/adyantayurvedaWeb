@@ -84,6 +84,11 @@ function Menubar() {
     }
   }
 
+  const handleLogout = () => {
+    logout();
+    handleCloseUserMenu();
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none' }}>
@@ -170,7 +175,7 @@ function Menubar() {
                 <MenuItem onClick={handleProfile}>
                   <Typography textAlign="center">Settings</Typography>
                 </MenuItem>
-                <MenuItem onClick={logout}>
+                <MenuItem onClick={handleLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
             </Menu>
