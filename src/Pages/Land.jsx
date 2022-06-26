@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
   button: {
     [theme.breakpoints.up("md")]: {
-      marginLeft: '5vw',
+      // marginLeft: '5vw',
     },
     [theme.breakpoints.down("md")]: {
       paddingLeft:'1vw',
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
   stack: {
     [theme.breakpoints.down("md")]: {
-      marginTop: '1vw',
+      marginTop: '5vw',
     },
     [theme.breakpoints.up("md")]: {
       marginLeft: '5vw',
