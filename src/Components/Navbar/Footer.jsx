@@ -4,10 +4,14 @@ import React, {  } from "react";
 import { makeStyles } from '@material-ui/core'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     input1: {
         width: '250px !important',
         background: '#FFF6E4',
+        [theme.breakpoints.down("md")]: {
+          marginLeft: '5vw !important',
+          marginBottom:'25vw'
+        },
       },
     head19: {
         fontFamily: 'Josefin Sans !important',
@@ -17,8 +21,14 @@ const useStyles = makeStyles({
         lineHeight: '30px',
         textAlign: 'center',
         position: 'absolute',
-        right:'20%',
-        marginTop: '-5vw !important',
+        [theme.breakpoints.up("md")]: {
+          marginTop: '-5vw !important',
+          right:'20%',
+        },
+        [theme.breakpoints.down("md")]: {
+          marginTop: '20vw !important',
+          zIndex:'1'
+        },
       },
 
       btn6: {
@@ -30,6 +40,7 @@ const useStyles = makeStyles({
         fontWeight: '600 !important',
         height:' max-content',
         marginTop: '2vw !important',
+        
       },
 
       head22: {
@@ -38,7 +49,13 @@ const useStyles = makeStyles({
         fontWeight: '400 !important',
         fontStyle: 'normal !important',
         lineHeight: '30px',
-        marginRight: '2vw !important',
+        
+        [theme.breakpoints.up("md")]: {
+          marginRight: '2vw !important',
+        },
+        [theme.breakpoints.down("md")]: {
+          marginRight: '8vw !important',
+        },
       },
 
       btn5: {
@@ -49,42 +66,99 @@ const useStyles = makeStyles({
         fontFamily: 'Josefin Sans !important',
         fontWeight: '600 !important',
         textTransform: 'none !important',
-        position: 'absolute !important',
-        right:'10%',
-        marginTop: '-6vw !important',
         '&:hover': {
           color: 'white',
         },
+        [theme.breakpoints.up("md")]: {
+          marginTop:'-6vw',
+          right:'10%',
+          position: 'absolute !important', 
+        },
+        [theme.breakpoints.down("md")]: {
+          
+        },
       },
-})
+
+      img: {
+        [theme.breakpoints.up("md")]: {
+          height:'10%', width:'10%',
+          marginLeft: '5vw',
+        },
+        [theme.breakpoints.down("md")]: {
+          width:'25%'
+        },
+      },
+
+      box: {
+        [theme.breakpoints.up("md")]: {
+          display:'flex'
+        },
+      },
+
+      grid: {
+        [theme.breakpoints.up("md")]: {
+          marginLeft: '10vw',
+        },
+      },
+
+      grid2: {
+        [theme.breakpoints.down("md")]: {
+          
+          position: 'relative', 
+        },
+      },
+
+      text1: {
+        [theme.breakpoints.down("md")]: {
+          marginLeft:'5vw'
+        },
+      },
+
+      termsbox: {
+        [theme.breakpoints.up("md")]: {
+          marginLeft:'11vw',
+          paddingBottom:'2vw'
+        },
+        [theme.breakpoints.down("md")]: {
+          marginLeft:'5vw'
+        },
+      },
+
+      icons: {
+        [theme.breakpoints.up("md")]: {
+          marginRight:'20vw',
+        },
+        [theme.breakpoints.down("md")]: {
+          marginRight:'5vw',
+        },
+      },
+}))
 function Footer () {
     const classes = useStyles();
     const navigate = useNavigate();
   return (
       <>
-        <img style={{width:"100%", marginTop:'-12vw', zIndex:'-1'}} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Ffooter.svg?alt=media&token=9a65161a-6982-4717-b995-10781d733bf1"/>
+        <img  style={{width:"100%", marginTop:'-12vw', zIndex:'-1'}} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Ffooter.svg?alt=media&token=9a65161a-6982-4717-b995-10781d733bf1"/>
         <Box style={{background:'#FFF6E4', p:{ xs:4, md:10}, pt:12, pb:12, fontSize: { xs:'12px', md:'14px'}, }}>
-        <Box style={{
-            display: 'flex',
+        <Box className={classes.box1} style={{
+            
             marginTop: '-2vw',
             marginLeft: '5vw',
           }}>
-          <img style={{ 
+          <img className={classes.img} style={{ 
             marginTop: '-7vw',
-              marginLeft: '5vw',
-            height:'10%', width:'10%',
             }}
           src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Flogo.png?alt=media&token=133422cd-c16f-4575-8d80-afb240030125"/>
-          <Typography className={classes.head19} variant="h5">
+          <Typography className={classes.head19} variant="h5" fontSize={{lg: 25,xs: 15}}>
             Ready to get started?</Typography>
           <Button className={classes.btn5} variant="contained" color="primary">
             Get Started
           </Button>
           </Box>
-          <Grid container spacing={2} justifyContent="center" style={{marginLeft:'10vw'}}>
+          <Grid className={classes.grid2} container spacing={2} justifyContent="center" >
             <Grid item md={6} lg={4} xs={12}>
-              <Typography >
-                  Subscribe to our<br></br>
+              <Typography className={classes.text1} fontSize={{lg: 20,xs: 12}}>
+                  Subscribe to our
                   newsletter
               </Typography>
               <Box style={{display:'flex'}}>
@@ -94,7 +168,7 @@ function Footer () {
                 </Button>
               </Box>
             </Grid>
-            <Grid item md={3} lg={2}>
+            <Grid className={classes.grid2} item md={3} lg={2} spacing={3}>
               <Typography className={classes.head21} lineHeight={2}>
                 Services
               </Typography>
@@ -154,11 +228,11 @@ function Footer () {
               <rect opacity="0.1" x="0.928589" width="1068" height="1" fill="#3E3E3E"/>
             </svg>
           </Box>
-          <Box style={{display:'flex', marginTop:'2vw', marginLeft:'11vw', paddingBottom:'2vw'}}>
-            <Typography className={classes.head22}>
+          <Box className={classes.termsbox} style={{display:'flex', marginTop:'2vw', }}>
+            <Typography className={classes.head22} fontSize={{lg: 16,xs: 9}}>
               Terms & Conditions
             </Typography>
-            <Typography className={classes.head22}>
+            <Typography className={classes.head22} fontSize={{lg: 16,xs: 9}}>
               Privacy Policy
             </Typography>
             <Box style={{
@@ -176,7 +250,7 @@ function Footer () {
               </svg>
             </Box>
 
-            <Box style={{ marginRight:'20vw', }}>
+            <Box className={classes.icons} style={{  }}>
               <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.80273 0H16.0527C19.8491 0 22.9277 3.07862 22.9277 6.875V15.125C22.9277 18.9214 19.8491 22 16.0527 22H7.80273C4.00636 22 0.927734 18.9214 0.927734 15.125V6.875C0.927734 3.07862 4.00636 0 7.80273 0ZM16.0527 19.9375C18.7065 19.9375 20.8652 17.7787 20.8652 15.125V6.875C20.8652 4.22125 18.7065 2.0625 16.0527 2.0625H7.80273C5.14898 2.0625 2.99023 4.22125 2.99023 6.875V15.125C2.99023 17.7787 5.14898 19.9375 7.80273 19.9375H16.0527Z" fill="#3E3E3E"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.42773 11C6.42773 7.96263 8.89036 5.5 11.9277 5.5C14.9651 5.5 17.4277 7.96263 17.4277 11C17.4277 14.0374 14.9651 16.5 11.9277 16.5C8.89036 16.5 6.42773 14.0374 6.42773 11ZM8.49023 11C8.49023 12.8948 10.033 14.4375 11.9277 14.4375C13.8225 14.4375 15.3652 12.8948 15.3652 11C15.3652 9.10388 13.8225 7.5625 11.9277 7.5625C10.033 7.5625 8.49023 9.10388 8.49023 11Z" fill="#3E3E3E"/>
