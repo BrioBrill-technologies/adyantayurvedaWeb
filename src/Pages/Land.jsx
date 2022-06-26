@@ -525,11 +525,6 @@ function Land() {
           </Box>
         </Grid>
       </Grid>
-      <div style={{zIndex:'-1', marginTop:'-10vw', marginBottom:'-10vw'}}>
-        <svg width="1440" height="432" viewBox="0 0 1440 432" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
-        </svg>
-      </div>
 
       <Mobile />
 
