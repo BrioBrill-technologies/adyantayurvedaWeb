@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
+  button: {
+    [theme.breakpoints.down("md")]: {
+      paddingLeft:'1vw',
+    },
+  },
+
   img: {
     [theme.breakpoints.down("md")]: {
       marginTop:'1.8rem',
@@ -183,6 +189,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
+    [theme.breakpoints.down("md")]: {
+      width:'50%',
+      position: 'relative',
+    },
   },
 
   head6: {
@@ -192,6 +202,9 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal !important',
     lineHeight: '1.5em',
     textAlign: 'center',
+    [theme.breakpoints.down("md")]: {
+      marginLeft:'5vw'
+    },
   },
 
   head7: {
@@ -233,12 +246,20 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '2vw !important',
     marginBottom: '1vw !important',
     marginLeft: '1vw !important',
+    [theme.breakpoints.down("md")]: {
+      marginTop: '3vw !important',
+      marginLeft: '3vw !important',
+    },
   },
 
   head14: {
     fontFamily: 'Josefin Sans !important',
     color: '#303030',
     fontWeight: '700 !important',
+    [theme.breakpoints.down("md")]: {
+      marginTop: '3vw !important',
+      marginLeft: '3vw !important',
+    },
   },
 
   head15: {
@@ -247,6 +268,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '400 !important',
     fontStyle: 'normal !important',
     lineHeight: '30px',
+    [theme.breakpoints.down("md")]: {
+      marginTop: '1vw !important',
+      marginLeft: '4vw !important',
+    },
   },
 
   head16: {
@@ -321,7 +346,107 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '30px',
   },
 
+  gridcard: {
+    [theme.breakpoints.up("md")]: {
+      maxWidth:'21%'
+      
+    },
+    [theme.breakpoints.down("md")]: {
+      maxWidth:'17%',
+      justifyContent:'center',
+    },
+  },
 
+  g:{
+    [theme.breakpoints.up("md")]: {
+      maxWidth:'21%' 
+    },
+  },
+
+  doc:{
+    [theme.breakpoints.up("md")]: {
+      maxWidth:'20%' 
+    },
+  },
+
+  testbox1: {
+    [theme.breakpoints.up("md")]: {
+      marginTop:'50vw'
+    },
+    [theme.breakpoints.down("md")]: {
+      marginTop:'10vw'
+    },
+  },
+
+  testbox2: {
+    [theme.breakpoints.up("md")]: {
+      display:'flex',
+      marginLeft: '5vw',
+    },
+    [theme.breakpoints.down("md")]: {
+      width:'50vw'
+    },
+  },
+
+  testbox3: {
+    [theme.breakpoints.up("md")]: {
+      padding: '2vw 2vw 0 4vw',
+      height: '300px',
+      width: '500px',
+    },
+    [theme.breakpoints.down("md")]: {
+      width:'300px',
+      height: '220px',
+      padding: '2vw 2vw 0 4vw',
+    },
+  },
+
+  testimg1: {
+    [theme.breakpoints.down("md")]: {
+      width:'20rem',
+      justifyContent:'center',
+    },
+  },
+
+  testimg2: {
+    [theme.breakpoints.down("md")]: {
+      width:'20rem',
+      
+    },
+  },
+
+  map: {
+    [theme.breakpoints.up("md")]: {
+      width:"600px",
+      height:"600px",
+      marginLeft: '10vw',
+    },
+    [theme.breakpoints.down("md")]: {
+      width:"300px",
+      height:"300px",
+      justifyContent:'center',
+      marginLeft: '8vw',
+    },
+  },
+
+  mapbox1: {
+    [theme.breakpoints.up("md")]: {
+      display:'flex'
+    },
+  },
+
+  mapbox2: {
+    [theme.breakpoints.up("md")]: {
+      width:'fit-content',
+      marginLeft:'5vw', 
+    },
+    [theme.breakpoints.down("md")]: {
+      width:'70%',
+      justifyContent:'center',
+      marginLeft:'12vw', 
+      marginTop:'10vw', 
+    },
+  },
 
   head20: {
     fontFamily: 'Josefin Sans !important',
@@ -409,15 +534,16 @@ function Land() {
       <Mobile />
 
       <Grid xs={12} style={{marginTop:'5vw'}}>
-        <Typography className={classes.head6} variant="h2">
+        <Typography className={classes.head6} variant="h2" fontSize={{lg: 60,xs: 30}}>
           Our Ayurvedic Services
         </Typography>
-        <Typography className={classes.head7} variant="h6">
+        <Typography className={classes.head7} variant="h6" fontSize={{lg: 40,xs: 15}}>
           Personalized Offline Therapies with verified therapists in all Specialities
         </Typography>
       </Grid>
       <Grid container spacing={3} style={{justifyContent:'center', marginTop:'1vw', textAlign:'center'}}>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3}>
+          
           <Card sx={{
             width: 'fit-content',
             marginLeft: 'auto',
@@ -431,22 +557,22 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec1.png?alt=media&token=9904f2ad-fd51-4cad-a1f6-3de6a67a862e"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Rejuvenative Treatments
                 </Typography>
                 <CardActionArea>
                     <Button 
-                    variant="outlined"
+                    variant="outlined" 
                     onClick={() => {
                         navigate('therapyType', { state: { therapyType: 'Rejuvenative Treatments' } })
-                    }}>
+                    }} >
                         Book Now 
                     </Button>
                 </CardActionArea>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3} >
           <Card sx={{
             width: 'fit-content',
             padding: '0 0.5rem',
@@ -461,7 +587,7 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Spine and Joint Care
                 </Typography>
                 <CardActionArea>
@@ -476,7 +602,8 @@ function Land() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3} >
+          
           <Card sx={{
             width: 'fit-content',
             marginLeft: 'auto',
@@ -490,7 +617,7 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Elderly care
                 </Typography>
                 <CardActionArea>
@@ -505,7 +632,7 @@ function Land() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3} >
           <Card sx={{
             width: 'fit-content',
             marginLeft: 'auto',
@@ -519,7 +646,7 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Prenatal / Post-natal care
                 </Typography>
                 <CardActionArea>
@@ -534,7 +661,7 @@ function Land() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3} >
           <Card sx={{
             width: 'fit-content',
             marginLeft: 'auto',
@@ -548,7 +675,7 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Skin and Haircare
                 </Typography>
                 <CardActionArea>
@@ -563,7 +690,7 @@ function Land() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'21%'}}>
+        <Grid className={classes.g} item xs={12} sm={6} md={3} lg={3} >
           <Card sx={{
             width: 'fit-content',
             marginLeft: 'auto',
@@ -577,7 +704,7 @@ function Land() {
                 image="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fspec2.png?alt=media&token=f8803d36-3006-4179-b4ed-ecffcc56bdeb"
             />
             <CardContent>
-                <Typography className={classes.head11}>
+                <Typography className={classes.head11} fontSize={{lg: 16,xs: 12}}>
                 Weight Management
                 </Typography>
                 <CardActionArea>
@@ -613,41 +740,41 @@ function Land() {
       </Button> 
 
         <Grid xs={12} style={{marginTop:'5vw'}}>
-          <Typography className={classes.head6} variant="h2">
+          <Typography className={classes.head6} variant="h2" fontSize={{lg:60,xs:30}}>
             Consult top doctors online
           </Typography>
-          <Typography className={classes.head7} variant="h6">
+          <Typography className={classes.head7} variant="h6" fontSize={{lg: 40,xs: 15}}>
             Online consultations with verified doctors in all specialties
           </Typography>
         </Grid>
         <Grid container spacing={0} style={{textAlign:'center'}}>
-          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+          <Grid className={classes.doc} item xs={12} sm={6} md={3} lg={3} >
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+          <Grid className={classes.doc} item xs={12} sm={6} md={3} lg={3}>
             <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+          <Grid className={classes.doc} item xs={12} sm={6} md={3} lg={3}>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
 
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+          <Grid className={classes.doc} item xs={12} sm={6} md={3} lg={3}>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
           </Box>
 
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={3} style={{maxWidth:'20%'}}>
+          <Grid className={classes.doc} item xs={12} sm={6} md={3} lg={3}>
           <Box>
             <img src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2FdocPlaceholer.png?alt=media&token=100b2a89-a515-4243-9bcb-7e32c452298d"/>
             <Typography>LOREM IPSUM</Typography>
@@ -673,59 +800,58 @@ function Land() {
         </Button>
       
       <Box>
-        <Typography className={classes.head4} variant="h6">
+        <Typography className={classes.head4} variant="h6" fontSize={{lg:25,xs:15}}>
           WHAT WE TREAT 
         </Typography>
-        <Typography className={classes.head5} variant="h2">
+        <Typography className={classes.head5} variant="h2" fontSize={{lg:60,xs:30}}>
           The spirit of healing<br></br>
           is profound empathy.
         </Typography> 
         <img className={classes.bodyImage} src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fbody.png?alt=media&token=55c4fb64-6fb5-45aa-9b2b-be2031ad9d90"/>
       </Box>
 
-      <Box style={{background:'#FFFBF3', paddingBottom:'5vw', marginTop:'50vw'}}>
-        <Typography className={classes.head11} variant="h5">
+      <Box className={classes.testbox1} style={{background:'#FFFBF3', paddingBottom:'5vw'}}>
+        <Typography className={classes.head11} variant="h5" fontSize={{lg: 20,xs: 12}}>
         OUR TESTIMONIALS
         </Typography>
-        <Typography className={classes.head12} variant="h3">
+        <Typography className={classes.head12} variant="h3" fontSize={{lg: 50,xs: 30}}>
         What Our Clients Say About Us
         </Typography>
-        <Box style={{
-          display: 'flex',
+        <Box className={classes.testbox2} style={{
+          
           marginTop: '2vw',
-          marginLeft: '5vw',
+          
         }}>
-          <img
+          <img className={classes.testimg1}
           style={{
             marginLeft: '5vw',
           }}
             src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Freview.png?alt=media&token=6b1143cf-8767-4dcd-862c-bd1ed2f77b85"/>
-          <Box style={{
+          <Box className={classes.testbox3} style={{
             color: '#303030',
             background: '#FFFFFF',
             marginTop: '5vw',
-            padding: '2vw 2vw 0 4vw',
-            height: '300px',
-            width: '500px',
+            
+            
             marginLeft: '5vw',
             boxShadow:' 0px 4px 24px rgba(0, 0, 0, 0.05)',
             borderRadius: '28px 120px',
           }}>
-            <Box style={{display:'flex'}}>
-              <img
+            <Box  style={{display:'flex'}}>
+              <img className={classes.testimg2}
                 style={{
                   width: '60.74px',
                   height: '60.74px',
                 }}
                 src="https://firebasestorage.googleapis.com/v0/b/adyantayurveda-cba8a.appspot.com/o/Website%2Fava.png?alt=media&token=21721680-d760-4c0f-9286-1607c8ad3635"/>
-              <Typography className={classes.head13} variant="h6">
+              <Typography className={classes.head13} variant="h6" fontSize={{lg: 20,xs: 15}}>
                 Agatha Christ,32
               </Typography>
             </Box>
-            <Typography className={classes.head14} variant="h6">
+            <Typography className={classes.head14} variant="h6" fontSize={{lg: 20,xs: 12}}>
               “It was a very good experience.”
             </Typography>
-            <Typography className={classes.head15}>
+            <Typography className={classes.head15} fontSize={{lg: 18,xs: 11}}>
               Lorem ipsum dolor sit amet, consectetur adipiscing <br></br> elit. Cursus nibh mauris, nec turpis orci lectus<br></br> maecenas. Suspendisse sed magna eget nibh in<br></br> turpis. Consequat duis diam lacus arcu. Faucibus <br></br>venenatis felis id augue sit cursus pellentesque enim.
             </Typography>
           </Box>
@@ -733,25 +859,23 @@ function Land() {
       </Box>
 
       <Box style={{marginBottom:'2vw'}}>
-          <Typography className={classes.head16} variant="h5">
+          <Typography className={classes.head16} variant="h5" fontSize={{lg: 30,xs: 14}}>
             PAY US A VISIT
           </Typography>
-          <Typography className={classes.head17} variant="h3">
+          <Typography className={classes.head17} variant="h3" fontSize={{lg: 50,xs: 35}}>
             We are  right here in Bangalore
           </Typography>
-          <Typography className={classes.head18} variant="h6">
+          <Typography className={classes.head18} variant="h6" fontSize={{lg: 20,xs: 12}}>
             Come visit our friendly staff at one of our ayurveda centres.
           </Typography>
-          <Box style={{
-            display: 'flex',
+          <Box className={classes.mapbox1} style={{
+            
             marginTop: '2vw',
-            marginLeft: '10vw',
+            
           }}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d248888.97900990263!2d77.4927761!3d12.9147718!3m2!1i1024!2i768!4f13.1!2m1!1sAdyant%20Ayurveda!5e0!3m2!1sen!2sin!4v1654586879569!5m2!1sen!2sin" width="600" height="600" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <Box style={{display:'flex', 
+            <iframe className={classes.map} src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d248888.97900990263!2d77.4927761!3d12.9147718!3m2!1i1024!2i768!4f13.1!2m1!1sAdyant%20Ayurveda!5e0!3m2!1sen!2sin!4v1654586879569!5m2!1sen!2sin" width="600" height="600" style={{border:'0'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <Box className={classes.mapbox2} style={{display:'flex', 
               flexDirection:'column',
-              marginLeft:'5vw', 
-              width:'fit-content',
               borderRadius: '18px 80px', 
               padding:'2vw',
               boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.05)' }} 
