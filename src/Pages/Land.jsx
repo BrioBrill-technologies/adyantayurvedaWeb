@@ -885,7 +885,18 @@ function Land() {
               <InputBase className={classes.input} id="email" placeholder="Your Email"  />
               <InputBase className={classes.input} id=" phone" placeholder="Your Phone Number"  />
               <TextareaAutosize minRows={3} type="submit" className={classes.textarea} placeholder="Message" />
-              <Button className={classes.btn4} variant="contained" color="primary">
+              <Button  
+                style={{
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  marginTop: '2rem',
+                  backgroundColor: '#74613C',
+                  color: 'white',
+                  fontFamily: 'Josefin Sans',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',}}
+                variant="contained" 
+                color="primary">
                 Send
               </Button>
             </Box>
