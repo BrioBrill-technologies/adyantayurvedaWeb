@@ -491,7 +491,7 @@ function Land() {
       top: 0,
       width: '-webkit-fill-available',
       zIndex: -1}}>
-      <Grid className={classes.grid} style={{ flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw'}}>
+      <Grid className={classes.grid} style={{ flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw', marginBottom:'5vw'}}>
         <Grid item xs={14} >
           <Box style={{ paddingLeft: '24px'}}>
             <Typography className={classes.typo} variant="h6" fontSize={{lg: 30,xs: 12}}>
