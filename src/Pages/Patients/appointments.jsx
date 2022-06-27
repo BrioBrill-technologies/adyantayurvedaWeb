@@ -19,16 +19,14 @@ function Appointments(){
             for(let i = 0; i < doc.docs.length; i++){ 
                 const data = doc.docs[i].data();
                 data.id = doc.docs[i].id;
-
+                data.date = data.date.toDate();
                 const docs = await getDocs(query(collection(db, "doctors")));
                 for(let j = 0; j < docs.docs.length; j++){
-                    const doc = docs.docs[j].data();
-                    if(doc.uid === data.DocId){
+                    if(docs.docs[j].data().uid === data.DocId){
                         data.doctor = doc;
                         break;
                     }
                 }
-                data.date = data.date.toDate()
                 setBookings(bookings => [...bookings, data]);
             }
         } catch (error) {

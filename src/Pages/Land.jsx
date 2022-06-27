@@ -549,11 +549,6 @@ function Land() {
           </Box>
         </Grid>
       </Grid>
-      <div style={{zIndex:'-1', marginTop:'-10vw', marginBottom:'-10vw'}}>
-        <svg className={classes.svg}  viewBox="0 0 1440 432" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 432L60 382C120 331 240 230 360 194C480 158 600 187 720 202C840 216 960 216 1080 187C1200 158 1320 101 1380 72L1440 43V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V432Z" fill="#FFFBF3"/>
-        </svg>
-      </div>
 
       <Mobile />
 
@@ -909,7 +904,18 @@ function Land() {
               <InputBase className={classes.input} id="email" placeholder="Your Email"  />
               <InputBase className={classes.input} id=" phone" placeholder="Your Phone Number"  />
               <TextareaAutosize minRows={3} type="submit" className={classes.textarea} placeholder="Message" />
-              <Button className={classes.btn4} variant="contained" color="primary">
+              <Button  
+                style={{
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  marginTop: '2rem',
+                  backgroundColor: '#74613C',
+                  color: 'white',
+                  fontFamily: 'Josefin Sans',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',}}
+                variant="contained" 
+                color="primary">
                 Send
               </Button>
             </Box>

@@ -36,6 +36,9 @@ function BookingTherapy () {
     const [pack, setPack] = useState([]);
     const [pack4, setPack4] = useState([]);
     const [pack7, setPack7] = useState([]);
+    const [morning, setMorning] = useState(true);
+    const [afternoon, setAfternoon] = useState(true);
+    const [evening, setEvening] = useState(true);
     const navigate = useNavigate();
 
 
@@ -63,7 +66,6 @@ function BookingTherapy () {
                     })
                 } 
             }
-            console.log(data);
             if(data.package1){
                 setPack(data.package1);
                 if(pack4.length === 0){
@@ -97,6 +99,7 @@ function BookingTherapy () {
                 place: place,
                 date: date,
                 amount: amount,
+                time: time,
             } });
         } else if(!date){
             setAlert(true);
@@ -131,7 +134,20 @@ function BookingTherapy () {
 
     const handleChange = (event, newAlignment) => {
         setTime(newAlignment);
-      };
+    };
+
+    const handleDateChange = (date) => {
+        if(date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear() ) {
+            if(new Date().getHours() > 12) setMorning(false);
+            if(new Date().getHours() >= 14) setAfternoon(false);
+            if(new Date().getHours() > 21) setEvening(false);
+        } else {
+            setMorning(true);
+            setAfternoon(true);
+            setEvening(true);
+        }
+        setDate(date);
+    }
 
     return(
         <div >
@@ -253,7 +269,7 @@ function BookingTherapy () {
                                 minDate= {new Date()}
                                 label={<Typography style={{fontFamily:'Josefin Sans'}}>Date of Appointment</Typography>}
                                 value={date}
-                                onChange={(e) => { setDate(e) }}
+                                onChange={handleDateChange}
                                 renderInput={(params) => <TextField style={{width:'100%'}} {...params} />}/>
                         </LocalizationProvider>
                         <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
@@ -262,7 +278,7 @@ function BookingTherapy () {
                         <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.6vw'}}>
                             Evening (5 slots)
                         </Typography>
-                        <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
+                        <ToggleButtonGroup disabled={!date || !evening } sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange}>
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="05:00 PM">05:00 PM</ToggleButton>
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="06:00 PM">06:00 PM</ToggleButton>
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="07:00 PM">07:00 PM</ToggleButton>
@@ -272,7 +288,7 @@ function BookingTherapy () {
                         <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
                             Morning (5 slots)
                         </Typography>
-                        <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
+                        <ToggleButtonGroup disabled={!date || !morning } sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
                             <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>

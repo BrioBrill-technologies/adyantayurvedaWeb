@@ -9,7 +9,8 @@ import {
     Radio,
     Divider,
     ToggleButtonGroup,
-    ToggleButton
+    ToggleButton,
+    Alert
 } from '@mui/material';
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -26,6 +27,11 @@ function Booking () {
     const [user, loading, error] = useAuthState(auth);
     const [place, setPlace] = useState(null);
     const [amount, setAmount] = useState(0);
+    const [morning, setMorning] = useState(true);
+    const [afternoon, setAfternoon] = useState(true);
+    const [evening, setEvening] = useState(true);
+    const [alert, setAlert] = useState(false);
+    const [alertText, setAlertText] = useState('');
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -33,16 +39,43 @@ function Booking () {
         if (!user) return navigate("/");
     }, [loading]);
 
+    const handleDateChange = (date) => {
+        if(date.getDate() === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
+            if(new Date().getHours() > 12) setMorning(false);
+            if(new Date().getHours() >= 14) setAfternoon(false);
+            if(new Date().getHours() > 21) setEvening(false);
+        } else {
+            setMorning(true);
+            setAfternoon(true);
+            setEvening(true);
+        }
+        setDate(date);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/pay", { state: { 
-            id: state.id,
-            type: state.type,
-            place: place,
-            date: date,
-            time: time,
-            amount: amount,
-        } });
+        if(place === null) {
+            setAlert(true);
+            setAlertText('Please select a place');
+            return;
+        } else if(date === null) {
+            setAlert(true);
+            setAlertText('Please select a date');
+            return;
+        } else if(time === '') {
+            setAlert(true);
+            setAlertText('Please select a time');
+            return;
+        } else {
+            navigate("/pay", { state: { 
+                id: state.id,
+                type: state.type,
+                place: place,
+                date: date,
+                time: time,
+                amount: amount,
+            }});
+        }
     }
 
     const handlePlace = (e) => {
@@ -54,9 +87,7 @@ function Booking () {
         }
     }
 
-    const handleChange = (event, newAlignment) => {
-      setTime(newAlignment);
-    };
+    const handleChange = (event, newAlignment) => setTime(newAlignment);
 
     return(
         <div >
@@ -91,29 +122,33 @@ function Booking () {
                             minDate= {new Date()}
                             label={<Typography style={{fontFamily:'Josefin Sans'}}>Date of Appointment</Typography>}
                             value={date}
-                            onChange={(e) => { setDate(e) }}
+                            onChange={handleDateChange}
                             renderInput={(params) => <TextField style={{width:'70%'}} {...params} />}/>
                     </LocalizationProvider>
+                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
+                        Morning (5 slots)
+                    </Typography>
+                    <ToggleButtonGroup sx={{marginTop:'1vw'}} disabled={!date || !afternoon }  value={time} exclusive onChange={handleChange}>
+                        <ToggleButton disabled={!morning} sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
+                        <ToggleButton disabled={!morning} sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
+                        <ToggleButton disabled={!morning} sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="01:00 PM">01:00 PM</ToggleButton>
+                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="02:00 PM">02:00 PM</ToggleButton>
+                        
+                    </ToggleButtonGroup>
                     <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.6vw'}}>
                         Evening (5 slots)
                     </Typography>
-                    <ToggleButtonGroup sx={{marginTop:'1vw'}} value={time} exclusive onChange={handleChange}>
+                    <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} disabled={!date || !evening } value={time} exclusive onChange={handleChange} >
                         <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="05:00 PM">05:00 PM</ToggleButton>
                         <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="06:00 PM">06:00 PM</ToggleButton>
                         <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="07:00 PM">07:00 PM</ToggleButton>
                         <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="08:00 PM">08:00 PM</ToggleButton>
                         <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="09:00 PM">09:00 PM</ToggleButton>
-                    </ToggleButtonGroup>
-                    <Typography sx={{fontFamily: 'Josefin Sans',marginTop:'1.5vw'}}>
-                        Morning (5 slots)
-                    </Typography>
-                    <ToggleButtonGroup sx={{marginTop:'1vw',mb:2}} value={time} exclusive onChange={handleChange} >
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="10:00 AM">10:00 AM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="11:00 AM">11:00 AM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="12:00 PM">12:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="01:00 PM">01:00 PM</ToggleButton>
-                        <ToggleButton sx={{borderRadius:'15px',fontFamily: 'Josefin Sans'}} value="02:00 PM">02:00 PM</ToggleButton>
-                    </ToggleButtonGroup>
+                    </ToggleButtonGroup>                        
+                    { alert && (
+                            <Alert severity="error"> {alertText} </Alert>
+                    )}
                     <Button variant='contained' color='primary' onClick={handleSubmit} sx={{mb:10, width:'fit-content', p:2,fontFamily: 'Josefin Sans',marginTop:'2vw'}}>
                         Book Appointment
                     </Button>
