@@ -45,8 +45,21 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
+    [theme.breakpoints.up("md")]: {
+      // marginLeft: '5vw',
+    },
     [theme.breakpoints.down("md")]: {
       paddingLeft:'1vw',
+      marginTop:'20vw'
+    },
+  },
+
+  stack: {
+    [theme.breakpoints.down("md")]: {
+      marginTop: '5vw',
+    },
+    [theme.breakpoints.up("md")]: {
+      marginLeft: '5vw',
     },
   },
 
@@ -455,6 +468,18 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal !important',
     lineHeight: '30px',
   },
+
+  svg:{
+    [theme.breakpoints.up("md")]: {
+      width:"1440",
+      height:"432"
+    },
+    [theme.breakpoints.down("md")]: {
+      marginTop:'-110px',
+      width:"400px",
+      height:"400px"
+    },
+  },
 }));
 
 function Land() {
@@ -466,7 +491,7 @@ function Land() {
       top: 0,
       width: '-webkit-fill-available',
       zIndex: -1}}>
-      <Grid className={classes.grid} style={{ flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw'}}>
+      <Grid className={classes.grid} style={{ flexDirection:'row', background:'#FFFBF3', paddingTop:'5vw', marginBottom:'5vw'}}>
         <Grid item xs={14} >
           <Box style={{ paddingLeft: '24px'}}>
             <Typography className={classes.typo} variant="h6" fontSize={{lg: 30,xs: 12}}>
@@ -481,11 +506,10 @@ function Land() {
               Health Needs at Your Doorstep.
             </Typography>
             {/* <Box style={{display:'flex', flexDirection:'row'}}> */}
-              <Stack spacing={2} direction='row'>
+              <Stack spacing={2} direction='row' className={classes.stack}>
               <Button variant="contained" color="primary" className={classes.button} style={{
                   background: '#74613C',
                  color: 'white !important',
-                 marginLeft: '5vw',
                  marginTop: '3vw',
                  padding: '1vw 2vw',
                  borderRadius: '10px',
