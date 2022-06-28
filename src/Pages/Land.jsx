@@ -583,7 +583,7 @@ function Land() {
                     <Button 
                     variant="outlined" 
                     onClick={() => {
-                        navigate('therapyType', { state: { therapyType: 'Rejuvenative Treatments' } })
+                        navigate('therapies', { state: { therapyType: 'Rejuvenative Treatments' } })
                     }} >
                         Book Now 
                     </Button>
@@ -613,7 +613,7 @@ function Land() {
                     <Button 
                     variant="outlined"
                     onClick={() => {
-                      navigate('therapyType', { state: { therapyType: 'Spine and Joint Care' } })
+                      navigate('therapies', { state: { therapyType: 'Spine and Joint Care' } })
                     }}>
                         Book Now 
                     </Button>
@@ -643,7 +643,7 @@ function Land() {
                     <Button 
                     variant="outlined"
                     onClick={() => {
-                      navigate('therapyType', { state: { therapyType: 'Elderly care' } })
+                      navigate('therapies', { state: { therapyType: 'Elderly care' } })
                     }}>
                         Book Now 
                     </Button>
@@ -672,7 +672,7 @@ function Land() {
                     <Button 
                     variant="outlined"
                     onClick={() => {
-                      navigate('therapyType', { state: { therapyType: 'Prenatal care – Post-natal care' } })
+                      navigate('therapies', { state: { therapyType: 'Prenatal care – Post-natal care' } })
                     }}>
                         Book Now 
                     </Button>
@@ -701,7 +701,7 @@ function Land() {
                     <Button 
                     variant="outlined"
                     onClick={() => {
-                      navigate('therapyType', { state: { therapyType: 'Skin and Haircare' } })
+                      navigate('therapies', { state: { therapyType: 'Skin and Haircare' } })
                     }}>
                         Book Now 
                     </Button>
@@ -730,7 +730,7 @@ function Land() {
                     <Button 
                     variant="outlined"
                     onClick={() => {
-                      navigate('therapyType', { state: { therapyType: 'Weight Management' } })
+                      navigate('therapies', { state: { therapyType: 'Weight Management' } })
                     }}>
                         Book Now 
                     </Button>

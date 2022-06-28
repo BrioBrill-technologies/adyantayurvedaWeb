@@ -83,18 +83,23 @@ function Therapies(){
     const navigate = useNavigate();
     
     const fetchTherapies = async () => {
-        try {
-            setTherapy([])
-            const data = await getTherapies();
-            setTherapy(data);
+        setTherapy([])
+        if(state?.therapyType){
+            setValue(state.therapyType);
+            fetchAyurveda(state.therapyType);
             const data2 = await getTherapyType();
             setTherapyType(data2);
-            if(state){
-                fetchAyurveda(state.therapy);
+            state.therapyType = '';
+        } else {
+            try {
+                const data = await getTherapies();
+                setTherapy(data);
+                const data2 = await getTherapyType();
+                setTherapyType(data2);
+            } catch (err) {
+                console.error(err);
+                alert("An error occurred while fetching Therapy data");
             }
-        } catch (err) {
-            console.error(err);
-            alert("An error occurred while fetching Therapy data");
         }
     }
 
@@ -104,6 +109,7 @@ function Therapies(){
 
     const searchResults = async (e) => {
         e.preventDefault();
+        setTherapy([])
         const search = e.target.value;
         const data = await getTherapies();
         const filtered = data.filter(item => {
@@ -114,9 +120,6 @@ function Therapies(){
 
     const fetchAyurveda = async (ayurveda) => {
         try {
-            if(state){
-                state.therapy = ayurveda;
-            }
             setTherapy([])
             const data = await getTherapies();
             for (let i = 0; i < data.length; i++) {

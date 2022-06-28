@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, InputBase, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Divider, Grid, InputBase, Typography, Select, InputLabel, MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
@@ -31,12 +31,13 @@ function TherapyPay(){
     const [user, loading, error] = useAuthState(auth);
     const [doctor, setDoctor] = useState(null);
     const [amount, setAmount] = useState(state.amount);
-    console.log(state);
     const [totalAmount, setTotalAmount] = useState(amount);
     const [date, setDate] = useState(new Date(state.date));
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [gender, setGender] = useState('');
+    const [address, setAddress] = useState('')
     const classes = useStyles();
     const navigate = useNavigate();
     const fetchDoctor = async () => {
@@ -88,8 +89,9 @@ function TherapyPay(){
                     type:state.type,
                     patientId:user.uid,
                     date:date,
+                    address:address,
                     paymentId:response.razorpay_payment_id,
-                    time:state.time, 
+                    time:state.time,    
                     status: "Booked",
                     amount: state.amount,
                 }).then(() => {
@@ -134,13 +136,6 @@ function TherapyPay(){
                                     fontSize:'16px',
                                     marginTop:'1vw'}}
                                     >{state.place}</Typography>
-                            <Typography
-                                sx={{
-                                    fontFamily:'Josefin Sans',
-                                    fontSize:'14px',
-                                    color:'#7E7E7E',
-                                    marginTop:'0.6vw'}}
-                                    >Includes Prescription</Typography>
                             <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" >
                                 <Typography 
@@ -177,19 +172,7 @@ function TherapyPay(){
                                     marginTop:'0.6vw'}}>Change date & time</Typography>
                             <Divider style={{borderColor:"black", margin:'0.5vw 0'}}/>
                             <Box display="flex" flexDirection="row" >
-                                <CardMedia
-                                    component="img"
-                                    style={{
-                                        position:'absolute',
-                                        height:'5vw',
-                                        width:'5vw', 
-                                        borderRadius: '50%',
-                                        marginTop: '1vw',
-                                        border: '4px solid #fff',
-                                        filter: 'drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.25))',
-                                    }}
-                                    image={doctor.photoURL}/>
-                                <Box display="flex" flexDirection="column" style={{marginLeft: '8vw',marginTop:'0.5vw'}}>
+                                <Box display="flex" flexDirection="column" style={{marginTop:'0.5vw'}}>
                                     <Typography 
                                         style={{
                                             fontFamily:'Josefin Sans',
@@ -200,12 +183,7 @@ function TherapyPay(){
                                         sx={{
                                             fontFamily:'Josefin Sans',
                                             fontSize:'14px',
-                                            color:'#7E7E7E'}}>{doctor.education}</Typography>
-                                    <Typography 
-                                        sx={{
-                                            fontFamily:'Josefin Sans',
-                                            fontSize:'13px',
-                                            color:'#7E7E7E'}}>{doctor.specialization}</Typography>
+                                            color:'#7E7E7E'}}>{doctor.description}</Typography>
                                 </Box>
                             </Box>
                         </ CardContent>
@@ -271,6 +249,36 @@ function TherapyPay(){
                          id="mobile"
                             value={phone}
                          placeholder="Mobile Number"  />
+                        <Typography 
+                            sx={{
+                                fontFamily:'Josefin Sans',
+                                fontSize:'20px',
+                                color:'#3E3E3E',
+                                fontWeight:400,
+                                marginTop:'0.8vw',}}>
+                            Your Full Address*
+                        </Typography>
+                        <InputBase
+                            sx={{border:'1px solid #DDDDDD', padding: '8px 16vw 8px 18px'}}
+                            id="address"
+                            label="Address"
+                            value={address}
+                            variant="outlined"
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+
+                         <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                        <Select
+                            sx={{mb:2, background: '#EFEFF1'}}
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={gender}
+                            label="Age"
+                            onChange={(e) => setGender(e.target.value)}
+                        >
+                            <MenuItem value={'male'}>Male</MenuItem>
+                            <MenuItem value={'female'}>Female</MenuItem>
+                        </Select>
                         <Typography
                             sx={{
                                 fontFamily:'Josefin Sans',
